@@ -23,7 +23,12 @@ class ServiceProvider extends BaseServiceProvider {
 		$app = $this->app;
 
 		if (version_compare($app::VERSION, '5.0') < 0) {
+			// Laravel 4
 			$this->package('cviebrock/laravel-elasticsearch', 'elasticsearch', realpath(__DIR__ . '/../'));
+		} else {
+			// Laravel 5
+			$configPath = realpath(__DIR__ . '/../config/config.php');
+			$this->publishes([$configPath => config_path('elasticsearch.php')]);
 		}
 	}
 
