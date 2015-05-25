@@ -11,7 +11,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $defer = true;
+	protected $defer = false;
 
 	/**
 	 * Bootstrap the application events.
@@ -24,10 +24,10 @@ class ServiceProvider extends BaseServiceProvider {
 
 		if (version_compare($app::VERSION, '5.0') < 0) {
 			// Laravel 4
-			$this->package('cviebrock/laravel-elasticsearch', 'elasticsearch', realpath(__DIR__ . '/../'));
+			$this->package('cviebrock/laravel-elasticsearch', 'elasticsearch', realpath(__DIR__));
 		} else {
 			// Laravel 5
-			$configPath = realpath(__DIR__ . '/../config/config.php');
+			$configPath = realpath(__DIR__ . '/config/config.php');
 			$this->publishes([
 				$configPath => config_path('elasticsearch.php')
 			]);
@@ -47,7 +47,6 @@ class ServiceProvider extends BaseServiceProvider {
 
 			return new Client($config);
 		});
-
 	}
 
 	/**
