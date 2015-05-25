@@ -28,7 +28,9 @@ class ServiceProvider extends BaseServiceProvider {
 		} else {
 			// Laravel 5
 			$configPath = realpath(__DIR__ . '/../config/config.php');
-			$this->publishes([$configPath => config_path('elasticsearch.php')]);
+			$this->publishes([
+				$configPath => config_path('elasticsearch.php')
+			]);
 		}
 	}
 

@@ -3,41 +3,44 @@
 An easy way to use the official Elastic Search client in your Laravel applications!
 
 
-## Installation
+## Installation and Configuration
 
-Install the `cviebrock/laravel-elasticsearch` package via composer:
+1. Install the `cviebrock/laravel-elasticsearch` package via composer:
 
-```shell
-$ composer require cviebrock/laravel-elasticsearch
-```
+    ```shell
+    $ composer require cviebrock/laravel-elasticsearch
+    ```
     
-## Configuration
+2. Publish the configuration file.  For Laravel 4:
 
-### Laravel 4
+    ```shell
+    php artisan config:publish cviebrock/laravel-elasticsearch
+    ```
 
-Copy the base configuration file into your app:
+    Or for Laravel 5:
+
+    ```shell
+    php artisan vendor:publish cviebrock/laravel-elasticsearch
+    ```
+
+3. Add the service provider (`app/config/app.php` for Laravel 4, `config/app.php` for Laravel 5):
+
+    ```php
+    # Add the service provider to the `providers` array
+    'providers' => array(
+        ...
+        'Cviebrock\LaravelElasticSearch\ServiceProvider',
+    )
+
+    # Add the facade to the `aliases` array
+    'aliases' => array(
+        ...
+        'Elasticsearch' => 'Cviebrock\LaravelElasticSearch\Facade',
+    )
+    ```
 
 
-### Laravel 5
 
-Publish the configuration file:
+## Usage
 
-```shell
-php artisan config:publish cviebrock/laravel-elasticsearch
-```
-
-Add the service provider to `config/app.php`:
-
-```php
-# Add the service provider to the `providers` array
-'providers' => array(
-    ...
-    'Cviebrock\LaravelElasticSearch\ServiceProvider',
-)
-
-# Add the facade to the `aliases` array
-'aliases' => array(
-    ...
-    'Elasticsearch' => 'Cviebrock\LaravelElasticSearch\Facade',
-)
-```
+_TODO_
