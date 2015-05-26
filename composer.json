@@ -9,7 +9,7 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"elasticsearch/elasticsearch": "~2.0",
+		"elasticsearch/elasticsearch": "~2.0@beta",
 		"illuminate/support": "~4|~5",
 		"psr/log": "~1.0"
 	},
