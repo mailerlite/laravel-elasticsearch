@@ -1,6 +1,6 @@
 # Laravel-Elasticsearch
 
-An easy way to use the official Elastic Search client in your Laravel applications!
+An easy way to use the official Elastic Search client in your Laravel applications.
 
 
 ## Installation and Configuration
@@ -43,4 +43,16 @@ An easy way to use the official Elastic Search client in your Laravel applicatio
 
 ## Usage
 
-_TODO_
+The `Elasticsearch` facade is just an entry point into the ES client.
+
+```php
+$data = [
+    'body' => [
+        'testField' => 'abc'
+    ],
+    'index' => 'my_index',
+    'type' => 'my_type',
+    'id' => 'my_id',
+];
+$return = Elasticsearch::index($data);
+```

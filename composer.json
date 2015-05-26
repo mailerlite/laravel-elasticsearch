@@ -13,7 +13,7 @@
 		"illuminate/support": "~4|~5",
 		"psr/log": "~1.0"
 	},
-	"license": "MIT'",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Colin Viebrock",
