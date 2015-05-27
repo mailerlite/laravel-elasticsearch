@@ -69,15 +69,12 @@ $return = Elasticsearch::index($data);
 If you prefer to not use facades, that's okay too:
 
 ```php
-
-use 
 class MyClass {
 
     protected $elasticsearch;
 
-	public function __construct() {
-
-		$this->elasticsearch = app('elasticsearch');
+    public function __construct() {
+        $this->elasticsearch = app('elasticsearch');
 	}
 
 }
