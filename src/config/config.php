@@ -79,12 +79,13 @@ return [
 
 
 	/**
-	 * Index Environment Prefixing
+	 * Environment Index Prefixing
 	 *
-	 * This is an addition to the Elasticsearch client.  Let's say your
-	 * application has several different environments ("beta", "live", etc.).
-	 * Normally, you could have different package configurations for each
-	 * environment -- e.g., different "hosts".  But maybe you only have one ES
+	 * This is an addition to the Elasticsearch client.
+	 *
+	 * Let's say your application has several different environments ("beta",
+	 * "live", etc.). Normally, you could have different package configurations for
+	 * each environment -- e.g., different "hosts".  But maybe you only have one ES
 	 * instance available and you need to use it across all your environments.  You
 	 * will start to run into difficulties, because the "beta" environment may
 	 * index a document using the "my_index" index, and so will the "live"

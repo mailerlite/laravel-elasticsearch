@@ -43,7 +43,8 @@ An easy way to use the official Elastic Search client in your Laravel applicatio
 
 ## Usage
 
-The `Elasticsearch` facade is just an entry point into the ES client.
+The `Elasticsearch` facade is just an entry point into the ES client, so previously
+you might have used:
 
 ```php
 $data = [
@@ -54,5 +55,27 @@ $data = [
     'type' => 'my_type',
     'id' => 'my_id',
 ];
+
+$client = ClientBuilder::create()->build();
+$return = $client->index($data);
+```
+
+You can now replace those last two lines with simply:
+
+```php
 $return = Elasticsearch::index($data);
+```
+
+If you prefer to not use facades, that's okay too:
+
+```php
+class MyClass {
+
+    protected $elasticsearch;
+
+    public function __construct() {
+        $this->elasticsearch = app('elasticsearch');
+	}
+
+}
 ```
