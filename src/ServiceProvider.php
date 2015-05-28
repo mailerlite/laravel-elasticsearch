@@ -1,9 +1,15 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
-use Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Psr\Log\LoggerInterface;
 
 
+/**
+ * Class ServiceProvider
+ *
+ * @package Cviebrock\LaravelElasticsearch
+ */
 class ServiceProvider extends BaseServiceProvider {
 
 	/**
@@ -31,6 +37,7 @@ class ServiceProvider extends BaseServiceProvider {
 			$this->publishes([
 				$configPath => config_path('elasticsearch.php')
 			]);
+			$this->mergeConfigFrom($configPath, 'elasticsearch');
 		}
 	}
 
@@ -45,7 +52,89 @@ class ServiceProvider extends BaseServiceProvider {
 
 			$config = $app['config']['elasticsearch'] ?: $app['config']['elasticsearch::config'];
 
-			return new Client($config);
+			$clientBuilder = ClientBuilder::create();
+
+			// Configure hosts
+
+			$clientBuilder->setHosts($config['hosts']);
+
+			// Configure SSL
+
+			if ($config['sslVerification'] !== null) {
+				$clientBuilder->setSSLVerification($config['sslVerification']);
+			}
+
+			// Configure logging
+
+			if ($config['logging']) {
+				if ($config['logObject'] instanceof LoggerInterface) {
+					$clientBuilder->setLogger($config['logObject']);
+				} else {
+					$path = $config['logPath'];
+					$level = $config['logLevel'];
+					$logger = ClientBuilder::defaultLogger($path, $level);
+					$clientBuilder->setLogger($logger);
+				}
+			}
+
+			// Configure retries
+
+			if ($config['retries'] !== null) {
+				$clientBuilder->setRetries($config['retries']);
+			}
+
+			// Configure HTTP Handler
+
+			if ($config['httpHandler'] !== null) {
+				$clientBuilder->setHandler($config['httpHandler']);
+			}
+
+			// Configure Connection Pool
+
+			if ($config['connectionPool'] !== null) {
+				$clientBuilder->setConnectionPool($config['connectionPool']);
+			}
+
+			// Configure Connection Selector
+
+			if ($config['connectionSelector'] !== null) {
+				$clientBuilder->setSelector($config['connectionSelector']);
+			}
+
+			// Configure Serializer
+
+			if ($config['serializer'] !== null) {
+				$clientBuilder->setSerializer($config['serializer']);
+			}
+
+			// Configure Connection Factory
+
+			if ($config['connectionFactory'] !== null) {
+				$clientBuilder->setConnectionFactory($config['connectionFactory']);
+			}
+
+			// Configure Endpoint
+
+			if ($config['endpoint'] !== null) {
+				$clientBuilder->setEndpoint($config['endpoint']);
+			}
+
+			// Build the client
+
+			$client = $clientBuilder->build();
+
+			// If we are using index-prefixing, then generate a prefix based on the
+			// current environment, and wrap the base client in our client
+
+			if ($config['environmentIndexPrefixing']) {
+				$environment = strtolower($app->environment());
+				$prefix = trim(preg_replace('/[^a-z0-9]+/', '_', $environment), '_') . '_';
+				$client = new Client($client, $prefix);
+			}
+
+			// Return the client
+
+			return $client;
 		});
 	}
 

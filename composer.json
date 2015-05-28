@@ -1,6 +1,6 @@
 {
 	"name": "cviebrock/laravel-elasticsearch",
-	"description": "An easy way to use the official ElasticSearch client in your Laravel applications",
+	"description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications",
 	"keywords": [
 		"laravel",
 		"elasticsearch",
@@ -10,8 +10,7 @@
 	"require": {
 		"php": ">=5.4.0",
 		"elasticsearch/elasticsearch": "~2.0@beta",
-		"illuminate/support": "~4|~5",
-		"psr/log": "~1.0"
+		"illuminate/support": "~4|~5"
 	},
 	"license": "MIT",
 	"authors": [
