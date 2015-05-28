@@ -77,7 +77,13 @@ class ServiceProvider extends BaseServiceProvider {
 				}
 			}
 
-			// Configure retries
+			// Configure Sniff-on-Start
+
+			if ($config['sniffOnStart'] !== null) {
+				$clientBuilder->setSniffOnStart($config['sniffOnStart']);
+			}
+
+			// Configure Retries
 
 			if ($config['retries'] !== null) {
 				$clientBuilder->setRetries($config['retries']);

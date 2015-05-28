@@ -116,6 +116,15 @@ return [
 
 
 	/**
+	 * Sniff On Start
+	 *
+	 * @see https://www.elastic.co/guide/en/elasticsearch/client/php-api/2.0/_configuration.html
+	 */
+
+	'sniffOnStart' => false,
+
+
+	/**
 	 * HTTP Handler
 	 *
 	 * @see https://www.elastic.co/guide/en/elasticsearch/client/php-api/2.0/_configuration.html#_configure_the_http_handler
