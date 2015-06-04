@@ -18,7 +18,6 @@ return [
 		'localhost:9200'
 	],
 
-
 	/**
 	 * SSL
 	 *
@@ -36,7 +35,6 @@ return [
 	 */
 
 	'sslVerification' => null,
-
 
 	/**
 	 * Logging
@@ -60,10 +58,9 @@ return [
 
 	'logObject' => \Log::getMonolog(),
 
-	'logPath' => storage_path('/logs/elasticsearch.log'),
+	'logPath' => storage_path('logs/elasticsearch.log'),
 
 	'logLevel' => Monolog\Logger::INFO,
-
 
 	/**
 	 * Retries
@@ -77,9 +74,8 @@ return [
 
 	'retries' => null,
 
-
 	/**
-	 * Environment Index Prefixing
+	 * Index Prefixing and Suffixing
 	 *
 	 * This is an addition to the Elasticsearch client.
 	 *
@@ -92,20 +88,27 @@ return [
 	 * environment.  That is to say, both environments are using the same indices,
 	 * so your data will get confused.
 	 *
-	 * By turning on environmentIndexPrefixing, we wrap the base Elasticsearch
-	 * client object in our own object.  Then, we intercept all calls to the client
-	 * and inspect the parameters being sent. If the "index" parameter exists, we
-	 * prefix it with the current Laravel environment.  So "my_index" in the above
-	 * scenario would become "beta_my_index" or "live_my_index".  You no longer
-	 * will need to juggle different indices in your code -- we'll take care of it
-	 * for you!
+	 * By turning on client.indexPrefix, we wrap the base Elasticsearch client
+	 * object in our own object.  Then, we intercept all calls to the client and
+	 * inspect the parameters being sent. If the "index" parameter exists, we
+	 * prefix it with given value (by default, the current Laravel environment).
+	 * So "my_index" in the above scenario would become "beta-my_index" or
+	 * "live-my_index".  You no longer will need to juggle different indices in
+	 * your code -- we'll take care of it for you!
+	 *
+	 * Similarly, we can automatically add a suffix to the index as well (by
+	 * default, the year-month-day).
+	 *
+	 * Set the values to null, and no prefix/suffix will be used.
 	 *
 	 * Note: any data that's returned is not (currently) altered (e.g., to
-	 * strip the environment from an index).
+	 * strip the suffix or prefix from an index).
 	 */
 
-	'environmentIndexPrefixing' => false,
-
+	'client' => [
+		'indexPrefix' => strtolower(app()->environment()),
+		'indexSuffix' => date('Y-m-d'),
+	],
 
 	/**
 	 * The remainder of the configuration options can almost always be left
@@ -114,7 +117,6 @@ return [
 	 * does and what values it expects.
 	 */
 
-
 	/**
 	 * Sniff On Start
 	 *
@@ -122,7 +124,6 @@ return [
 	 */
 
 	'sniffOnStart' => false,
-
 
 	/**
 	 * HTTP Handler
@@ -133,7 +134,6 @@ return [
 
 	'httpHandler' => null,
 
-
 	/**
 	 * Connection Pool
 	 *
@@ -142,7 +142,6 @@ return [
 	 */
 
 	'connectionPool' => null,
-
 
 	/**
 	 * Connection Selector
@@ -153,7 +152,6 @@ return [
 
 	'connectionSelector' => null,
 
-
 	/**
 	 * Serializer
 	 *
@@ -163,7 +161,6 @@ return [
 
 	'serializer' => null,
 
-
 	/**
 	 * Connection Factory
 	 *
@@ -171,7 +168,6 @@ return [
 	 */
 
 	'connectionFactory' => null,
-
 
 	/**
 	 * Endpoint

@@ -17,18 +17,18 @@ class Client {
 	protected $client;
 
 	/**
-	 * @var string
+	 * @var array
 	 */
-	protected $prefix = null;
+	protected $config = null;
 
 	/**
 	 * @param BaseClient $client
-	 * @param string $prefix
+	 * @param array $config
 	 */
-	public function __construct(BaseClient $client, $prefix) {
+	public function __construct(BaseClient $client, array $config) {
 
 		$this->setClient($client);
-		$this->setPrefix($prefix);
+		$this->setConfig($config);
 	}
 
 	/**
@@ -39,13 +39,24 @@ class Client {
 	}
 
 	/**
-	 * Set the string to prefix to all indices.
+	 * Set the configuration array.
 	 *
-	 * @param string $prefix
+	 * @param array $config
 	 */
-	public function setPrefix($prefix) {
-		$this->prefix = $prefix;
+	public function setConfig(array $config) {
+		$this->config = $config;
 	}
+
+
+	public function getIndex($index) {
+		$indexParts = [
+			array_get($this->config, 'client.indexPrefix'),
+			$index,
+			array_get($this->config, 'client.indexSuffix')
+		];
+		return join('-', array_filter($indexParts));
+	}
+
 
 	/**
 	 * Magic method to pass calls to the underlying ES client,
@@ -61,7 +72,7 @@ class Client {
 			&& (isset($arguments[0]) === true)
 			&& (isset($arguments[0]['index']) === true)
 		) {
-			$arguments[0]['index'] = $this->prefixIndices($arguments[0]['index']);
+			$arguments[0]['index'] = $this->getIndex($arguments[0]['index']);
 		}
 
 		return call_user_func_array([$this->client, $name], $arguments);

@@ -50,7 +50,7 @@ class ServiceProvider extends BaseServiceProvider {
 
 		$this->app->singleton('elasticsearch', function ($app) {
 
-			$config = $app['config']['elasticsearch'] ?: $app['config']['elasticsearch::config'];
+			$config = $app['config']->get('elasticsearch') ?: $app['config']->get('elasticsearch::config');
 
 			$clientBuilder = ClientBuilder::create();
 
@@ -130,13 +130,18 @@ class ServiceProvider extends BaseServiceProvider {
 			$client = $clientBuilder->build();
 
 			// If we are using index-prefixing, then generate a prefix based on the
-			// current environment, and wrap the base client in our client
+			// current environment.
 
 			if ($config['environmentIndexPrefixing']) {
 				$environment = strtolower($app->environment());
 				$prefix = trim(preg_replace('/[^a-z0-9]+/', '_', $environment), '_') . '_';
-				$client = new Client($client, $prefix);
+			} else {
+				$prefix = null;
 			}
+
+			// Wrap the base client in our client
+
+			$client = new Client($client, $prefix);
 
 			// Return the client
 
