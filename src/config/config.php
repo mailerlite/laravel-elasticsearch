@@ -79,35 +79,6 @@ return [
 
 
 	/**
-	 * Environment Index Prefixing
-	 *
-	 * This is an addition to the Elasticsearch client.
-	 *
-	 * Let's say your application has several different environments ("beta",
-	 * "live", etc.). Normally, you could have different package configurations for
-	 * each environment -- e.g., different "hosts".  But maybe you only have one ES
-	 * instance available and you need to use it across all your environments.  You
-	 * will start to run into difficulties, because the "beta" environment may
-	 * index a document using the "my_index" index, and so will the "live"
-	 * environment.  That is to say, both environments are using the same indices,
-	 * so your data will get confused.
-	 *
-	 * By turning on environmentIndexPrefixing, we wrap the base Elasticsearch
-	 * client object in our own object.  Then, we intercept all calls to the client
-	 * and inspect the parameters being sent. If the "index" parameter exists, we
-	 * prefix it with the current Laravel environment.  So "my_index" in the above
-	 * scenario would become "beta_my_index" or "live_my_index".  You no longer
-	 * will need to juggle different indices in your code -- we'll take care of it
-	 * for you!
-	 *
-	 * Note: any data that's returned is not (currently) altered (e.g., to
-	 * strip the environment from an index).
-	 */
-
-	'environmentIndexPrefixing' => false,
-
-
-	/**
 	 * The remainder of the configuration options can almost always be left
 	 * as-is unless you have specific reasons to change them.  Refer to the
 	 * appropriate sections in the Elasticsearch documentation for what each option

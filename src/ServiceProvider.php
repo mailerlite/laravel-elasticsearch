@@ -125,22 +125,10 @@ class ServiceProvider extends BaseServiceProvider {
 				$clientBuilder->setEndpoint($config['endpoint']);
 			}
 
-			// Build the client
+			// Build and return the client
 
-			$client = $clientBuilder->build();
+			return $clientBuilder->build();
 
-			// If we are using index-prefixing, then generate a prefix based on the
-			// current environment, and wrap the base client in our client
-
-			if ($config['environmentIndexPrefixing']) {
-				$environment = strtolower($app->environment());
-				$prefix = trim(preg_replace('/[^a-z0-9]+/', '_', $environment), '_') . '_';
-				$client = new Client($client, $prefix);
-			}
-
-			// Return the client
-
-			return $client;
 		});
 	}
 
