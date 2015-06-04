@@ -18,7 +18,6 @@ return [
 		'localhost:9200'
 	],
 
-
 	/**
 	 * SSL
 	 *
@@ -36,7 +35,6 @@ return [
 	 */
 
 	'sslVerification' => null,
-
 
 	/**
 	 * Logging
@@ -60,10 +58,9 @@ return [
 
 	'logObject' => \Log::getMonolog(),
 
-	'logPath' => storage_path('/logs/elasticsearch.log'),
+	'logPath' => storage_path('logs/elasticsearch.log'),
 
 	'logLevel' => Monolog\Logger::INFO,
-
 
 	/**
 	 * Retries
@@ -77,14 +74,12 @@ return [
 
 	'retries' => null,
 
-
 	/**
 	 * The remainder of the configuration options can almost always be left
 	 * as-is unless you have specific reasons to change them.  Refer to the
 	 * appropriate sections in the Elasticsearch documentation for what each option
 	 * does and what values it expects.
 	 */
-
 
 	/**
 	 * Sniff On Start
@@ -93,7 +88,6 @@ return [
 	 */
 
 	'sniffOnStart' => false,
-
 
 	/**
 	 * HTTP Handler
@@ -104,7 +98,6 @@ return [
 
 	'httpHandler' => null,
 
-
 	/**
 	 * Connection Pool
 	 *
@@ -113,7 +106,6 @@ return [
 	 */
 
 	'connectionPool' => null,
-
 
 	/**
 	 * Connection Selector
@@ -124,7 +116,6 @@ return [
 
 	'connectionSelector' => null,
 
-
 	/**
 	 * Serializer
 	 *
@@ -134,7 +125,6 @@ return [
 
 	'serializer' => null,
 
-
 	/**
 	 * Connection Factory
 	 *
@@ -142,7 +132,6 @@ return [
 	 */
 
 	'connectionFactory' => null,
-
 
 	/**
 	 * Endpoint

@@ -50,7 +50,7 @@ class ServiceProvider extends BaseServiceProvider {
 
 		$this->app->singleton('elasticsearch', function ($app) {
 
-			$config = $app['config']['elasticsearch'] ?: $app['config']['elasticsearch::config'];
+			$config = $app['config']->get('elasticsearch') ?: $app['config']->get('elasticsearch::config');
 
 			$clientBuilder = ClientBuilder::create();
 
@@ -128,7 +128,6 @@ class ServiceProvider extends BaseServiceProvider {
 			// Build and return the client
 
 			return $clientBuilder->build();
-
 		});
 	}
 
