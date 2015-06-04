@@ -22,7 +22,11 @@ class Factory {
 		$this->config = $this->container['config']->get('elasticsearch') ?: $this->container['config']->get('elasticsearch::config');
 	}
 
-	public function make($name) {
+    /**
+     * @param string $name
+     * @return mixed
+     */
+	public function make($name = 'default') {
 
 		// Do we already have a bound instance of this client?
 		$key = 'elasticsearch.clients.' . $name;
@@ -128,7 +132,7 @@ class Factory {
 	 */
 	protected function getConnectionConfig($name) {
 
-		$name = $name ?: $this->config['default'];
+		$name = ($name === 'default') ? $this->config['default']: $name;
 
 		if(empty($this->config['connections'][$name])) {
 			throw new InvalidArgumentException("Connection [$name] not configured.");

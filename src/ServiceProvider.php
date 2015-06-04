@@ -48,14 +48,9 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function register() {
 
-		$this->app->singleton('elasticsearch.factory', function($app)
-		{
-			return new Factory($app);
-		});
-
 		$this->app->singleton('elasticsearch', function($app)
 		{
-			return new Manager($app, $app['elasticsearch.factory']);
+			return (new Factory($app))->make();
 		});
 
 	}
