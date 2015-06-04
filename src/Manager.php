@@ -44,31 +44,13 @@ class Manager {
 	}
 
 
-	protected function makeConnection($name) {
-		$config = $this->getConfig($name);
-
-		return $this->factory->make($config, $name);
-	}
-
-	protected function getConfig($name) {
-		$name = $name ?: $this->getDefaultConnection();
-
-		// Load configuration (L4- and L5-friendly)
-		$connections = $this->container['config']->get('elasticsearch.connections') ?: $this->container['config']->get('elasticsearch::config.connections');
-
-		if (is_null($config = array_get($connections, $name))) {
-			throw new \InvalidArgumentException("Connection [$name] not configured.");
-		}
-
-		return $config;
-	}
-
 	/**
-	 * Get the default connection name.
-	 *
-	 * @return string
+	 * @param $name
+	 * @return mixed
 	 */
-	public function getDefaultConnection() {
-		return $this->container['config']->get('elasticsearch.default') ?: $this->container['config']->get('elasticsearch::config.default');
+	protected function makeConnection($name) {
+
+		return $this->factory->make($name);
 	}
+
 }

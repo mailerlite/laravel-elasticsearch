@@ -2,6 +2,7 @@
 
 use Elasticsearch\ClientBuilder;
 use Illuminate\Container\Container;
+use InvalidArgumentException;
 
 
 class Factory {
@@ -127,10 +128,12 @@ class Factory {
 	 */
 	protected function getConnectionConfig($name) {
 
-		if(!empty($this->config['connections'][$name])) {
-			return $this->config['connections'][$name];
+		$name = $name ?: $this->config['default'];
+
+		if(empty($this->config['connections'][$name])) {
+			throw new InvalidArgumentException("Connection [$name] not configured.");
 		}
 
-		return $this->config['connections']['default'];
+		return $this->config['connections'][$name];
 	}
 }

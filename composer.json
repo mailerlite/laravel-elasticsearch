@@ -18,7 +18,11 @@
 		{
 			"name": "Colin Viebrock",
 			"email": "colin@viebrock.ca"
-		}
+		},
+        {
+          "name": "Brandon Martel",
+          "email": "brandonmartel@gmail.com"
+        }
 	],
 	"autoload": {
 		"psr-4": {
