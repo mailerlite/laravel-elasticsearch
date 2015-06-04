@@ -21,7 +21,7 @@ class Factory {
 		$this->config = $this->container['config']->get('elasticsearch') ?: $this->container['config']->get('elasticsearch::config');
 	}
 
-	public function make(array $config, $name) {
+	public function make($name) {
 
 		// Do we already have a bound instance of this client?
 		$key = 'elasticsearch.clients.' . $name;
@@ -31,7 +31,7 @@ class Factory {
 		}
 
 		// Build the client
-		$client = $this->buildClient($config);
+		$client = $this->buildClient($this->getConnectionConfig($name));
 
 		// Persist it in the container so we don't need to build it every time
 		// and return it.
@@ -119,5 +119,18 @@ class Factory {
 		// Build and return the client
 
 		return $clientBuilder->build();
+	}
+
+	/**
+	 * @param $name
+	 * @return mixed
+	 */
+	protected function getConnectionConfig($name) {
+
+		if(!empty($this->config['connections'][$name])) {
+			return $this->config['connections'][$name];
+		}
+
+		return $this->config['connections']['default'];
 	}
 }
