@@ -1,51 +1,29 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\ClientBuilder;
-use Illuminate\Container\Container;
-use InvalidArgumentException;
-
 
 class Factory {
 
 	/**
-	 * @var Container
+	 * Make the Elasticsearch client for the given named configuration, or
+	 * the default client.
+	 *
+	 * @param array $config
+	 * @return \Elasticsearch\Client|mixed
 	 */
-	protected $container;
-
-	/**
-	 * @var array
-	 */
-	protected $config;
-
-	public function __construct(Container $container) {
-		$this->container = $container;
-		$this->config = $this->container['config']->get('elasticsearch') ?: $this->container['config']->get('elasticsearch::config');
-	}
-
-    /**
-     * @param string $name
-     * @return mixed
-     */
-	public function make($name = 'default') {
-
-		// Do we already have a bound instance of this client?
-		$key = 'elasticsearch.clients.' . $name;
-
-		if ($this->container->bound($key)) {
-			return $this->container->make($key);
-		}
+	public function make(array $config) {
 
 		// Build the client
-		$client = $this->buildClient($this->getConnectionConfig($name));
+		return $this->buildClient($config);
 
-		// Persist it in the container so we don't need to build it every time
-		// and return it.
-
-		$this->container->instance($key, $client);
-
-		return $client;
 	}
 
+	/**
+	 * Build and configure an Elasticsearch client.
+	 *
+	 * @param array $config
+	 * @return \Elasticsearch\Client
+	 */
 	protected function buildClient(array $config) {
 
 		$clientBuilder = ClientBuilder::create();
@@ -126,18 +104,4 @@ class Factory {
 		return $clientBuilder->build();
 	}
 
-	/**
-	 * @param $name
-	 * @return mixed
-	 */
-	protected function getConnectionConfig($name) {
-
-		$name = ($name === 'default') ? $this->config['default']: $name;
-
-		if(empty($this->config['connections'][$name])) {
-			throw new InvalidArgumentException("Connection [$name] not configured.");
-		}
-
-		return $this->config['connections'][$name];
-	}
 }
