@@ -1,0 +1,128 @@
+<?php namespace Cviebrock\LaravelElasticsearch;
+
+/**
+ * Class Manager
+ *
+ * @package Cviebrock\LaravelElasticsearch
+ */
+class Manager {
+
+	/**
+	 * The application instance.
+	 *
+	 * @var \Illuminate\Foundation\Application
+	 */
+	protected $app;
+
+	/**
+	 * The Elasticsearch connection factory instance.
+	 *
+	 * @var Factory
+	 */
+	protected $factory;
+
+	/**
+	 * The active connection instances.
+	 *
+	 * @var array
+	 */
+	protected $connections = [];
+
+	/**
+	 * @param $app
+	 * @param Factory $factory
+	 */
+	public function __construct($app, Factory $factory) {
+
+		$this->app = $app;
+		$this->factory = $factory;
+	}
+
+	/**
+	 * Retrieve or build the named connection.
+	 *
+	 * @param null $name
+	 * @return \Elasticsearch\Client|mixed
+	 */
+	public function connection($name = null) {
+
+		$name = $name ?: $this->getDefaultConnection();
+
+		if (!isset($this->connections[$name])) {
+			$client = $this->makeConnection($name);
+
+			// TODO: implement client wrappers here?
+
+			$this->connections[$name] = $client;
+		}
+
+		return $this->connections[$name];
+	}
+
+	/**
+	 * Get the default connection.
+	 *
+	 * @return string
+	 */
+	public function getDefaultConnection() {
+		return $this->app['config']['elasticsearch.defaultConnection'];
+	}
+
+	/**
+	 * Set the default connection.
+	 *
+	 * @param string $connection
+	 */
+	public function setDefaultConnection($connection) {
+		$this->app['config']['elasticsearch.defaultConnection'] = $connection;
+	}
+
+	/**
+	 * Make a new connection.
+	 *
+	 * @param $name
+	 * @return \Elasticsearch\Client|mixed
+	 */
+	protected function makeConnection($name) {
+		$config = $this->getConfig($name);
+
+		return $this->factory->make($config);
+	}
+
+	/**
+	 * Get the configuration for a named connection.
+	 *
+	 * @param $name
+	 * @return mixed
+	 */
+	protected function getConfig($name) {
+
+		$connections = $this->app['config']['elasticsearch.connections'];
+
+		if (is_null($config = array_get($connections, $name))) {
+			throw new \InvalidArgumentException("Elasticsearch connection [$name] not configured.");
+		}
+
+		return $config;
+	}
+
+	/**
+	 * Return all of the created connections.
+	 *
+	 * @return array
+	 */
+	public function getConnections() {
+		return $this->connections;
+	}
+
+	/**
+	 * Dynamically pass methods to the default connection.
+	 *
+	 * @param  string $method
+	 * @param  array $parameters
+	 * @return mixed
+	 */
+	public function __call($method, $parameters) {
+		return call_user_func_array([$this->connection(), $method], $parameters);
+	}
+}

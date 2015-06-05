@@ -10,16 +10,9 @@ use Illuminate\Support\Facades\Facade as BaseFacade;
  */
 class Facade extends BaseFacade {
 
-    /**
-     * @param $name
-     * @return mixed
-     */
-    public static function connection($name) {
-
-        return app('Cviebrock\LaravelElasticsearch\Factory')->make($name);
-    }
-
 	/**
+	 * Get the registered name of the component.
+	 *
 	 * @return string
 	 */
 	protected static function getFacadeAccessor() {

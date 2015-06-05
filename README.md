@@ -11,35 +11,34 @@ An easy way to use the official Elastic Search client in your Laravel applicatio
     $ composer require cviebrock/laravel-elasticsearch
     ```
     
-2. Publish the configuration file.  For Laravel 4:
-
-    ```shell
-    php artisan config:publish cviebrock/laravel-elasticsearch
-    ```
-
-    Or for Laravel 5:
+2. Publish the configuration file.  For Laravel 5:
 
     ```shell
     php artisan vendor:publish cviebrock/laravel-elasticsearch
     ```
 
-3. Add the service provider (`app/config/app.php` for Laravel 4, `config/app.php` for Laravel 5):
+    In order to make this pacakge also work with Laravel 4, we can't do the
+    standard configuration publishing like most Laravel 4 packages do.  You will
+    need to simply copy the configuration file into your application's configuration folder:
+    
+    ```shell
+    cp vendor/cviebrock/laravel-elasticsearch/config/elasticsearch.php app/config/
+    ```
+
+3. Add the service provider and facade (`config/app.php` for Laravel 5 or `app/config/app.php` for Laravel 4):
 
     ```php
-    # Add the service provider to the `providers` array
     'providers' => array(
         ...
         'Cviebrock\LaravelElasticSearch\ServiceProvider',
     )
 
-    # Add the facade to the `aliases` array
     'aliases' => array(
         ...
         'Elasticsearch' => 'Cviebrock\LaravelElasticSearch\Facade',
     )
     ```
-
-
+    
 
 ## Usage
 
@@ -66,16 +65,11 @@ You can now replace those last two lines with simply:
 $return = Elasticsearch::index($data);
 ```
 
-If you prefer to not use facades, that's okay too:
+That will run the command on the default connection.  You can run a command on
+any connection (see the `defaultConnection` setting and `connections` array in
+the configuration file).
 
 ```php
-class MyClass {
-
-    protected $elasticsearch;
-
-    public function __construct() {
-        $this->elasticsearch = app('elasticsearch');
-	}
-
-}
+$return = Elasticsearch::connection('connectionName')->index($data);
 ```
+

@@ -11,7 +11,7 @@ return [
 	 * use create several clients at once, each with different configurations.
 	 */
 
-	'default' => 'default',
+	'defaultConnection' => 'default',
 
 	/**
 	 * These are the connection parameters used when building a client.

@@ -1,8 +1,6 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
-use Elasticsearch\ClientBuilder;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Psr\Log\LoggerInterface;
 
 
 /**
@@ -17,7 +15,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 *
 	 * @var bool
 	 */
-	protected $defer = true;
+	protected $defer = false;
 
 	/**
 	 * Bootstrap the application events.
@@ -28,16 +26,12 @@ class ServiceProvider extends BaseServiceProvider {
 
 		$app = $this->app;
 
-		if (version_compare($app::VERSION, '5.0') < 0) {
-			// Laravel 4
-			$this->package('cviebrock/laravel-elasticsearch', 'elasticsearch', realpath(__DIR__));
-		} else {
+		if (version_compare($app::VERSION, '5.0') >= 0) {
 			// Laravel 5
-			$configPath = realpath(__DIR__ . '/config/config.php');
+			$configPath = realpath(__DIR__ . '/../config/elasticsearch.php');
 			$this->publishes([
 				$configPath => config_path('elasticsearch.php')
 			]);
-			$this->mergeConfigFrom($configPath, 'elasticsearch');
 		}
 	}
 
@@ -48,19 +42,14 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function register() {
 
-		$this->app->singleton('elasticsearch', function($app)
+		$this->app->bindShared('elasticsearch.factory', function($app)
 		{
-			return (new Factory($app))->make();
+			return new Factory();
 		});
-
+		$this->app->bindShared('elasticsearch', function($app)
+		{
+			return new Manager($app, $app['elasticsearch.factory']);
+		});
 	}
 
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides() {
-
-	}
 }
