@@ -42,14 +42,12 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function register() {
 
-		$this->app->bindShared('elasticsearch.factory', function($app)
-		{
+		$this->app->bindShared('elasticsearch.factory', function ($app) {
 			return new Factory();
 		});
-		$this->app->bindShared('elasticsearch', function($app)
-		{
+
+		$this->app->bindShared('elasticsearch', function ($app) {
 			return new Manager($app, $app['elasticsearch.factory']);
 		});
 	}
-
 }
