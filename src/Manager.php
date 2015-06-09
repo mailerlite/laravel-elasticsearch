@@ -51,8 +51,6 @@ class Manager {
 		if (!isset($this->connections[$name])) {
 			$client = $this->makeConnection($name);
 
-			// TODO: implement client wrappers here?
-
 			$this->connections[$name] = $client;
 		}
 
