@@ -1,5 +1,8 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
+use Illuminate\Foundation\Application;
+
+
 /**
  * Class Manager
  *
@@ -29,10 +32,10 @@ class Manager {
 	protected $connections = [];
 
 	/**
-	 * @param $app
+	 * @param Application $app
 	 * @param Factory $factory
 	 */
-	public function __construct($app, Factory $factory) {
+	public function __construct(Application $app, Factory $factory) {
 
 		$this->app = $app;
 		$this->factory = $factory;
