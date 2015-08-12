@@ -14,7 +14,7 @@ An easy way to use the official Elastic Search client in your Laravel applicatio
 2. Publish the configuration file.  For Laravel 5:
 
     ```shell
-    php artisan vendor:publish cviebrock/laravel-elasticsearch
+    php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServiceProvider"
     ```
 
     In order to make this pacakge also work with Laravel 4, we can't do the
@@ -30,12 +30,12 @@ An easy way to use the official Elastic Search client in your Laravel applicatio
     ```php
     'providers' => array(
         ...
-        'Cviebrock\LaravelElasticSearch\ServiceProvider',
+        'Cviebrock\LaravelElasticsearch\ServiceProvider',
     )
 
     'aliases' => array(
         ...
-        'Elasticsearch' => 'Cviebrock\LaravelElasticSearch\Facade',
+        'Elasticsearch' => 'Cviebrock\LaravelElasticsearch\Facade',
     )
     ```
     
