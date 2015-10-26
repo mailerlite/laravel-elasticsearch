@@ -75,7 +75,8 @@ return [
 
 			'logging' => false,
 
-			'logObject' => \Log::getMonolog(),
+			// If you have an existing instance of Monolog you can use it here.
+			//'logObject' => \Log::getMonolog(),
 
 			'logPath' => storage_path('logs/elasticsearch.log'),
 
