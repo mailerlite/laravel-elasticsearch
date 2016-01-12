@@ -2,7 +2,6 @@
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-
 /**
  * Class ServiceProvider
  *
@@ -49,6 +48,10 @@ class ServiceProvider extends BaseServiceProvider {
 
 		$app->singleton('elasticsearch', function ($app) {
 			return new Manager($app, $app['elasticsearch.factory']);
+		});
+
+		$app->singleton(\Elasticsearch\Client::class, function($app) {
+			return $app['elasticsearch']->connection();
 		});
 	}
 }
