@@ -1,6 +1,7 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\ClientBuilder;
+use Psr\Log\LoggerInterface;
 
 class Factory {
 
