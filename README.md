@@ -16,7 +16,7 @@ An easy way to use the official Elastic Search client in your Laravel applicatio
 <a name="installation"></a>
 ## Installation and Configuration
 
-Install the `cviebrock/laravel-elasticsearch` package via composer:
+Install the `khoatran/laravel-elasticsearch` package via composer:
 
 ```shell
 composer require cviebrock/laravel-elasticsearch
@@ -41,7 +41,7 @@ Add the service provider and facade (`config/app.php` for Laravel 5 or `app/conf
 ```php
 'providers' => [
     ...
-    Cviebrock\LaravelElasticsearch\ServiceProvider::class,
+    Cviebrock\LaravelElasticsearch\ServiceProvider::class, //=> Service provider for Laravel    
 ]
 
 'aliases' => [
@@ -49,6 +49,15 @@ Add the service provider and facade (`config/app.php` for Laravel 5 or `app/conf
     'Elasticsearch' => Cviebrock\LaravelElasticsearch\Facade::class,
 ]
 ```
+
+If you work with Lumen, please register the LumenServiceProvider:
+
+```php
+
+$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+
+```
+
 
 <a name="usage"></a>
 ## Usage
@@ -84,7 +93,11 @@ the configuration file).
 $return = Elasticsearch::connection('connectionName')->index($data);
 ```
 
-
+Please be noticed that you should not use Facade in Lumen. 
+So, in Lumen - you should use IoC or get the ElasticSearch service object from the application.
+```php
+$elasticSearch = $this->app('elasticsearch');
+```
 
 <a name="bugs"></a>
 ## Bugs, Suggestions and Contributions

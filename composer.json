@@ -1,6 +1,6 @@
 {
-	"name": "cviebrock/laravel-elasticsearch",
-	"description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications",
+	"name": "khoatran/laravel-elasticsearch",
+	"description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications. This repository is cloned from cviebrock/laravel-elasticsearch, but I make some changes to make it works with Lumen",
 	"keywords": [
 		"laravel",
 		"elasticsearch",
@@ -15,6 +15,10 @@
 	},
 	"license": "MIT",
 	"authors": [
+		{
+			"name": "Khoa Tran",
+			"email": "tran.dang.khoa.khtn@gmail.com"
+		},
 		{
 			"name": "Colin Viebrock",
 			"email": "colin@viebrock.ca"
