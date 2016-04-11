@@ -16,7 +16,7 @@ An easy way to use the official Elastic Search client in your Laravel applicatio
 <a name="installation"></a>
 ## Installation and Configuration
 
-Install the `khoatran/laravel-elasticsearch` package via composer:
+Install the `cviebrock/laravel-elasticsearch` package via composer:
 
 ```shell
 composer require cviebrock/laravel-elasticsearch
