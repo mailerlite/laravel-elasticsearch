@@ -54,7 +54,7 @@ If you work with Lumen, please register the LumenServiceProvider:
 
 ```php
 
-$app->register(Dingo\Api\Provider\LumenServiceProvider::class);
+$app->register(Cviebrock\LaravelElasticsearch\LumenServiceProvider::class);
 
 ```
 
