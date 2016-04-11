@@ -10,6 +10,15 @@
 
 * Remove index mangling from this package (that functionality belongs elsewhere).
 
+## 1.1.0 - 11-Apr-2016
+
+* Added support for Lumen (thanks @khoatran).
+
+
+## 1.0.0 - 06-Jan-2016
+
+* Initial release.
+
 
 ## 0.9.0 - 27-May-2015
 
