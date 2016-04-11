@@ -21,20 +21,6 @@ Install the `cviebrock/laravel-elasticsearch` package via composer:
 ```shell
 composer require cviebrock/laravel-elasticsearch
 ```
-    
-Publish the configuration file.  For Laravel 5:
-
-```shell
-php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServiceProvider"
-```
-
-In order to make this package also work with Laravel 4, we can't do the
-standard configuration publishing like most Laravel 4 packages do.  You will
-need to simply copy the configuration file into your application's configuration folder:
-    
-```shell
-cp vendor/cviebrock/laravel-elasticsearch/config/elasticsearch.php app/config/
-```
 
 Add the service provider and facade (`config/app.php` for Laravel 5 or `app/config/app.php` for Laravel 4):
 
@@ -48,6 +34,20 @@ Add the service provider and facade (`config/app.php` for Laravel 5 or `app/conf
     ...
     'Elasticsearch' => Cviebrock\LaravelElasticsearch\Facade::class,
 ]
+```
+    
+Publish the configuration file.  For Laravel 5:
+
+```shell
+php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServiceProvider"
+```
+
+In order to make this package also work with Laravel 4, we can't do the
+standard configuration publishing like most Laravel 4 packages do.  You will
+need to simply copy the configuration file into your application's configuration folder:
+    
+```shell
+cp vendor/cviebrock/laravel-elasticsearch/config/elasticsearch.php app/config/
 ```
 
 If you work with Lumen, please register the LumenServiceProvider:
