@@ -26,7 +26,10 @@ class LumenServiceProvider extends BaseServiceProvider {
 
 		$app = $this->app;
 
-		if (version_compare($app::VERSION, '5.0') >= 0) {
+		// Later versions of lumen don't define VERSION and don't have vendor:publish
+		$versionConstant = get_class($app) . '::VERSION';
+
+		if (defined($versionConstant) && version_compare($app::VERSION, '5.0') >= 0) {
 			// Laravel 5
 			$configPath = realpath(__DIR__ . '/../config/elasticsearch.php');
 			$this->publishes([
