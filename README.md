@@ -47,7 +47,7 @@ php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServicePro
 
 ### Lumen
 
-If you work with Lumen, please register the LumenServiceProvider:
+If you work with Lumen, please register the LumenServiceProvider in `bootstrap/app.php`:
 
 ```php
 $app->register(Cviebrock\LaravelElasticsearch\LumenServiceProvider::class);
