@@ -29,11 +29,11 @@ class LumenServiceProvider extends BaseServiceProvider
     {
         $app = $this->app;
 
-        $app->singleton('elasticsearch.factory', function ($app) {
+        $app->singleton('elasticsearch.factory', function($app) {
             return new Factory();
         });
 
-        $app->singleton('elasticsearch', function ($app) {
+        $app->singleton('elasticsearch', function($app) {
             return new LumenManager($app, $app['elasticsearch.factory']);
         });
     }

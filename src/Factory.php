@@ -15,15 +15,15 @@ class Factory
      * @var array
      */
     protected $configMappings = [
-        'sslVerification' => 'setSSLVerification',
-        'sniffOnStart' => 'setSnifefOnStart',
-        'retries' => 'setRetries',
-        'httpHandler' => 'setHandler',
-        'connectionPool' => 'setConnectionPool',
+        'sslVerification'    => 'setSSLVerification',
+        'sniffOnStart'       => 'setSniffOnStart',
+        'retries'            => 'setRetries',
+        'httpHandler'        => 'setHandler',
+        'connectionPool'     => 'setConnectionPool',
         'connectionSelector' => 'setSelector',
-        'serializer' => 'setSerializer',
-        'connectionFactory' => 'setConnectionFactory',
-        'endpoint' => 'setEndpoint',
+        'serializer'         => 'setSerializer',
+        'connectionFactory'  => 'setConnectionFactory',
+        'endpoint'           => 'setEndpoint',
     ];
 
     /**

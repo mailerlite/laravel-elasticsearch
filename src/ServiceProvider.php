@@ -30,7 +30,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $configPath = realpath(__DIR__ . '/../config/elasticsearch.php');
         $this->publishes([
-            $configPath => config_path('elasticsearch.php')
+            $configPath => config_path('elasticsearch.php'),
         ]);
     }
 
@@ -43,15 +43,15 @@ class ServiceProvider extends BaseServiceProvider
     {
         $app = $this->app;
 
-        $app->singleton('elasticsearch.factory', function ($app) {
+        $app->singleton('elasticsearch.factory', function($app) {
             return new Factory();
         });
 
-        $app->singleton('elasticsearch', function ($app) {
+        $app->singleton('elasticsearch', function($app) {
             return new Manager($app, $app['elasticsearch.factory']);
         });
 
-        $app->singleton(Client::class, function ($app) {
+        $app->singleton(Client::class, function($app) {
             return $app['elasticsearch']->connection();
         });
     }
