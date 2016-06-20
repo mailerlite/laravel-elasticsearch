@@ -1,6 +1,7 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\ClientBuilder;
+use Psr\Log\LoggerInterface;
 
 class Factory {
 
@@ -34,16 +35,16 @@ class Factory {
 
 		// Configure SSL
 
-		if ($config['sslVerification'] !== null) {
+		if (isset($config['sslVerification']) && $config['sslVerification'] !== null) {
 			$clientBuilder->setSSLVerification($config['sslVerification']);
 		}
 
 		// Configure logging
 
-		if ($config['logging']) {
-			if ($config['logObject'] instanceof LoggerInterface) {
+		if (isset($config['logging']) && $config['logging']) {
+			if (isset($config['logObject']) && $config['logObject'] instanceof LoggerInterface) {
 				$clientBuilder->setLogger($config['logObject']);
-			} else {
+			} else if (isset($config['logPath']) && isset($config['logLevel'])) {
 				$path = $config['logPath'];
 				$level = $config['logLevel'];
 				$logger = ClientBuilder::defaultLogger($path, $level);
@@ -53,49 +54,49 @@ class Factory {
 
 		// Configure Sniff-on-Start
 
-		if ($config['sniffOnStart'] !== null) {
+		if (isset($config['sniffOnStart']) && $config['sniffOnStart'] !== null) {
 			$clientBuilder->setSniffOnStart($config['sniffOnStart']);
 		}
 
 		// Configure Retries
 
-		if ($config['retries'] !== null) {
+		if (isset($config['retries']) && $config['retries'] !== null) {
 			$clientBuilder->setRetries($config['retries']);
 		}
 
 		// Configure HTTP Handler
 
-		if ($config['httpHandler'] !== null) {
+		if (isset($config['httpHandler']) && $config['httpHandler'] !== null) {
 			$clientBuilder->setHandler($config['httpHandler']);
 		}
 
 		// Configure Connection Pool
 
-		if ($config['connectionPool'] !== null) {
+		if (isset($config['connectionPool']) && $config['connectionPool'] !== null) {
 			$clientBuilder->setConnectionPool($config['connectionPool']);
 		}
 
 		// Configure Connection Selector
 
-		if ($config['connectionSelector'] !== null) {
+		if (isset($config['connectionSelector']) && $config['connectionSelector'] !== null) {
 			$clientBuilder->setSelector($config['connectionSelector']);
 		}
 
 		// Configure Serializer
 
-		if ($config['serializer'] !== null) {
+		if (isset($config['serializer']) && $config['serializer'] !== null) {
 			$clientBuilder->setSerializer($config['serializer']);
 		}
 
 		// Configure Connection Factory
 
-		if ($config['connectionFactory'] !== null) {
+		if (isset($config['connectionFactory']) && $config['connectionFactory'] !== null) {
 			$clientBuilder->setConnectionFactory($config['connectionFactory']);
 		}
 
 		// Configure Endpoint
 
-		if ($config['endpoint'] !== null) {
+		if (isset($config['endpoint']) && $config['endpoint'] !== null) {
 			$clientBuilder->setEndpoint($config['endpoint']);
 		}
 
