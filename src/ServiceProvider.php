@@ -1,57 +1,58 @@
-<?php namespace Cviebrock\LaravelElasticsearch;
+<?php
 
+namespace Cviebrock\LaravelElasticsearch;
+
+use Elasticsearch\Client;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+
 
 /**
  * Class ServiceProvider
  *
  * @package Cviebrock\LaravelElasticsearch
  */
-class ServiceProvider extends BaseServiceProvider {
+class ServiceProvider extends BaseServiceProvider
+{
 
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
-	/**
-	 * Bootstrap the application events.
-	 *
-	 * @return void
-	 */
-	public function boot() {
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $configPath = realpath(__DIR__ . '/../config/elasticsearch.php');
+        $this->publishes([
+            $configPath => config_path('elasticsearch.php')
+        ]);
+    }
 
-		$app = $this->app;
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $app = $this->app;
 
-		if (version_compare($app::VERSION, '5.0') >= 0) {
-			// Laravel 5
-			$configPath = realpath(__DIR__ . '/../config/elasticsearch.php');
-			$this->publishes([
-				$configPath => config_path('elasticsearch.php')
-			]);
-		}
-	}
+        $app->singleton('elasticsearch.factory', function ($app) {
+            return new Factory();
+        });
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register() {
-		$app = $this->app;
+        $app->singleton('elasticsearch', function ($app) {
+            return new Manager($app, $app['elasticsearch.factory']);
+        });
 
-		$app->singleton('elasticsearch.factory', function ($app) {
-			return new Factory();
-		});
-
-		$app->singleton('elasticsearch', function ($app) {
-			return new Manager($app, $app['elasticsearch.factory']);
-		});
-
-		$app->singleton(\Elasticsearch\Client::class, function($app) {
-			return $app['elasticsearch']->connection();
-		});
-	}
+        $app->singleton(Client::class, function ($app) {
+            return $app['elasticsearch']->connection();
+        });
+    }
 }

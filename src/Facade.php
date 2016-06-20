@@ -1,4 +1,6 @@
-<?php namespace Cviebrock\LaravelElasticsearch;
+<?php
+
+namespace Cviebrock\LaravelElasticsearch;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 
@@ -8,14 +10,16 @@ use Illuminate\Support\Facades\Facade as BaseFacade;
  *
  * @package Cviebrock\LaravelElasticsearch
  */
-class Facade extends BaseFacade {
+class Facade extends BaseFacade
+{
 
-	/**
-	 * Get the registered name of the component.
-	 *
-	 * @return string
-	 */
-	protected static function getFacadeAccessor() {
-		return 'elasticsearch';
-	}
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return 'elasticsearch';
+    }
 }
