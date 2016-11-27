@@ -55,6 +55,11 @@ $app->register(Cviebrock\LaravelElasticsearch\LumenServiceProvider::class);
 
 And manually copy the configuration file to your application.
 
+**Note:** don't forget to register your elasticsearch.php config in bootstrap/app.php
+```php
+$app->configure('elasticsearch');
+```
+
 
 
 ## Usage
