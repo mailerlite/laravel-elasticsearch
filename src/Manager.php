@@ -1,6 +1,4 @@
-<?php
-
-namespace Cviebrock\LaravelElasticsearch;
+<?php namespace Cviebrock\LaravelElasticsearch;
 
 use Illuminate\Contracts\Foundation\Application;
 

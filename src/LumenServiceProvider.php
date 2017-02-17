@@ -1,6 +1,4 @@
-<?php
-
-namespace Cviebrock\LaravelElasticsearch;
+<?php namespace Cviebrock\LaravelElasticsearch;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
@@ -40,7 +38,8 @@ class LumenServiceProvider extends BaseServiceProvider
         $this->withFacades();
     }
 
-	protected function withFacades() {
-		class_alias('\Cviebrock\LaravelElasticsearch\Facade', 'Elasticsearch');
-	}
+    protected function withFacades()
+    {
+        class_alias('\Cviebrock\LaravelElasticsearch\Facade', 'Elasticsearch');
+    }
 }

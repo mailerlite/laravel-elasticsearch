@@ -1,6 +1,4 @@
-<?php
-
-namespace Cviebrock\LaravelElasticsearch;
+<?php namespace Cviebrock\LaravelElasticsearch;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 

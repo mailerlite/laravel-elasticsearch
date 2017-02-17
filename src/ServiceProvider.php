@@ -1,6 +1,4 @@
-<?php
-
-namespace Cviebrock\LaravelElasticsearch;
+<?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\Client;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;

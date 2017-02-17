@@ -1,6 +1,4 @@
-<?php
-
-namespace Cviebrock\LaravelElasticsearch;
+<?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\ClientBuilder;
 use Psr\Log\LoggerInterface;
@@ -35,7 +33,6 @@ class Factory
      */
     public function make(array $config)
     {
-
         // Build the client
         return $this->buildClient($config);
     }

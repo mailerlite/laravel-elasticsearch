@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0 - 17-Feb-2017
+
+* Further fixes for Lumen (thanks @pafelin).
+
+
 ## 1.2.0 - 20-Jun-2016
 
 * Fixed support for Lumen (thanks @JamesB797).
