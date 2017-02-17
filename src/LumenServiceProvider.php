@@ -36,5 +36,11 @@ class LumenServiceProvider extends BaseServiceProvider
         $app->singleton('elasticsearch', function($app) {
             return new LumenManager($app, $app['elasticsearch.factory']);
         });
+
+        $this->withFacades();
     }
+
+	protected function withFacades() {
+		class_alias('\Cviebrock\LaravelElasticsearch\Facade', 'Elasticsearch');
+	}
 }
