@@ -45,6 +45,19 @@ Publish the configuration file:
 php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServiceProvider"
 ```
 
+##### Alternative configuration method via .env file
+
+After you publish the configuration file as suggested above, you may configure Elastic Search
+by adding the following to laravel ```.env``` file
+  
+```ini
+ELASTICSEARCH_HOST=localhost
+ELASTICSEARCH_PORT=9200
+ELASTICSEARCH_SCHEME=http
+ELASTICSEARCH_USER=
+ELASTICSEARCH_PASS=
+```  
+
 ### Lumen
 
 If you work with Lumen, please register the LumenServiceProvider in `bootstrap/app.php`:
