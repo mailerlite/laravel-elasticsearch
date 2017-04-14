@@ -33,9 +33,15 @@ return [
              * @see https://www.elastic.co/guide/en/elasticsearch/client/php-api/2.0/_configuration.html#_host_configuration
              */
 
-            'hosts' => [
-                'localhost:9200',
-            ],
+			'hosts' => [
+				[
+					'host' => env('ELASTICSEARCH_HOST', 'localhost'),
+					'port' => env('ELASTICSEARCH_PORT', 9200),
+					'scheme' => env('ELASTICSEARCH_SCHEME', null),
+					'user' => env('ELASTICSEARCH_USER', null),
+					'pass' => env('ELASTICSEARCH_PASS', null),
+				]
+			],
 
             /**
              * SSL
