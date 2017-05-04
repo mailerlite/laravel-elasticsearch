@@ -48,7 +48,7 @@ php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServicePro
 ##### Alternative configuration method via .env file
 
 After you publish the configuration file as suggested above, you may configure Elastic Search
-by adding the following to laravel ```.env``` file
+by adding the following to laravel `.env` file
   
 ```ini
 ELASTICSEARCH_HOST=localhost

@@ -3,6 +3,7 @@
 ## 2.0.0 - 04-May-2017
 
 * Bump ES client version to 5.x
+* Allow configuration via `.env` file (thanks @expertcoder)
 
 
 ## 1.3.0 - 17-Feb-2017
