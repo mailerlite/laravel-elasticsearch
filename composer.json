@@ -9,7 +9,7 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"elasticsearch/elasticsearch": "^2.0",
+		"elasticsearch/elasticsearch": "^5.0",
 		"illuminate/support": "~5",
 		"monolog/monolog": "~1"
 	},
@@ -18,10 +18,6 @@
 		{
 			"name": "Colin Viebrock",
 			"email": "colin@viebrock.ca"
-		},
-		{
-			"name": "Brandon Martel",
-			"email": "brandonmartel@gmail.com"
 		}
 	],
 	"autoload": {

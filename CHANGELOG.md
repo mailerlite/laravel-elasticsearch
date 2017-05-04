@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0 - 04-May-2017
+
+* Bump ES client version to 5.x
+
+
 ## 1.3.0 - 17-Feb-2017
 
 * Further fixes for Lumen (thanks @pafelin).
