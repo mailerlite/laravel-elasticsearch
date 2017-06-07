@@ -133,4 +133,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute changes.
 was written by [Colin Viebrock](http://viebrock.ca) and is released under the 
 [MIT License](LICENSE.md).
 
-Copyright (c) 2015 Colin Viebrock
+Copyright (c) 2017 Colin Viebrock
