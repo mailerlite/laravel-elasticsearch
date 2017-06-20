@@ -1,6 +1,6 @@
 # Laravel-Elasticsearch
 
-An easy way to use the official Elastic Search client in your Laravel 5 or Lumen applications.
+An easy way to use the [official Elastic Search client](https://github.com/elastic/elasticsearch-php) in your Laravel 5 or Lumen applications.
 
 [![Build Status](https://travis-ci.org/cviebrock/laravel-elasticsearch.svg)](https://travis-ci.org/cviebrock/laravel-elasticsearch)
 [![Total Downloads](https://poser.pugx.org/cviebrock/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
@@ -77,8 +77,8 @@ $app->configure('elasticsearch');
 
 ## Usage
 
-The `Elasticsearch` facade is just an entry point into the ES client, so previously
-you might have used:
+The `Elasticsearch` facade is just an entry point into the [ES client](https://github.com/elastic/elasticsearch-php),
+so previously you might have used:
 
 ```php
 $data = [
@@ -108,11 +108,14 @@ the configuration file).
 $return = Elasticsearch::connection('connectionName')->index($data);
 ```
 
-Please be noticed that you should not use Facade in Lumen. 
-So, in Lumen - you should use IoC or get the ElasticSearch service object from the application.
+Lumen users who aren't using facades will need to use dependency injection or the application container
+in order to get the ES service object:
+
 ```php
 $elasticSearch = $this->app('elasticsearch');
 ```
+
+(Of course, DI and the application container work for Laravel as well.)
 
 
 ## Bugs, Suggestions and Contributions
