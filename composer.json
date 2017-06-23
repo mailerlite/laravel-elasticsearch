@@ -26,5 +26,15 @@
 		}
 	},
 	"minimum-stability": "stable",
-	"prefer-stable": true
+	"prefer-stable": true,
+	"extra": {
+		"laravel": {
+	    		"providers": [
+				"Cviebrock\\LaravelElasticsearch\\ServiceProvider"
+	    		],
+			"aliases": {
+				"Elasticsearch": "Cviebrock\\LaravelElasticsearch\\Facade"
+			}
+		}
+	}
 }
