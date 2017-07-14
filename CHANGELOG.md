@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1 - 14-Jul-2017
+
+* Add alias for Lumen (thanks @matejvelikonja)
+
+
 ## 2.0.0 - 04-May-2017
 
 * Bump ES client version to 5.x

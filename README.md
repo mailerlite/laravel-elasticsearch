@@ -69,6 +69,7 @@ $app->register(Cviebrock\LaravelElasticsearch\LumenServiceProvider::class);
 And manually copy the configuration file to your application.
 
 **Note:** don't forget to register your elasticsearch.php config in bootstrap/app.php
+
 ```php
 $app->configure('elasticsearch');
 ```
@@ -112,6 +113,13 @@ Lumen users who aren't using facades will need to use dependency injection or th
 in order to get the ES service object:
 
 ```php
+// using injection:
+public function handle(\Cviebrock\LaravelElasticsearch\LumenManager $elasticsearch)
+{
+  $elasticsearch->ping();
+}
+
+// using application container:
 $elasticSearch = $this->app('elasticsearch');
 ```
 
