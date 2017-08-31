@@ -1,5 +1,6 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
+use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Psr\Log\LoggerInterface;
 
@@ -29,6 +30,7 @@ class Factory
      * the default client.
      *
      * @param array $config
+     *
      * @return \Elasticsearch\Client|mixed
      */
     public function make(array $config)
@@ -41,9 +43,10 @@ class Factory
      * Build and configure an Elasticsearch client.
      *
      * @param array $config
+     *
      * @return \Elasticsearch\Client
      */
-    protected function buildClient(array $config)
+    protected function buildClient(array $config): Client
     {
 
         $clientBuilder = ClientBuilder::create();

@@ -12,9 +12,7 @@ class Facade extends BaseFacade
 {
 
     /**
-     * Get the registered name of the component.
-     *
-     * @return string
+     * @inheritdoc
      */
     protected static function getFacadeAccessor()
     {

@@ -1,7 +1,9 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\Client;
+use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Laravel\Lumen\Application as LumenApplication;
 
 
 /**
@@ -13,27 +15,15 @@ class ServiceProvider extends BaseServiceProvider
 {
 
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
-     * Bootstrap the application events.
-     *
-     * @return void
+     * Bootstrap the application services.
      */
     public function boot()
     {
-        $configPath = realpath(__DIR__ . '/../config/elasticsearch.php');
-        $this->publishes([
-            $configPath => config_path('elasticsearch.php'),
-        ]);
+        $this->setUpConfig();
     }
 
     /**
-     * Register the service provider.
+     * Register the application services.
      *
      * @return void
      */
@@ -52,5 +42,27 @@ class ServiceProvider extends BaseServiceProvider
         $app->singleton(Client::class, function($app) {
             return $app['elasticsearch']->connection();
         });
+
+        if ($app instanceof LumenApplication) {
+            $this->withLumenFacades();
+        }
+    }
+
+    protected function setUpConfig()
+    {
+        $source = dirname(__DIR__) . '/config/elasticsearch.php';
+
+        if ($this->app instanceof LaravelApplication) {
+            $this->publishes([$source => config_path('elasticsearch.php')], 'config');
+        } elseif ($this->app instanceof LumenApplication) {
+            $this->app->configure('elasticsearch');
+        }
+
+        $this->mergeConfigFrom($source, 'elasticsearch');
+    }
+
+    protected function withLumenFacades()
+    {
+        class_alias(Facade::class, 'Elasticsearch');
     }
 }

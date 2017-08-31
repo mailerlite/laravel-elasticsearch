@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0 - 31-Aug-2017
+
+- Laravel 5.5 support, including auto-registration
+- Bump ES client version to ^5.3
+
+
 ## 2.0.1 - 14-Jul-2017
 
 * Add alias for Lumen (thanks @matejvelikonja)

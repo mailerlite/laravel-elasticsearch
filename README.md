@@ -19,36 +19,24 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 
 Install the `cviebrock/laravel-elasticsearch` package via composer:
 
-```shell
+```sh
 composer require cviebrock/laravel-elasticsearch
 ```
 
-### Laravel 
+### Laravel
 
-Add the service provider and facade to `config/app.php`:
-
-```php
-'providers' => [
-    ...
-    Cviebrock\LaravelElasticsearch\ServiceProvider::class,   
-]
-
-'aliases' => [
-    ...
-    'Elasticsearch' => Cviebrock\LaravelElasticsearch\Facade::class,
-]
-```
+The package will automatically register itself.
     
 Publish the configuration file:
 
-```shell
+```sh
 php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServiceProvider"
 ```
 
 ##### Alternative configuration method via .env file
 
 After you publish the configuration file as suggested above, you may configure Elastic Search
-by adding the following to laravel `.env` file
+by adding the following to your application's `.env` file (with appropriate values):
   
 ```ini
 ELASTICSEARCH_HOST=localhost
@@ -60,19 +48,14 @@ ELASTICSEARCH_PASS=
 
 ### Lumen
 
-If you work with Lumen, please register the LumenServiceProvider in `bootstrap/app.php`:
+If you work with Lumen, please register the service provider and configuration in `bootstrap/app.php`:
 
 ```php
-$app->register(Cviebrock\LaravelElasticsearch\LumenServiceProvider::class);
-```
-
-And manually copy the configuration file to your application.
-
-**Note:** don't forget to register your elasticsearch.php config in bootstrap/app.php
-
-```php
+$app->register(Cviebrock\LaravelElasticsearch\ServiceProvider::class);
 $app->configure('elasticsearch');
 ```
+
+Manually copy the configuration file to your application.
 
 
 
@@ -114,7 +97,7 @@ in order to get the ES service object:
 
 ```php
 // using injection:
-public function handle(\Cviebrock\LaravelElasticsearch\LumenManager $elasticsearch)
+public function handle(\Cviebrock\LaravelElasticsearch\Manager $elasticsearch)
 {
   $elasticsearch->ping();
 }
@@ -123,7 +106,7 @@ public function handle(\Cviebrock\LaravelElasticsearch\LumenManager $elasticsear
 $elasticSearch = $this->app('elasticsearch');
 ```
 
-(Of course, DI and the application container work for Laravel as well.)
+Of course, DI and the application container work for Laravel as well.
 
 
 ## Bugs, Suggestions and Contributions

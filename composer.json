@@ -1,40 +1,40 @@
 {
-	"name": "cviebrock/laravel-elasticsearch",
-	"description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications.",
-	"keywords": [
-		"laravel",
-		"elasticsearch",
-		"search",
-		"client"
-	],
-	"require": {
-		"php": ">=5.4.0",
-		"elasticsearch/elasticsearch": "^5.0",
-		"illuminate/support": "~5",
-		"monolog/monolog": "~1"
-	},
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Colin Viebrock",
-			"email": "colin@viebrock.ca"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"Cviebrock\\LaravelElasticsearch\\": "src/"
-		}
-	},
-	"minimum-stability": "stable",
-	"prefer-stable": true,
-	"extra": {
-		"laravel": {
-	    		"providers": [
-				"Cviebrock\\LaravelElasticsearch\\ServiceProvider"
-	    		],
-			"aliases": {
-				"Elasticsearch": "Cviebrock\\LaravelElasticsearch\\Facade"
-			}
-		}
-	}
+    "name": "cviebrock/laravel-elasticsearch",
+    "description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications.",
+    "keywords": [
+        "laravel",
+        "elasticsearch",
+        "search",
+        "client"
+    ],
+    "require": {
+        "php": "^7.0",
+        "elasticsearch/elasticsearch": "^5.3",
+        "illuminate/support": "~5.5.0",
+        "monolog/monolog": "^1.23"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Colin Viebrock",
+            "email": "colin@viebrock.ca"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Cviebrock\\LaravelElasticsearch\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cviebrock\\LaravelElasticsearch\\ServiceProvider"
+            ],
+            "aliases": {
+                "Elasticsearch": "Cviebrock\\LaravelElasticsearch\\Facade"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
