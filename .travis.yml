@@ -20,6 +20,5 @@ services:
   - elasticsearch
 
 before_script:
-  - sleep 10
   - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
