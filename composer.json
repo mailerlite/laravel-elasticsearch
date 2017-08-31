@@ -7,12 +7,7 @@
         "search",
         "client"
     ],
-    "require": {
-        "php": "^7.0",
-        "elasticsearch/elasticsearch": "^5.3",
-        "illuminate/support": "~5.5.0",
-        "monolog/monolog": "^1.23"
-    },
+    "homepage": "https://github.com/cviebrock/laravel-elasticsearch",
     "license": "MIT",
     "authors": [
         {
@@ -20,10 +15,28 @@
             "email": "colin@viebrock.ca"
         }
     ],
+    "require": {
+        "php": "^7.0",
+        "elasticsearch/elasticsearch": "^5.3",
+        "illuminate/support": "~5.5.0",
+        "monolog/monolog": "^1.23"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~3.5.0",
+        "phpunit/phpunit": "^6.2"
+    },
     "autoload": {
         "psr-4": {
-            "Cviebrock\\LaravelElasticsearch\\": "src/"
+            "Cviebrock\\LaravelElasticsearch\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cviebrock\\LaravelElasticsearch\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "extra": {
         "laravel": {

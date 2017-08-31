@@ -39,6 +39,8 @@ class ServiceProvider extends BaseServiceProvider
             return new Manager($app, $app['elasticsearch.factory']);
         });
 
+        $app->alias('elasticsearch', Manager::class);
+
         $app->singleton(Client::class, function($app) {
             return $app['elasticsearch']->connection();
         });
