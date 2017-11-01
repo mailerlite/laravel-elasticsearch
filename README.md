@@ -51,12 +51,11 @@ ELASTICSEARCH_PASS=
 If you work with Lumen, please register the service provider and configuration in `bootstrap/app.php`:
 
 ```php
-$app->register(Cviebrock\LaravelElasticsearch\ServiceProvider::class);
+$app->register(Cviebrock\LaravelElasticsearch\LumenServiceProvider::class);
 $app->configure('elasticsearch');
 ```
 
 Manually copy the configuration file to your application.
-
 
 
 ## Usage
