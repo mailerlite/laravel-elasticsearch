@@ -52,13 +52,10 @@ If you work with Lumen, please register the service provider and configuration i
 
 ```php
 $app->register(Cviebrock\LaravelElasticsearch\LumenServiceProvider::class);
-```
-
-If you are not using the alternative configuration method via `.env` file (as described above) manually copy the configuration file to your application and add the following line:
-
-```php
 $app->configure('elasticsearch');
 ```
+
+Manually copy the configuration file to your application.
 
 
 ## Usage
