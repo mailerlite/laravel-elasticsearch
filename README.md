@@ -23,7 +23,7 @@ Install the current version of the `cviebrock/laravel-elasticsearch` package via
 composer require cviebrock/laravel-elasticsearch
 ```
 
-If you are using ElasticSearch version 5, then use version 2
+If you are using ElasticSearch version 5, then use version 2 of this package:
 
 ```sh
 composer require cviebrock/laravel-elasticsearch:^2
@@ -31,8 +31,8 @@ composer require cviebrock/laravel-elasticsearch:^2
 
 ### Laravel
 
-The package will automatically register itself.
-    
+The package's service provider will automatically register itself.
+
 Publish the configuration file:
 
 ```sh
