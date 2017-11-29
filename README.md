@@ -17,10 +17,16 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 
 ## Installation and Configuration
 
-Install the `cviebrock/laravel-elasticsearch` package via composer:
+Install the current version of the `cviebrock/laravel-elasticsearch` package via composer:
 
 ```sh
 composer require cviebrock/laravel-elasticsearch
+```
+
+If you are using ElasticSearch version 5, then use version 2
+
+```sh
+composer require cviebrock/laravel-elasticsearch:^2
 ```
 
 ### Laravel

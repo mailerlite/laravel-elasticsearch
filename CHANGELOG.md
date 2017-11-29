@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 - 29-Nov-2017
+
+- Bump ES client version to ^6.0
+
 ## 2.1.0 - 31-Aug-2017
 
 - Laravel 5.5 support, including auto-registration
