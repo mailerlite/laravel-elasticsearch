@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^7.0",
-        "elasticsearch/elasticsearch": "^5.3",
+        "elasticsearch/elasticsearch": "^6.0",
         "illuminate/support": "~5.5.0",
         "monolog/monolog": "^1.23"
     },
