@@ -131,13 +131,13 @@ $stats = Elasticsearch::cluster()->stats();
 
 create and restore snapshots (read the Elastic docs about creating repository paths and plugins first):
 ```php
-$stats = Elasticsearch::snapshots()->create($params);
-$stats = Elasticsearch::snapshots()->restore($params);
+$response = Elasticsearch::snapshots()->create($params);
+$response = Elasticsearch::snapshots()->restore($params);
 ```
 
 or delete whole indices (with great power comes great responsibility):
 ```php
-$stats = Elasticsearch::indices()->delete(['index' => 'my_index']);
+$response = Elasticsearch::indices()->delete(['index' => 'my_index']);
 ```
 
 Please remember that this package is a thin wrapper around a large number of very sophisticated and well-documented Elastic features. Information about those features and the methods and parameters used to call them can be found in the [Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html). Help with using them is available on the [Elastic forums](https://discuss.elastic.co/) and [stackoverflow](https://stackoverflow.com/).
