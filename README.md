@@ -23,7 +23,7 @@ Install the current version of the `cviebrock/laravel-elasticsearch` package via
 composer require cviebrock/laravel-elasticsearch
 ```
 
-If you are using ElasticSearch version 5, then use version 2 of this package:
+If you are using ElasticSearch version 5, then install version 2 of this package:
 
 ```sh
 composer require cviebrock/laravel-elasticsearch:^2
@@ -118,29 +118,39 @@ Of course, DI and the application container work for Laravel as well.
 
 ## Advanced Usage
 
-So, you've mastered Elasticsearch CRUD and querying and are ready to monitor the health of your Elastic cluster programmatically, back it up, or make changes to it. But that's done through "namespaced" commands ...
+Because the package is a wrapper around the official Elastic client, you can 
+do pretty much anything with this package.  Not only can you perform standard CRUD operations,
+but you could monitor the health of your Elastic cluster programmatically, 
+back it up, or make changes to it.  Some of these operations are done through 
+"namespaced" commands, which this package happily supports.
 
-Happily this package works just fine with those too.
+To grab statistics for an index:
 
-So you can grab stats:
 ```php
 $stats = Elasticsearch::indices()->stats(['index' => 'my_index']);
 $stats = Elasticsearch::nodes()->stats();
 $stats = Elasticsearch::cluster()->stats();
 ```
 
-create and restore snapshots (read the Elastic docs about creating repository paths and plugins first):
+To create and restore snapshots (read the Elastic docs about creating repository paths and plugins first):
+
 ```php
 $response = Elasticsearch::snapshots()->create($params);
 $response = Elasticsearch::snapshots()->restore($params);
 ```
 
-or delete whole indices (with great power comes great responsibility):
+To delete whole indices (be careful!):
+
 ```php
 $response = Elasticsearch::indices()->delete(['index' => 'my_index']);
 ```
 
-Please remember that this package is a thin wrapper around a large number of very sophisticated and well-documented Elastic features. Information about those features and the methods and parameters used to call them can be found in the [Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html). Help with using them is available on the [Elastic forums](https://discuss.elastic.co/) and [stackoverflow](https://stackoverflow.com/).
+Please remember that this package is a thin wrapper around a large number of very 
+sophisticated and well-documented Elastic features.  Information about those features 
+and the methods and parameters used to call them can be found in the 
+[Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html).
+Help with using them is available via the [Elastic forums](https://discuss.elastic.co/) 
+and on sites like [Stack Overflow](https://stackoverflow.com/questions/tagged/elasticsearch).
 
 
 
