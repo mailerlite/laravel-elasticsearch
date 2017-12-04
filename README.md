@@ -115,6 +115,35 @@ $elasticSearch = $this->app('elasticsearch');
 Of course, DI and the application container work for Laravel as well.
 
 
+
+## Advanced Usage
+
+So, you've mastered Elasticsearch CRUD and querying and are ready to monitor the health of your Elastic cluster programmatically, back it up, or make changes to it. But that's done through "namespaced" commands ...
+
+Happily this package works just fine with those too.
+
+So you can grab stats:
+```php
+$stats = Elasticsearch::indices()->stats(['index' => 'my_index']);
+$stats = Elasticsearch::nodes()->stats();
+$stats = Elasticsearch::cluster()->stats();
+```
+
+create and restore snapshots (read the Elastic docs about creating repository paths and plugins first):
+```php
+$response = Elasticsearch::snapshots()->create($params);
+$response = Elasticsearch::snapshots()->restore($params);
+```
+
+or delete whole indices (with great power comes great responsibility):
+```php
+$response = Elasticsearch::indices()->delete(['index' => 'my_index']);
+```
+
+Please remember that this package is a thin wrapper around a large number of very sophisticated and well-documented Elastic features. Information about those features and the methods and parameters used to call them can be found in the [Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html). Help with using them is available on the [Elastic forums](https://discuss.elastic.co/) and [stackoverflow](https://stackoverflow.com/).
+
+
+
 ## Bugs, Suggestions and Contributions
 
 Thanks to [everyone](https://github.com/cviebrock/laravel-elasticsearch/graphs/contributors)
