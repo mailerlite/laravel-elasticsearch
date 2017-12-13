@@ -3,7 +3,6 @@
 use Elasticsearch\Client;
 use Illuminate\Contracts\Container\Container;
 
-
 /**
  * Class Manager
  *
