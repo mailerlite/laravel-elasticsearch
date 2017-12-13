@@ -44,10 +44,6 @@ class ServiceProvider extends BaseServiceProvider
         $app->singleton(Client::class, function($app) {
             return $app['elasticsearch']->connection();
         });
-
-        if ($app instanceof LumenApplication) {
-            $this->withLumenFacades();
-        }
     }
 
     protected function setUpConfig()
@@ -61,10 +57,5 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         $this->mergeConfigFrom($source, 'elasticsearch');
-    }
-
-    protected function withLumenFacades()
-    {
-        class_alias(Facade::class, 'Elasticsearch');
     }
 }
