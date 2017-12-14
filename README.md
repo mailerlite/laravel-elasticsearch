@@ -99,39 +99,41 @@ the configuration file).
 $return = Elasticsearch::connection('connectionName')->index($data);
 ```
 
-Lumen users who wish to use Facades can do so by editing their bootstrap/app.php file to include
-the following:
+Lumen users who wish to use Facades can do so by editing the 
+`bootstrap/app.php` file to include the following:
+
 ```php
 $app->withFacades(true, [
-        ...
-        '\Cviebrock\LaravelElasticsearch\Facade' => 'Elasticsearch',
-        ...
+    ...
+    Cviebrock\LaravelElasticsearch\Facade::class => 'Elasticsearch',
+    ...
 ]);
 ```
 
-Lumen users who aren't using facades will need to use dependency injection or the application container
-in order to get the ES service object:
+Lumen users who aren't using facades will need to use dependency injection 
+or the application container in order to get the ES service object:
 
 ```php
 // using injection:
 public function handle(\Cviebrock\LaravelElasticsearch\Manager $elasticsearch)
 {
-  $elasticsearch->ping();
+    $elasticsearch->ping();
 }
 
 // using application container:
 $elasticSearch = $this->app('elasticsearch');
 ```
 
-Of course, DI and the application container work for Laravel as well.
+Of course, dependency injection and the application container work 
+for Laravel applications as well.
 
 
 
 ## Advanced Usage
 
 Because the package is a wrapper around the official Elastic client, you can 
-do pretty much anything with this package.  Not only can you perform standard CRUD operations,
-but you could monitor the health of your Elastic cluster programmatically, 
+do pretty much anything with this package.  Not only can you perform standard 
+CRUD operations, but you can monitor the health of your Elastic cluster programmatically, 
 back it up, or make changes to it.  Some of these operations are done through 
 "namespaced" commands, which this package happily supports.
 

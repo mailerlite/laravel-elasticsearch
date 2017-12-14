@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.0 - 14-Dec-2017 
+
+- Real fix for Lumen users (thanks @petercoles and @aripekkako)
+
+
 ## 3.0.0 - 29-Nov-2017
 
 - Bump ES client version to ^6.0
