@@ -1,8 +1,7 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\Client;
-use Illuminate\Contracts\Foundation\Application;
-
+use Illuminate\Contracts\Container\Container;
 
 /**
  * Class Manager
@@ -15,7 +14,7 @@ class Manager
     /**
      * The application instance.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Contracts\Container\Container
      */
     protected $app;
 
@@ -34,10 +33,10 @@ class Manager
     protected $connections = [];
 
     /**
-     * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param \Illuminate\Contracts\Container\Container $app
      * @param \Cviebrock\LaravelElasticsearch\Factory $factory
      */
-    public function __construct(Application $app, Factory $factory)
+    public function __construct(Container $app, Factory $factory)
     {
         $this->app = $app;
         $this->factory = $factory;

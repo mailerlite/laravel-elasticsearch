@@ -10,6 +10,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 
 * [Installation and Configuration](#installation-and-configuration)
 * [Usage](#usage)
+* [Advanced Usage](#advanced-usage)
 * [Bugs, Suggestions and Contributions](#bugs-suggestions-and-contributions)
 * [Copyright and License](#copyright-and-license)
 
@@ -96,6 +97,16 @@ the configuration file).
 
 ```php
 $return = Elasticsearch::connection('connectionName')->index($data);
+```
+
+Lumen users who wish to use Facades can do so by editing their bootstrap/app.php file to include
+the following:
+```php
+$app->withFacades(true, [
+        ...
+        '\Cviebrock\LaravelElasticsearch\Facade' => 'Elasticsearch',
+        ...
+]);
 ```
 
 Lumen users who aren't using facades will need to use dependency injection or the application container
