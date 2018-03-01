@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.1 - 28-Feb-2018
+
+- Support Laravel/Lumen 5.6 (thanks @akira28)
+
+
 ## 3.1.0 - 14-Dec-2017 
 
 - Real fix for Lumen users (thanks @petercoles and @aripekkako)
