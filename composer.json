@@ -22,7 +22,7 @@
         "monolog/monolog": "^1.23"
     },
     "require-dev": {
-        "limedeck/phpunit-detailed-printer": "^4.1",
+        "limedeck/phpunit-detailed-printer": "^3.2|^4.1",
         "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0",
         "phpunit/phpunit": "^6.2|^7.0"
     },
