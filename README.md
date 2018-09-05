@@ -11,7 +11,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 * [Installation and Configuration](#installation-and-configuration)
 * [Usage](#usage)
 * [Advanced Usage](#advanced-usage)
-* [Bugs, Suggestions and Contributions](#bugs-suggestions-and-contributions)
+* [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
 * [Copyright and License](#copyright-and-license)
 
 
@@ -32,7 +32,7 @@ composer require cviebrock/laravel-elasticsearch:^2
 
 ### Laravel
 
-The package's service provider will automatically register itself.
+The package's service provider will automatically register its service provider.
 
 Publish the configuration file:
 
@@ -167,10 +167,16 @@ and on sites like [Stack Overflow](https://stackoverflow.com/questions/tagged/el
 
 
 
-## Bugs, Suggestions and Contributions
+## Bugs, Suggestions, Contributions and Support
 
 Thanks to [everyone](https://github.com/cviebrock/laravel-elasticsearch/graphs/contributors)
 who has contributed to this project!
+
+Special thanks to 
+[JetBrains](https://www.jetbrains.com/?from=cviebrock/laravel-elasticsearch) for their 
+Open Source License Program ... and the excellent PHPStorm IDE, of course!
+
+[![JetBrains](./.github/jetbrains.svg)](https://www.jetbrains.com/?from=cviebrock/laravel-elasticsearch)
 
 Please use [Github](https://github.com/cviebrock/laravel-elasticsearch) for reporting bugs, 
 and making comments or suggestions.

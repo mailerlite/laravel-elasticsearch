@@ -11,14 +11,13 @@ env:
   - COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
   - COMPOSER_FLAGS=""
 
-matrix:
-  exclude:
-    - php: 7.2
-      env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
-
 services:
   - elasticsearch
 
 before_script:
   - travis_retry composer self-update
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+  - travis_retry composer dump-autoload
+
+script:
+  - php vendor/bin/phpunit
