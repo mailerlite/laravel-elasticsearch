@@ -80,7 +80,6 @@ class Factory
 
         foreach($config['hosts'] as $c) {
             if( $c['aws'] ) {
-                echo "hola";
                 $clientBuilder->setHandler( function(array $request) use($c) {
                     $psr7Handler = \Aws\default_http_handler();
                     $signer = new \Aws\Signature\SignatureV4('es', $c['aws_region']);
@@ -115,7 +114,7 @@ class Factory
                         'effective_url' => (string)$psr7Request->getUri(),
                     ]);
                 });
-            }else echo "no hola!";
+            }
         }
 
         // Build and return the client
