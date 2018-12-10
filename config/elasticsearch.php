@@ -173,6 +173,15 @@ return [
 
             'endpoint' => null,
 
+
+            /**
+             * register additional namespaces
+             *
+             * e.g.: for registerNamespace(XPack::Security()), 'namespaces' => XPack::Security()
+             *       or as an array: 'namespaces' => [XPack::Security(), XPack::Watcher()]
+             */
+            'namespaces' => null
+
         ],
 
     ],
