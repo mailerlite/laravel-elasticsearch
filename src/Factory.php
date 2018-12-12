@@ -23,6 +23,7 @@ class Factory
         'serializer'         => 'setSerializer',
         'connectionFactory'  => 'setConnectionFactory',
         'endpoint'           => 'setEndpoint',
+        'namespaces'         => 'registerNamespace'
     ];
 
     /**
@@ -74,7 +75,13 @@ class Factory
         foreach ($this->configMappings as $key => $method) {
             $value = array_get($config, $key);
             if ($value !== null) {
-                call_user_func([$clientBuilder, $method], $value);
+                if (is_array($value)) {
+                    foreach ($value as $vItem) {
+                        call_user_func([$clientBuilder, $method], $vItem);
+                    }
+                } else {
+                    call_user_func([$clientBuilder, $method], $value);
+                }
             }
         }
 
