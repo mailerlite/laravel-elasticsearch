@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.0 - 12-Dec-2018
+
+- Support AWS hosts (thanks @Matrix86)
+- Add ability to register additional namespaces (thanks @ShaneXie)
+
+
 ## 3.2.0 - 04-Sep-2018
 
 - Support Laravel/Lumen 5.7

@@ -4,7 +4,6 @@ use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Psr\Log\LoggerInterface;
 
-
 class Factory
 {
 
@@ -23,7 +22,7 @@ class Factory
         'serializer'         => 'setSerializer',
         'connectionFactory'  => 'setConnectionFactory',
         'endpoint'           => 'setEndpoint',
-        'namespaces'         => 'registerNamespace'
+        'namespaces'         => 'registerNamespace',
     ];
 
     /**
@@ -49,7 +48,6 @@ class Factory
      */
     protected function buildClient(array $config): Client
     {
-
         $clientBuilder = ClientBuilder::create();
 
         // Configure hosts
@@ -64,7 +62,7 @@ class Factory
             $logLevel = array_get($config, 'logLevel');
             if ($logObject && $logObject instanceof LoggerInterface) {
                 $clientBuilder->setLogger($logObject);
-            } else if ($logPath && $logLevel) {
+            } elseif ($logPath && $logLevel) {
                 $logObject = ClientBuilder::defaultLogger($logPath, $logLevel);
                 $clientBuilder->setLogger($logObject);
             }
@@ -74,23 +72,24 @@ class Factory
 
         foreach ($this->configMappings as $key => $method) {
             $value = array_get($config, $key);
-            if ($value !== null) {
-                if (is_array($value)) {
-                    foreach ($value as $vItem) {
-                        call_user_func([$clientBuilder, $method], $vItem);
-                    }
-                } else {
-                    call_user_func([$clientBuilder, $method], $value);
+            if (is_array($value)) {
+                foreach ($value as $vItem) {
+                    $clientBuilder->$method($vItem);
                 }
+            } elseif ($value !== null) {
+                $clientBuilder->$method($value);
             }
         }
 
-        foreach($config['hosts'] as $c) {
-            if( $c['aws'] ) {
-                $clientBuilder->setHandler( function(array $request) use($c) {
+        // Configure handlers for any AWS hosts
+
+        foreach ($config['hosts'] as $host) {
+            if ($host['aws']) {
+                $clientBuilder->setHandler(function(array $request) use ($host) {
                     $psr7Handler = \Aws\default_http_handler();
-                    $signer = new \Aws\Signature\SignatureV4('es', $c['aws_region']);
+                    $signer = new \Aws\Signature\SignatureV4('es', $host['aws_region']);
                     $request['headers']['Host'][0] = parse_url($request['headers']['Host'][0])['host'];
+
                     // Create a PSR-7 request from the array passed to the handler
                     $psr7Request = new \GuzzleHttp\Psr7\Request(
                         $request['http_method'],
@@ -100,25 +99,31 @@ class Factory
                         $request['headers'],
                         $request['body']
                     );
+
                     // Sign the PSR-7 request with credentials from the environment
                     $signedRequest = $signer->signRequest(
                         $psr7Request,
-                        new \Aws\Credentials\Credentials($c['aws_key'], $c['aws_secret'])
+                        new \Aws\Credentials\Credentials($host['aws_key'], $host['aws_secret'])
                     );
+
                     // Send the signed request to Amazon ES
                     /** @var \Psr\Http\Message\ResponseInterface $response */
-                    $response = $psr7Handler($signedRequest)->then(function (\Psr\Http\Message\ResponseInterface $response) {
-                        return $response;
-                    }, function ($error) {
-                        return $error['response'];
-                    })->wait();
+                    $response = $psr7Handler($signedRequest)
+                        ->then(function(\Psr\Http\Message\ResponseInterface $response) {
+                            return $response;
+                        }, function($error) {
+                            return $error['response'];
+                        })
+                        ->wait();
+
                     // Convert the PSR-7 response to a RingPHP response
                     return new \GuzzleHttp\Ring\Future\CompletedFutureArray([
-                        'status' => $response->getStatusCode(),
-                        'headers' => $response->getHeaders(),
-                        'body' => $response->getBody()->detach(),
+                        'status'         => $response->getStatusCode(),
+                        'headers'        => $response->getHeaders(),
+                        'body'           => $response->getBody()
+                                                     ->detach(),
                         'transfer_stats' => ['total_time' => 0],
-                        'effective_url' => (string)$psr7Request->getUri(),
+                        'effective_url'  => (string)$psr7Request->getUri(),
                     ]);
                 });
             }

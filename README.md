@@ -42,7 +42,7 @@ php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServicePro
 
 ##### Alternative configuration method via .env file
 
-After you publish the configuration file as suggested above, you may configure Elastic Search
+After you publish the configuration file as suggested above, you may configure ElasticSearch
 by adding the following to your application's `.env` file (with appropriate values):
   
 ```ini
@@ -51,6 +51,16 @@ ELASTICSEARCH_PORT=9200
 ELASTICSEARCH_SCHEME=http
 ELASTICSEARCH_USER=
 ELASTICSEARCH_PASS=
+```
+
+If you are connecting to ElasticSearch instances on Amazon AWS, then you can also 
+add the following to your `.env` file:
+
+```ini
+AWS_ELASTICSEARCH_ENABLED=true
+AWS_REGION=...
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_ID=...
 ```  
 
 ### Lumen
