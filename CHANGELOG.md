@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.4.0 - 17-Dec-2018
+
+- Re-add Lumen support (thanks @ristedavcevski)
+
+
 ## 3.3.0 - 12-Dec-2018
 
 - Support AWS hosts (thanks @Matrix86)
