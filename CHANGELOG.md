@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.0 - 04-Mar-2019
+
+- Support Laravel/Lumen 5.8
+
+
 ## 3.4.0 - 17-Dec-2018
 
 - Re-add Lumen support (thanks @ristedavcevski)
