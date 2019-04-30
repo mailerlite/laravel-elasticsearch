@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.1 - 29-Apr-2019
+
+- fix for ElasticSearch 6.5 (#59, thanks @SirNarsh)
+
+
 ## 3.5.0 - 04-Mar-2019
 
 - Support Laravel/Lumen 5.8
