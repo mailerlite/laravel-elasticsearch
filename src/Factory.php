@@ -3,6 +3,8 @@
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
 use Psr\Log\LoggerInterface;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class Factory
 {
@@ -63,7 +65,9 @@ class Factory
             if ($logObject && $logObject instanceof LoggerInterface) {
                 $clientBuilder->setLogger($logObject);
             } elseif ($logPath && $logLevel) {
-                $logObject = ClientBuilder::defaultLogger($logPath, $logLevel);
+                $handler = new StreamHandler($logPath, $logLevel);
+                $logObject = new Logger('log');
+                $logObject->pushHandler($handler);
                 $clientBuilder->setLogger($logObject);
             }
         }
