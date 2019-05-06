@@ -53,8 +53,10 @@ ELASTICSEARCH_USER=
 ELASTICSEARCH_PASS=
 ```
 
-If you are connecting to ElasticSearch instances on Amazon AWS, then you can also 
-add the following to your `.env` file:
+##### Connecting to AWS Elasticsearch Service
+If you are connecting to ElasticSearch instances on Amazon AWS, then you'll also
+need to `composer require aws/aws-sdk-php:^3.80` and add the following to your 
+`.env` file:
 
 ```ini
 AWS_ELASTICSEARCH_ENABLED=true
