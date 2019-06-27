@@ -72,6 +72,11 @@ class Factory
             }
         }
 
+        // Configure tracer
+        if ($tracer = array_get($config, 'tracer')) {
+            $clientBuilder->setTracer(app($tracer));
+        }
+
         // Set additional client configuration
 
         foreach ($this->configMappings as $key => $method) {

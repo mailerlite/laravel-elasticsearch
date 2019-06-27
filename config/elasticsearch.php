@@ -188,7 +188,16 @@ return [
              * @example 'namespaces' => [XPack::Security(), XPack::Watcher()]
              * @see https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/ElasticsearchPHP_Endpoints.html#Elasticsearch_ClientBuilderregisterNamespace_registerNamespace
              */
-            'namespaces' => []
+            'namespaces' => [],
+
+            /**
+             * Tracer
+             *
+             * Tracer is handled by passing in a name of the class implements Psr\Log\LoggerInterface.
+             *
+             * @see https://www.elastic.co/guide/en/elasticsearch/client/php-api/2.0/_configuration.html#_setting_a_custom_connectionfactory
+             */
+            'tracer' => null,
 
         ],
 
