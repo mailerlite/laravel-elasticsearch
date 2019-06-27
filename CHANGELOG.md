@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.0 - 26-Jun-2019
+
+- add support for tracers (#65, thanks @luoxiaojun1992)
+- fix typo in README.md (#63, thanks @Harrisonbro)
+
+
 ## 3.5.1 - 29-Apr-2019
 
 - fix for ElasticSearch 6.5 (#59, thanks @SirNarsh)
