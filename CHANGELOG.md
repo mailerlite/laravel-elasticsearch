@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.0.0 - 31-Aug-2019
+
+- Bump ES client version to ^7.0 (#68, thanks @Lednerb)
+
+
 ## 3.6.0 - 26-Jun-2019
 
 - add support for tracers (#65, thanks @luoxiaojun1992)
