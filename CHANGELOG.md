@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.0 - 03-Sep-2019
+
+- support for Laravel 6.0 (and drop support for < 5.8)
+
+
 ## 4.0.0 - 31-Aug-2019
 
 - Bump ES client version to ^7.0 (#68, thanks @Lednerb)

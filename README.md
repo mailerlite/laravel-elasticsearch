@@ -1,6 +1,6 @@
 # Laravel-Elasticsearch
 
-An easy way to use the [official Elastic Search client](https://github.com/elastic/elasticsearch-php) in your Laravel 5 or Lumen applications.
+An easy way to use the [official Elastic Search client](https://github.com/elastic/elasticsearch-php) in your Laravel or Lumen applications.
 
 [![Build Status](https://travis-ci.org/cviebrock/laravel-elasticsearch.svg)](https://travis-ci.org/cviebrock/laravel-elasticsearch)
 [![Total Downloads](https://poser.pugx.org/cviebrock/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
