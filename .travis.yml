@@ -10,6 +10,13 @@ env:
   - COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
   - COMPOSER_FLAGS=""
 
+matrix:
+  exclude:
+  - php: 7.2
+    env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+  - php: 7.3
+    env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+
 services:
   - elasticsearch
 
