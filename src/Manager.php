@@ -2,6 +2,8 @@
 
 use Elasticsearch\Client;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Arr;
+
 
 /**
  * Class Manager
@@ -108,7 +110,7 @@ class Manager
     {
         $connections = $this->app['config']['elasticsearch.connections'];
 
-        if (null === $config = array_get($connections, $name)) {
+        if (null === $config = Arr::get($connections, $name)) {
             throw new \InvalidArgumentException("Elasticsearch connection [$name] not configured.");
         }
 

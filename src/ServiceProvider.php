@@ -1,7 +1,9 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\Client;
+use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
 
@@ -41,8 +43,8 @@ class ServiceProvider extends BaseServiceProvider
 
         $app->alias('elasticsearch', Manager::class);
 
-        $app->singleton(Client::class, function($app) {
-            return $app['elasticsearch']->connection();
+        $app->singleton(Client::class, function(Container $app) {
+            return $app->make('elasticsearch')->connection();
         });
     }
 

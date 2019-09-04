@@ -2,6 +2,7 @@
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use Illuminate\Support\Arr;
 use Psr\Log\LoggerInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
@@ -58,10 +59,10 @@ class Factory
 
         // Configure logging
 
-        if (array_get($config, 'logging')) {
-            $logObject = array_get($config, 'logObject');
-            $logPath = array_get($config, 'logPath');
-            $logLevel = array_get($config, 'logLevel');
+        if (Arr::get($config, 'logging')) {
+            $logObject = Arr::get($config, 'logObject');
+            $logPath = Arr::get($config, 'logPath');
+            $logLevel = Arr::get($config, 'logLevel');
             if ($logObject && $logObject instanceof LoggerInterface) {
                 $clientBuilder->setLogger($logObject);
             } elseif ($logPath && $logLevel) {
@@ -73,14 +74,14 @@ class Factory
         }
 
         // Configure tracer
-        if ($tracer = array_get($config, 'tracer')) {
+        if ($tracer = Arr::get($config, 'tracer')) {
             $clientBuilder->setTracer(app($tracer));
         }
 
         // Set additional client configuration
 
         foreach ($this->configMappings as $key => $method) {
-            $value = array_get($config, $key);
+            $value = Arr::get($config, $key);
             if (is_array($value)) {
                 foreach ($value as $vItem) {
                     $clientBuilder->$method($vItem);

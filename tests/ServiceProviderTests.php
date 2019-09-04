@@ -9,7 +9,7 @@ use Elasticsearch\Client;
 class ServiceProviderTests extends TestCase
 {
 
-    public function testAbstractsAreLoaded()
+    public function testAbstractsAreLoaded(): void
     {
         $factory = app('elasticsearch.factory');
         $this->assertInstanceOf(Factory::class, $factory);
@@ -25,7 +25,8 @@ class ServiceProviderTests extends TestCase
      * Test that the facade works.
      * @todo This seems a bit simplistic ... maybe a better way to do this?
      */
-    public function testFacadeWorks() {
+    public function testFacadeWorks(): void
+    {
         $ping = Elasticsearch::ping();
 
         $this->assertTrue($ping);
@@ -34,10 +35,11 @@ class ServiceProviderTests extends TestCase
     /**
      * Test we can get the ES info.
      */
-    public function testInfoWorks() {
+    public function testInfoWorks(): void
+    {
         $info = Elasticsearch::info();
 
-        $this->assertTrue(is_array($info));
+        $this->assertIsArray($info);
         $this->assertArrayHasKey('cluster_name', $info);
     }
 }
