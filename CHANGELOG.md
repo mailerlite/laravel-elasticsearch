@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.1 - 13-Sep-2019
+
+- fix for semantic versioning
+
+
 ## 4.1.0 - 03-Sep-2019
 
 - support for Laravel 6.0 (and drop support for < 5.8)
