@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0 - 18-Jan-2020
+
+* Require Elastic client ^5.4 (#72, thanks @vladan-me)
+
+
 ## 2.0.1 - 14-Jul-2017
 
 * Add alias for Lumen (thanks @matejvelikonja)
