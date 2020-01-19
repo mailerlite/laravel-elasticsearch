@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.1.2 - 19-Jan-2020
+
+- minor fixes (add PHP 7.4 testing)
+
+
 ## 4.1.1 - 13-Sep-2019
 
 - fix for semantic versioning
