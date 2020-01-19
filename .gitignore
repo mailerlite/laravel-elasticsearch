@@ -1,3 +1,5 @@
-/vendor/
-/composer.lock
 /.idea/
+/.phpunit.result.cache
+/build/
+/composer.lock
+/vendor/
