@@ -8,11 +8,16 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 [![Latest Stable Version](https://poser.pugx.org/cviebrock/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch/badges/quality-score.png?format=flat)](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch)
 
-* [Installation and Configuration](#installation-and-configuration)
-* [Usage](#usage)
-* [Advanced Usage](#advanced-usage)
-* [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
-* [Copyright and License](#copyright-and-license)
+- [Laravel-Elasticsearch](#laravel-elasticsearch)
+  - [Installation and Configuration](#installation-and-configuration)
+    - [Laravel](#laravel)
+        - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
+        - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
+    - [Lumen](#lumen)
+  - [Usage](#usage)
+  - [Advanced Usage](#advanced-usage)
+  - [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
+  - [Copyright and License](#copyright-and-license)
 
 
 
@@ -65,6 +70,36 @@ AWS_REGION=...
 AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
 ```  
+If you have to use another authentication method having custom credentials (i.e. instanceProfile), 
+you have to publish the configuration file and use the **aws_credentials**
+
+```php
+<?php
+
+// config/elasticsearch.php
+$provider = \Aws\Credentials\CredentialProvider::instanceProfile();
+$memoizedProvider = \Aws\Credentials\CredentialProvider::memoize($provider);
+$credentials = call_user_func( $memoizedProvider )->wait();
+....
+'hosts' => [
+    [
+        'host'            => env('ELASTICSEARCH_HOST', 'localhost'),
+        'port'            => env('ELASTICSEARCH_PORT', 9200),
+        'scheme'          => env('ELASTICSEARCH_SCHEME', null),
+        'user'            => env('ELASTICSEARCH_USER', null),
+        'pass'            => env('ELASTICSEARCH_PASS', null),
+
+        // If you are connecting to an Elasticsearch instance on AWS, you will need these values as well
+        'aws'             => env('AWS_ELASTICSEARCH_ENABLED', false),
+        'aws_region'      => env('AWS_REGION', ''),
+        'aws_key'         => env('AWS_ACCESS_KEY_ID', ''),
+        'aws_secret'      => env('AWS_SECRET_ACCESS_KEY', '')
+        'aws_credentials' => $credentials
+    ],
+],
+
+
+```
 
 ### Lumen
 
