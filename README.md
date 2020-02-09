@@ -8,16 +8,15 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 [![Latest Stable Version](https://poser.pugx.org/cviebrock/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch/badges/quality-score.png?format=flat)](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch)
 
-- [Laravel-Elasticsearch](#laravel-elasticsearch)
-  - [Installation and Configuration](#installation-and-configuration)
-    - [Laravel](#laravel)
-        - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
-        - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
-    - [Lumen](#lumen)
-  - [Usage](#usage)
-  - [Advanced Usage](#advanced-usage)
-  - [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
-  - [Copyright and License](#copyright-and-license)
+- [Installation and Configuration](#installation-and-configuration)
+  - [Laravel](#laravel)
+      - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
+      - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
+  - [Lumen](#lumen)
+- [Usage](#usage)
+- [Advanced Usage](#advanced-usage)
+- [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
+- [Copyright and License](#copyright-and-license)
 
 
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.1.3 - 09-Feb-2020
+
+- Support for AWS credentials (#76, thanks @giorgiomen)
+- try and speed up Travis
+ 
+
 ## 4.1.2 - 19-Jan-2020
 
 - minor fixes (add PHP 7.4 testing)
