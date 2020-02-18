@@ -118,6 +118,11 @@ class Factory
                         $credentials = $host['aws_credentials'];
                     }
 
+                    if (!empty($host['aws_credentials']) && $host['aws_credentials'] instanceof \Closure) {
+                        // If it contains a closure you can obtain the credentials by invoking it
+                        $credentials = $host['aws_credentials']()->wait();
+                    }
+
                     // Sign the PSR-7 request
                     $signedRequest = $signer->signRequest(
                         $psr7Request,
