@@ -8,16 +8,15 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 [![Latest Stable Version](https://poser.pugx.org/cviebrock/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch/badges/quality-score.png?format=flat)](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch)
 
-- [Laravel-Elasticsearch](#laravel-elasticsearch)
-  - [Installation and Configuration](#installation-and-configuration)
-    - [Laravel](#laravel)
-        - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
-        - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
-    - [Lumen](#lumen)
-  - [Usage](#usage)
-  - [Advanced Usage](#advanced-usage)
-  - [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
-  - [Copyright and License](#copyright-and-license)
+- [Installation and Configuration](#installation-and-configuration)
+  - [Laravel](#laravel)
+    - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
+    - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
+  - [Lumen](#lumen)
+- [Usage](#usage)
+- [Advanced Usage](#advanced-usage)
+- [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
+- [Copyright and License](#copyright-and-license)
 
 
 
@@ -69,18 +68,21 @@ AWS_ELASTICSEARCH_ENABLED=true
 AWS_REGION=...
 AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
-```  
-If you have to use another authentication method having custom credentials (i.e. instanceProfile), 
-you have to publish the configuration file and use the **aws_credentials**
+```
+
+If you have to use another authentication method having custom credentials (i.e. `instanceProfile()`), 
+you have to publish the configuration file and use the **aws_credentials**:
 
 ```php
 <?php
-
 // config/elasticsearch.php
+
 $provider = \Aws\Credentials\CredentialProvider::instanceProfile();
 $memoizedProvider = \Aws\Credentials\CredentialProvider::memoize($provider);
-$credentials = call_user_func( $memoizedProvider )->wait();
-....
+$credentials = $memoizedProvider()->wait();
+
+...
+
 'hosts' => [
     [
         'host'            => env('ELASTICSEARCH_HOST', 'localhost'),
@@ -97,25 +99,26 @@ $credentials = call_user_func( $memoizedProvider )->wait();
         'aws_credentials' => $credentials
     ],
 ],
-
 ```
 
-If you have a job that runs in supervisor, you have to use the Closure, this way the credentials will be renewed at runtime.
+If you have a job that runs in supervisor, you have to use the Closure.
+This way the credentials will be renewed at runtime.
 
 ```php
 <?php
-
 // config/elasticsearch.php
+
 $provider = \Aws\Credentials\CredentialProvider::instanceProfile();
 $memoizedProvider = \Aws\Credentials\CredentialProvider::memoize($provider);
-....
+
+...
+
 'hosts' => [
     [
-        ....
+        ...
         'aws_credentials' => $memoizedProvider
     ],
 ],
-
 ```
 
 ### Lumen

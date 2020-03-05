@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.1 - 04-Mar-2020
+
+- Support for custom AWS credentials (#80, thanks @giorgiomen)
+
+
 ## 4.2.0 - 04-Mar-2020
 
 - Support for Laravel 7.0 (and drop support for < 6.0)
