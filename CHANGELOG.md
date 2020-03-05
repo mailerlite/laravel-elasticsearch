@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.0 - 04-Mar-2020
+
+- Support for Laravel 7.0 (and drop support for < 6.0)
+
+
 ## 4.1.3 - 09-Feb-2020
 
 - Support for AWS credentials (#76, thanks @giorgiomen)
