@@ -140,6 +140,8 @@ The `Elasticsearch` facade is just an entry point into the [ES client](https://g
 so previously you might have used:
 
 ```php
+use Elasticsearch\ClientBuilder;
+
 $data = [
     'body' => [
         'testField' => 'abc'
@@ -156,6 +158,8 @@ $return = $client->index($data);
 You can now replace those last two lines with simply:
 
 ```php
+use Elasticsearch;
+
 $return = Elasticsearch::index($data);
 ```
 
