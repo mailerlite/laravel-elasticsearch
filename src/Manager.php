@@ -49,7 +49,7 @@ class Manager
      *
      * @param string|null $name
      *
-     * @return Client
+     * @return \Elasticsearch\Client
      */
     public function connection(string $name = null): Client
     {

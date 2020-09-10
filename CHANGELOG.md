@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.2.2 - 10-Sep-2020
+
+- Fix for auto-complete issue with laravel-ide-helper (#88, thanks @SeinopSys)
+
+
 ## 4.2.1 - 04-Mar-2020
 
 - Support for custom AWS credentials (#80, thanks @giorgiomen)
