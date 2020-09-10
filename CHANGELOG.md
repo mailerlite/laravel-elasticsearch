@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.0 - 10-Sep-2020
+
+- Support for Laravel 8.0 (and drop support for earlier versions due to PHP and package conflicts) 
+
+
 ## 4.2.1 - 04-Mar-2020
 
 - Support for custom AWS credentials (#80, thanks @giorgiomen)
