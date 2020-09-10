@@ -3,6 +3,7 @@
 ## 4.2.2 - 10-Sep-2020
 
 - Fix for auto-complete issue with laravel-ide-helper (#88, thanks @SeinopSys)
+- Added AWS Session Token support (#87, thanks @nsaliu)
 
 
 ## 4.2.1 - 04-Mar-2020

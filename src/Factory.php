@@ -111,7 +111,11 @@ class Factory
                     );
                     
                     // Create the Credentials instance with the credentials from the environment
-                    $credentials = new \Aws\Credentials\Credentials($host['aws_key'], $host['aws_secret']);
+                    $credentials = new \Aws\Credentials\Credentials(
+                        $host['aws_key'],
+                        $host['aws_secret'],
+                        $host['aws_session_token'] ?? null
+                    );
                     // check if the aws_credentials from config is set and if it contains a Credentials instance
                     if (!empty($host['aws_credentials']) && $host['aws_credentials'] instanceof \Aws\Credentials\Credentials) {
                         // Set the credentials as in config
