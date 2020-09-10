@@ -3,7 +3,6 @@
 use Elasticsearch\Client;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
 
@@ -48,7 +47,7 @@ class ServiceProvider extends BaseServiceProvider
         });
     }
 
-    protected function setUpConfig()
+    protected function setUpConfig(): void
     {
         $source = dirname(__DIR__) . '/config/elasticsearch.php';
 

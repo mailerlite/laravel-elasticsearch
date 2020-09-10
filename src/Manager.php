@@ -49,7 +49,7 @@ class Manager
      *
      * @param string|null $name
      *
-     * @return Client
+     * @return \Elasticsearch\Client
      */
     public function connection(string $name = null): Client
     {
@@ -79,7 +79,7 @@ class Manager
      *
      * @param string $connection
      */
-    public function setDefaultConnection(string $connection)
+    public function setDefaultConnection(string $connection): void
     {
         $this->app['config']['elasticsearch.defaultConnection'] = $connection;
     }
