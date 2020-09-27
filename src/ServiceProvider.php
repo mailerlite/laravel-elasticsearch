@@ -1,5 +1,6 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
+use Cviebrock\LaravelElasticsearch\Console\Command\IndexExistsCommand;
 use Elasticsearch\Client;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
@@ -21,6 +22,7 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->setUpConfig();
+        $this->setUpConsoleCommands();
     }
 
     /**
@@ -58,5 +60,14 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         $this->mergeConfigFrom($source, 'elasticsearch');
+    }
+
+    private function setUpConsoleCommands(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                IndexExistsCommand::class,
+            ]);
+        }
     }
 }
