@@ -1,5 +1,6 @@
 <?php namespace Cviebrock\LaravelElasticsearch;
 
+use Cviebrock\LaravelElasticsearch\Console\Command\AliasCreateCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\CreateIndexCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexDeleteCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexExistsCommand;
@@ -68,6 +69,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                AliasCreateCommand::class,
                 CreateIndexCommand::class,
                 IndexDeleteCommand::class,
                 IndexExistsCommand::class,
