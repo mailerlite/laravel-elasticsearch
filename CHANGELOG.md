@@ -2,7 +2,7 @@
 
 ## 4.1.4 - 28-Sep-2020
 
-- Re-add support for ES client version 6
+- Re-add support for ES client version 5 and 6
 
 
 ## 4.1.3 - 09-Feb-2020
