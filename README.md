@@ -257,6 +257,32 @@ Delete an index:
 php artisan laravel-elasticsearch:utils:index-delete <your_elasticsearch_index_name>
 ```
 
+Create or update index mapping:  
+_Note: index mapping file must contain a valid json mapping definition as Elasticsearch expects, for example:_
+```json
+{
+    "body": {
+        "_source": {
+            "enabled": true
+        },
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "property_1": {
+                "type": "text"
+            },
+            "property_2": {
+                "type": "text"
+            }
+        }
+    }
+}
+```
+```php
+php artisan laravel-elasticsearch:utils:index-create-or-update-mapping <your_elasticsearch_index_name> <json_mapping_absolute_file_path>
+```
+
 Creates an alias:
 ```php
 php artisan laravel-elasticsearch:utils:alias-create <your_elasticsearch_index_name> <your_elasticsearch_alias_name>
