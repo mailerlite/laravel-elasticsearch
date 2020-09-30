@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.1 - 29-Sep-2020
+
+- Add utility console commands (huge thanks to @nsaliu)
+
+
 ## 8.0.0 - 10-Sep-2020
 
 - Support for Laravel 8.0 (and drop support for earlier versions due to PHP and package conflicts) 
