@@ -4,6 +4,7 @@ use Cviebrock\LaravelElasticsearch\Console\Command\AliasCreateCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\AliasRemoveIndexCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\AliasSwitchIndexCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexCreateCommand;
+use Cviebrock\LaravelElasticsearch\Console\Command\IndexCreateOrUpdateMappingCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexDeleteCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexExistsCommand;
 use Elasticsearch\Client;
@@ -75,6 +76,7 @@ class ServiceProvider extends BaseServiceProvider
                 AliasRemoveIndexCommand::class,
                 AliasSwitchIndexCommand::class,
                 IndexCreateCommand::class,
+                IndexCreateOrUpdateMappingCommand::class,
                 IndexDeleteCommand::class,
                 IndexExistsCommand::class,
             ]);
