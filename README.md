@@ -15,6 +15,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
   - [Lumen](#lumen)
 - [Usage](#usage)
 - [Advanced Usage](#advanced-usage)
+- [Console Commands](#console-commands)
 - [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
 - [Copyright and License](#copyright-and-license)
 
@@ -236,6 +237,76 @@ and the methods and parameters used to call them can be found in the
 [Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html).
 Help with using them is available via the [Elastic forums](https://discuss.elastic.co/) 
 and on sites like [Stack Overflow](https://stackoverflow.com/questions/tagged/elasticsearch).
+
+
+
+## Console commands
+
+This package also provides some useful console commands.
+
+Check if an index exists:
+
+```sh
+php artisan laravel-elasticsearch:utils:index-exists <your_elasticsearch_index_name>
+```
+
+Create an index:
+
+```sh
+php artisan laravel-elasticsearch:utils:index-create <your_elasticsearch_index_name>
+```
+
+Delete an index:
+
+```sh
+php artisan laravel-elasticsearch:utils:index-delete <your_elasticsearch_index_name>
+```
+
+Create or update index mapping:  
+_Note: The index mapping file must contain a valid JSON mapping definition as Elasticsearch expects, for example:_
+
+```json
+{
+    "body": {
+        "_source": {
+            "enabled": true
+        },
+        "properties": {
+            "id": {
+                "type": "keyword"
+            },
+            "property_1": {
+                "type": "text"
+            },
+            "property_2": {
+                "type": "text"
+            }
+        }
+    }
+}
+```
+
+```sh
+php artisan laravel-elasticsearch:utils:index-create-or-update-mapping <your_elasticsearch_index_name> <json_mapping_absolute_file_path>
+```
+
+Creates an alias:
+
+```sh
+php artisan laravel-elasticsearch:utils:alias-create <your_elasticsearch_index_name> <your_elasticsearch_alias_name>
+```
+
+Remove index from an alias:
+
+```sh
+php artisan laravel-elasticsearch:utils:alias-remove-index <your_elasticsearch_index_name> <your_elasticsearch_alias_name>
+```
+
+Switch index on alias (useful for zero-downtime release of the new index):
+
+```sh
+php artisan laravel-elasticsearch:utils:alias-switch-index <your_NEW_elasticsearch_index_name> <your_OLD_elasticsearch_index_name> <your_elasticsearch_alias_name>
+```  
 
 
 
