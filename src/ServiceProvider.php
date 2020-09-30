@@ -3,7 +3,7 @@
 use Cviebrock\LaravelElasticsearch\Console\Command\AliasCreateCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\AliasRemoveIndexCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\AliasSwitchIndexCommand;
-use Cviebrock\LaravelElasticsearch\Console\Command\CreateIndexCommand;
+use Cviebrock\LaravelElasticsearch\Console\Command\IndexCreateCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexCreateOrUpdateMappingCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexDeleteCommand;
 use Cviebrock\LaravelElasticsearch\Console\Command\IndexExistsCommand;
@@ -75,10 +75,10 @@ class ServiceProvider extends BaseServiceProvider
                 AliasCreateCommand::class,
                 AliasRemoveIndexCommand::class,
                 AliasSwitchIndexCommand::class,
-                CreateIndexCommand::class,
+                IndexCreateCommand::class,
+                IndexCreateOrUpdateMappingCommand::class,
                 IndexDeleteCommand::class,
                 IndexExistsCommand::class,
-                IndexCreateOrUpdateMappingCommand::class,
             ]);
         }
     }
