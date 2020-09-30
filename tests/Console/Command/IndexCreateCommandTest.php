@@ -11,7 +11,7 @@ use Exception;
 use Generator;
 use Mockery\MockInterface;
 
-final class CreateIndexCommandTest extends TestCase
+final class IndexCreateCommandTest extends TestCase
 {
     public function testCreateIndexMustSucceed(): void
     {
