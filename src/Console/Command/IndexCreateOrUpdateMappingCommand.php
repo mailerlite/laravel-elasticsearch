@@ -9,8 +9,10 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Throwable;
 
+
 final class IndexCreateOrUpdateMappingCommand extends Command
 {
+
     /**
      * @var string
      */
@@ -66,7 +68,7 @@ final class IndexCreateOrUpdateMappingCommand extends Command
         try {
             $this->client->indices()->putMapping([
                 'index' => $indexName,
-                'body' => json_decode(
+                'body'  => json_decode(
                     $mappingFilePath,
                     true
                 ),

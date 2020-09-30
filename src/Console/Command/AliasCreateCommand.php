@@ -8,8 +8,10 @@ use Elasticsearch\Client;
 use Illuminate\Console\Command;
 use Throwable;
 
+
 final class AliasCreateCommand extends Command
 {
+
     /**
      * @var string
      */
@@ -58,7 +60,7 @@ final class AliasCreateCommand extends Command
         try {
             $this->client->indices()->putAlias([
                 'index' => $indexName,
-                'name' => $aliasName,
+                'name'  => $aliasName,
             ]);
         } catch (Throwable $exception) {
             $this->output->writeln(

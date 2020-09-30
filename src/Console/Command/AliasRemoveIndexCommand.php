@@ -8,8 +8,10 @@ use Elasticsearch\Client;
 use Illuminate\Console\Command;
 use Throwable;
 
+
 final class AliasRemoveIndexCommand extends Command
 {
+
     /**
      * @var string
      */
@@ -58,7 +60,7 @@ final class AliasRemoveIndexCommand extends Command
         try {
             $this->client->indices()->deleteAlias([
                 'index' => $indexName,
-                'name' => $aliasName,
+                'name'  => $aliasName,
             ]);
         } catch (Throwable $exception) {
             $this->output->writeln(

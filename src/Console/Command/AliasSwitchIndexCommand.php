@@ -8,8 +8,10 @@ use Elasticsearch\Client;
 use Illuminate\Console\Command;
 use Throwable;
 
+
 final class AliasSwitchIndexCommand extends Command
 {
+
     /**
      * @var string
      */
@@ -61,12 +63,12 @@ final class AliasSwitchIndexCommand extends Command
         try {
             $this->client->indices()->putAlias([
                 'index' => $newIndexName,
-                'name' => $aliasName,
+                'name'  => $aliasName,
             ]);
 
             $this->client->indices()->deleteAlias([
                 'index' => $oldIndexName,
-                'name' => $aliasName,
+                'name'  => $aliasName,
             ]);
         } catch (Throwable $exception) {
             $this->output->writeln(
