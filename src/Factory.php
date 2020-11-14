@@ -105,6 +105,7 @@ class Factory
                         $request['http_method'],
                         (new \GuzzleHttp\Psr7\Uri($request['uri']))
                             ->withScheme($request['scheme'])
+                            ->withPort($host['port'])
                             ->withHost($request['headers']['Host'][0]),
                         $request['headers'],
                         $request['body']
@@ -133,9 +134,17 @@ class Factory
                         $credentials
                     );
 
+                    // Get curl stats
+                    $http_stats = new class {
+                        public $data = [];
+                        public function __invoke(...$args){
+                            $this->data = $args[0];
+                        }
+                    };
+
                     // Send the signed request to Amazon ES
                     /** @var \Psr\Http\Message\ResponseInterface $response */
-                    $response = $psr7Handler($signedRequest)
+                    $response = $psr7Handler($signedRequest,['http_stats_receiver' => $http_stats])
                         ->then(function(\Psr\Http\Message\ResponseInterface $response) {
                             return $response;
                         }, function($error) {
@@ -149,7 +158,10 @@ class Factory
                         'headers'        => $response->getHeaders(),
                         'body'           => $response->getBody()
                                                      ->detach(),
-                        'transfer_stats' => ['total_time' => 0],
+                        'transfer_stats' => [
+                            'total_time' => $http_stats->data["total_time"] ?? 0,
+                            "primary_port" => $http_stats->data["primary_port"] ?? ''
+                        ],
                         'effective_url'  => (string)$psr7Request->getUri(),
                     ]);
                 });
