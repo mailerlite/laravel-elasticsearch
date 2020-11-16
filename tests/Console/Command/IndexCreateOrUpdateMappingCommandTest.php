@@ -20,6 +20,10 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
             $mock->shouldReceive('exists')
                 ->once()
                 ->andReturn(true);
+            
+            $mock->shouldReceive('get')
+                ->once()
+                ->andReturn('{}');
         });
 
         $this->mock(Client::class, function (MockInterface $mock) {
@@ -108,6 +112,10 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
             $mock->shouldReceive('exists')
                 ->once()
                 ->andReturn(true);
+            
+            $mock->shouldReceive('get')
+                ->once()
+                ->andReturn('{}');
         });
 
         $this->mock(Client::class, function (MockInterface $mock) {
