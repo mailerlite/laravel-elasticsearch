@@ -20,7 +20,7 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
             $mock->shouldReceive('exists')
                 ->once()
                 ->andReturn(true);
-            
+
             $mock->shouldReceive('get')
                 ->once()
                 ->andReturn('{}');
@@ -74,24 +74,24 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
             ->expectsOutput('Argument mapping-file-path must exists on filesystem and must be a non empty string.');
     }
 
-    public function testCreateOrUpdateMappingMustFailBecauseIndexDoesntExists(): void
+    public function testCreateOrUpdateMappingMustCreateNewIndexIfIndexDoesntExists(): void
     {
         $this->mock(Filesystem::class, function (MockInterface $mock) {
             $mock->shouldReceive('exists')
                 ->once()
-                ->andReturn(true);
+                ->andReturn(false);
         });
 
         $this->mock(Client::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
-                ->once()
+                ->times(2)
                 ->andReturn(
                     $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
                             ->andReturn(false);
 
-                        $mock->shouldNotReceive('putMapping');
+                        $mock->shouldReceive('create');
                     })
                 );
         });
@@ -103,7 +103,7 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
                 'mapping-file-path' => '/path/to/existing_mapping_file.json',
             ]
         )->assertExitCode(1)
-            ->expectsOutput('Index valid_index_name doesn\'t exists and mapping cannot be created or updated.');
+            ->expectsOutput('Index valid_index_name doesn\'t exists, new index created with mapping/settings.');
     }
 
     public function testCreateOrUpdateMappingMustFail(): void
@@ -112,7 +112,7 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
             $mock->shouldReceive('exists')
                 ->once()
                 ->andReturn(true);
-            
+
             $mock->shouldReceive('get')
                 ->once()
                 ->andReturn('{}');
