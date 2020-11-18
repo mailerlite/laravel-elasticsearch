@@ -1,5 +1,12 @@
 # Changelog
 
+## 8.0.X - 18-Nov-2020
+
+- fix for loading JSON mapping files in `IndexCreateOrUpdateMappingCommand` (#104, thanks @danieljaniga)
+- set port for the request (#105, thanks @joshuaeon)
+- better error handling for request statistics (#105, thanks @joshuaeon)
+
+
 ## 8.0.1 - 29-Sep-2020
 
 - Add utility console commands (huge thanks to @nsaliu)
