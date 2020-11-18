@@ -69,7 +69,7 @@ final class IndexCreateOrUpdateMappingCommand extends Command
             $this->client->indices()->putMapping([
                 'index' => $indexName,
                 'body'  => json_decode(
-                    $mappingFilePath,
+                    $this->filesystem->get($mappingFilePath),
                     true
                 ),
             ]);
