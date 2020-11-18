@@ -2,10 +2,15 @@
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Ring\Future\CompletedFutureArray;
 use Illuminate\Support\Arr;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+
 
 class Factory
 {
@@ -34,11 +39,10 @@ class Factory
      *
      * @param array $config
      *
-     * @return \Elasticsearch\Client|mixed
+     * @return \Elasticsearch\Client
      */
-    public function make(array $config)
+    public function make(array $config): Client
     {
-        // Build the client
         return $this->buildClient($config);
     }
 
@@ -54,11 +58,9 @@ class Factory
         $clientBuilder = ClientBuilder::create();
 
         // Configure hosts
-
         $clientBuilder->setHosts($config['hosts']);
 
         // Configure logging
-
         if (Arr::get($config, 'logging')) {
             $logObject = Arr::get($config, 'logObject');
             $logPath = Arr::get($config, 'logPath');
@@ -79,7 +81,6 @@ class Factory
         }
 
         // Set additional client configuration
-
         foreach ($this->configMappings as $key => $method) {
             $value = Arr::get($config, $key);
             if (is_array($value)) {
@@ -92,7 +93,6 @@ class Factory
         }
 
         // Configure handlers for any AWS hosts
-
         foreach ($config['hosts'] as $host) {
             if (isset($host['aws']) && $host['aws']) {
                 $clientBuilder->setHandler(function(array $request) use ($host) {
@@ -101,16 +101,16 @@ class Factory
                     $request['headers']['Host'][0] = parse_url($request['headers']['Host'][0])['host'];
 
                     // Create a PSR-7 request from the array passed to the handler
-                    $psr7Request = new \GuzzleHttp\Psr7\Request(
+                    $psr7Request = new Request(
                         $request['http_method'],
-                        (new \GuzzleHttp\Psr7\Uri($request['uri']))
+                        (new Uri($request['uri']))
                             ->withScheme($request['scheme'])
                             ->withPort($host['port'])
                             ->withHost($request['headers']['Host'][0]),
                         $request['headers'],
                         $request['body']
                     );
-                    
+
                     // Create the Credentials instance with the credentials from the environment
                     $credentials = new \Aws\Credentials\Credentials(
                         $host['aws_key'],
@@ -137,15 +137,15 @@ class Factory
                     // Get curl stats
                     $http_stats = new class {
                         public $data = [];
-                        public function __invoke(...$args){
+                        public function __invoke(...$args)
+                        {
                             $this->data = $args[0];
                         }
                     };
 
                     // Send the signed request to Amazon ES
-                    /** @var \Psr\Http\Message\ResponseInterface $response */
-                    $response = $psr7Handler($signedRequest,['http_stats_receiver' => $http_stats])
-                        ->then(function(\Psr\Http\Message\ResponseInterface $response) {
+                    $response = $psr7Handler($signedRequest, ['http_stats_receiver' => $http_stats])
+                        ->then(function(ResponseInterface $response) {
                             return $response;
                         }, function($error) {
                             return $error['response'];
@@ -153,23 +153,21 @@ class Factory
                         ->wait();
 
                     // Convert the PSR-7 response to a RingPHP response
-                    return new \GuzzleHttp\Ring\Future\CompletedFutureArray([
+                    return new CompletedFutureArray([
                         'status'         => $response->getStatusCode(),
                         'headers'        => $response->getHeaders(),
-                        'body'           => $response->getBody()
-                                                     ->detach(),
+                        'body'           => $response->getBody()->detach(),
                         'transfer_stats' => [
-                            'total_time' => $http_stats->data["total_time"] ?? 0,
-                            "primary_port" => $http_stats->data["primary_port"] ?? ''
+                            'total_time'   => $http_stats->data['total_time'] ?? 0,
+                            'primary_port' => $http_stats->data['primary_port'] ?? '',
                         ],
-                        'effective_url'  => (string)$psr7Request->getUri(),
+                        'effective_url'  => (string) $psr7Request->getUri(),
                     ]);
                 });
             }
         }
 
         // Build and return the client
-
         return $clientBuilder->build();
     }
 }
