@@ -79,7 +79,11 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
         $this->mock(Filesystem::class, function (MockInterface $mock) {
             $mock->shouldReceive('exists')
                 ->once()
-                ->andReturn(false);
+                ->andReturn(true);
+
+            $mock->shouldReceive('get')
+                ->once()
+                ->andReturn('{}');
         });
 
         $this->mock(Client::class, function (MockInterface $mock) {
@@ -91,7 +95,9 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
                             ->once()
                             ->andReturn(false);
 
-                        $mock->shouldReceive('create');
+                        $mock->shouldReceive('create')
+                            ->once()
+                            ->andReturn(true);
                     })
                 );
         });
@@ -102,8 +108,8 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
                 'index-name' => 'valid_index_name',
                 'mapping-file-path' => '/path/to/existing_mapping_file.json',
             ]
-        )->assertExitCode(1)
-            ->expectsOutput('Index valid_index_name doesn\'t exists, new index created with mapping/settings.');
+        )->assertExitCode(0)
+            ->expectsOutput('Index valid_index_name doesn\'t exist, a new index was created with mapping/settings using file /path/to/existing_mapping_file.json.');
     }
 
     public function testCreateOrUpdateMappingMustFail(): void

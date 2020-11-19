@@ -78,7 +78,7 @@ final class IndexCreateOrUpdateMappingCommand extends Command
 
             $this->output->writeln(
                 sprintf(
-                    '<info>Index and Mapping created for index %s using file %s.</info>',
+                    '<info>Index %s doesn\'t exist, a new index was created with mapping/settings using file %s.</info>',
                     $indexName,
                     $mappingFilePath
                 )
