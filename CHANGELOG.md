@@ -1,7 +1,10 @@
 # Changelog
 
-## 8.0.X - 18-Nov-2020
+## 8.0.2 - 02-Dec-2020
 
+- PHP 8.0 support
+- move automated testing from travis-ci to Github actions
+- clean up some third-party tools and badges
 - fix for loading JSON mapping files in `IndexCreateOrUpdateMappingCommand` (#104, thanks @danieljaniga)
 - set port for the request (#105, thanks @joshuaeon)
 - better error handling for request statistics (#105, thanks @joshuaeon)

@@ -2,11 +2,12 @@
 
 An easy way to use the [official Elastic Search client](https://github.com/elastic/elasticsearch-php) in your Laravel or Lumen applications.
 
-[![Build Status](https://travis-ci.org/cviebrock/laravel-elasticsearch.svg)](https://travis-ci.org/cviebrock/laravel-elasticsearch)
+[![Build Status](https://github.com/cviebrock/laravel-elasticsearch/workflows/tests/badge.svg?branch=master)](https://github.com/cviebrock/laravel-elasticsearch/actions)
 [![Total Downloads](https://poser.pugx.org/cviebrock/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
 [![Latest Stable Version](https://poser.pugx.org/cviebrock/laravel-elasticsearch/v/stable.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
 [![Latest Stable Version](https://poser.pugx.org/cviebrock/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch/badges/quality-score.png?format=flat)](https://scrutinizer-ci.com/g/cviebrock/laravel-elasticsearch)
+[![License](https://img.shields.io/packagist/l/cviebrock/laravel-elasticsearch)](LICENSE.md)
+
 
 - [Installation and Configuration](#installation-and-configuration)
   - [Laravel](#laravel)
