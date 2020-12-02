@@ -2,6 +2,7 @@
 
 use Elasticsearch\ClientBuilder;
 use Psr\Log\LoggerInterface;
+use Illuminate\Support\Arr;
 
 
 class Factory
@@ -54,10 +55,10 @@ class Factory
 
         // Configure logging
 
-        if (array_get($config, 'logging')) {
-            $logObject = array_get($config, 'logObject');
-            $logPath = array_get($config, 'logPath');
-            $logLevel = array_get($config, 'logLevel');
+        if (Arr::get($config, 'logging')) {
+            $logObject = Arr::get($config, 'logObject');
+            $logPath = Arr::get($config, 'logPath');
+            $logLevel = Arr::get($config, 'logLevel');
             if ($logObject && $logObject instanceof LoggerInterface) {
                 $clientBuilder->setLogger($logObject);
             } else if ($logPath && $logLevel) {
@@ -69,7 +70,7 @@ class Factory
         // Set additional client configuration
 
         foreach ($this->configMappings as $key => $method) {
-            $value = array_get($config, $key);
+            $value = Arr::get($config, $key);
             if ($value !== null) {
                 call_user_func([$clientBuilder, $method], $value);
             }
