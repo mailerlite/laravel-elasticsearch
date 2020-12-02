@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.1 - 02-Dec-2020
+
+* Backport support for Laravel 6 (#99, thanks @jonasva)
+
+
 ## 2.1.0 - 18-Jan-2020
 
 * Require Elastic client ^5.4 (#72, thanks @vladan-me)
