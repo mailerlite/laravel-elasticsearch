@@ -55,14 +55,36 @@ final class IndexCreateOrUpdateMappingCommand extends Command
         if (!$this->client->indices()->exists([
             'index' => $indexName,
         ])) {
+            try {
+                $this->client->indices()->create([
+                    'index' => $indexName,
+                    'body'  => json_decode(
+                        $this->filesystem->get($mappingFilePath),
+                        true
+                    ),
+                ]);
+            } catch (Throwable $exception) {
+                $this->output->writeln(
+                    sprintf(
+                        '<error>Error creating or updating mapping for index %s, given mapping file: %s - error message: %s.</error>',
+                        $indexName,
+                        $mappingFilePath,
+                        $exception->getMessage()
+                    )
+                );
+
+                return self::FAILURE;
+            }
+
             $this->output->writeln(
                 sprintf(
-                    '<error>Index %s doesn\'t exists and mapping cannot be created or updated.</error>',
-                    $indexName
+                    '<info>Index %s doesn\'t exist, a new index was created with mapping/settings using file %s.</info>',
+                    $indexName,
+                    $mappingFilePath
                 )
             );
 
-            return self::FAILURE;
+            return self::SUCCESS;
         }
 
         try {
