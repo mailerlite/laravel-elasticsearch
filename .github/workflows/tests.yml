@@ -7,10 +7,10 @@ jobs:
   runs-on: ubuntu-latest
 
   strategy:
-   fail-fast: false
+   fail-fast: true
    matrix:
     php: [7.3, 7.4, 8.0]
-    elastic: [7.0]
+    elastic: [7.10.0]
     stability: [prefer-lowest, prefer-stable]
 
   name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
@@ -39,7 +39,13 @@ jobs:
      run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
    #      - name: Check coding style
    #        run: php-cs-fixer fix --dry-run --allow-risky=true --format=checkstyle | cs2pr
-   - name: Run Elasticsearch
+   - name: Configure sysctl limits
+     run: |
+      sudo swapoff -a
+      sudo sysctl -w vm.swappiness=1
+      sudo sysctl -w fs.file-max=262144
+      sudo sysctl -w vm.max_map_count=262144
+   - name: Runs Elasticsearch
      uses: elastic/elastic-github-actions/elasticsearch@master
      with:
       stack-version: ${{ matrix.elastic }}

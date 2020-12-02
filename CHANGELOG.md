@@ -5,10 +5,10 @@
 - PHP 8.0 support
 - move automated testing from travis-ci to Github actions
 - clean up some third-party tools and badges
+- ability to create a new index with settings/mappings on `IndexCreateOrUpdateMappingCommand` (#106, thanks zeidanbm)
 - fix for loading JSON mapping files in `IndexCreateOrUpdateMappingCommand` (#104, thanks @danieljaniga)
 - set port for the request (#105, thanks @joshuaeon)
 - better error handling for request statistics (#105, thanks @joshuaeon)
-
 
 ## 8.0.1 - 29-Sep-2020
 
