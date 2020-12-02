@@ -9,7 +9,7 @@ jobs:
   strategy:
    fail-fast: true
    matrix:
-    php: [7.3, 7.4, 8.0]
+    php: [7.3, 7.4]
     elastic: [7.10.0]
     stability: [prefer-lowest, prefer-stable]
 

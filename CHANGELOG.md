@@ -2,7 +2,6 @@
 
 ## 8.0.2 - 02-Dec-2020
 
-- PHP 8.0 support
 - move automated testing from travis-ci to Github actions
 - clean up some third-party tools and badges
 - ability to create a new index with settings/mappings on `IndexCreateOrUpdateMappingCommand` (#106, thanks zeidanbm)
