@@ -18,7 +18,7 @@
     "require": {
         "php": "^7.3",
         "ext-json": "*",
-        "elasticsearch/elasticsearch": "^7.0",
+        "elasticsearch/elasticsearch": "^7.10",
         "guzzlehttp/psr7": "^1.7",
         "illuminate/contracts": "^8.0",
         "illuminate/support": "^8.0",
