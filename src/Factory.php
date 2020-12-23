@@ -6,6 +6,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Ring\Future\CompletedFutureArray;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Reflector;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Monolog\Logger;
@@ -121,6 +122,15 @@ class Factory
                     if (!empty($host['aws_credentials']) && $host['aws_credentials'] instanceof \Aws\Credentials\Credentials) {
                         // Set the credentials as in config
                         $credentials = $host['aws_credentials'];
+                    }
+
+                    // If the aws_credentials is an array try using it as a static method of the class
+                    if (
+                        !empty($host['aws_credentials'])
+                        && is_array($host['aws_credentials'])
+                        && Reflector::isCallable($host['aws_credentials'], true)
+                    ) {
+                        $host['aws_credentials'] = call_user_func([$host['aws_credentials'][0], $host['aws_credentials'][1]]);
                     }
 
                     if (!empty($host['aws_credentials']) && $host['aws_credentials'] instanceof \Closure) {
