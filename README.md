@@ -123,6 +123,22 @@ $memoizedProvider = \Aws\Credentials\CredentialProvider::memoize($provider);
 ],
 ```
 
+If you are using `php artisan config:cache`, you cannot have the Closure in your config file, call it like this:
+
+```php
+<?php
+// config/elasticsearch.php
+
+...
+
+'hosts' => [
+    [
+        ...
+        'aws_credentials' => [\Aws\Credentials\CredentialProvider::class, 'defaultProvider'],
+    ],
+],
+```
+
 ### Lumen
 
 If you work with Lumen, please register the service provider and configuration in `bootstrap/app.php`:
