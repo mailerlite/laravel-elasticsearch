@@ -1,13 +1,18 @@
 # Changelog
 
+## 8.0.3 - 28-Dec-2020
+
+- Support using a closure for AWS credentials, allowing the config to be cached (#111, thanks @stasadev)
+
+
 ## 8.0.2 - 02-Dec-2020
 
-- move automated testing from travis-ci to Github actions
-- clean up some third-party tools and badges
-- ability to create a new index with settings/mappings on `IndexCreateOrUpdateMappingCommand` (#106, thanks zeidanbm)
-- fix for loading JSON mapping files in `IndexCreateOrUpdateMappingCommand` (#104, thanks @danieljaniga)
-- set port for the request (#105, thanks @joshuaeon)
-- better error handling for request statistics (#105, thanks @joshuaeon)
+- Move automated testing from travis-ci to Github actions
+- Clean up some third-party tools and badges
+- Ability to create a new index with settings/mappings on `IndexCreateOrUpdateMappingCommand` (#106, thanks zeidanbm)
+- Fix for loading JSON mapping files in `IndexCreateOrUpdateMappingCommand` (#104, thanks @danieljaniga)
+- Set port for the request (#105, thanks @joshuaeon)
+- Better error handling for request statistics (#105, thanks @joshuaeon)
 
 ## 8.0.1 - 29-Sep-2020
 
@@ -33,22 +38,22 @@
 ## 4.1.3 - 09-Feb-2020
 
 - Support for AWS credentials (#76, thanks @giorgiomen)
-- try and speed up Travis
+- Speed up Travis
  
 
 ## 4.1.2 - 19-Jan-2020
 
-- minor fixes (add PHP 7.4 testing)
+- Minor fixes (add PHP 7.4 testing)
 
 
 ## 4.1.1 - 13-Sep-2019
 
-- fix for semantic versioning
+- Fix for semantic versioning
 
 
 ## 4.1.0 - 03-Sep-2019
 
-- support for Laravel 6.0 (and drop support for < 5.8)
+- Support for Laravel 6.0 (and drop support for < 5.8)
 
 
 ## 4.0.0 - 31-Aug-2019
@@ -58,13 +63,13 @@
 
 ## 3.6.0 - 26-Jun-2019
 
-- add support for tracers (#65, thanks @luoxiaojun1992)
-- fix typo in README.md (#63, thanks @Harrisonbro)
+- Add support for tracers (#65, thanks @luoxiaojun1992)
+- Fix typo in README.md (#63, thanks @Harrisonbro)
 
 
 ## 3.5.1 - 29-Apr-2019
 
-- fix for ElasticSearch 6.5 (#59, thanks @SirNarsh)
+- Fix for ElasticSearch 6.5 (#59, thanks @SirNarsh)
 
 
 ## 3.5.0 - 04-Mar-2019
