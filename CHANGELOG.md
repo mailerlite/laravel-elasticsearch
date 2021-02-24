@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.4 - 24-Feb-2021
+
+- Add PHP 8.0 Support
+
 ## 8.0.3 - 28-Dec-2020
 
 - Support using a closure for AWS credentials, allowing the config to be cached (#111, thanks @stasadev)
