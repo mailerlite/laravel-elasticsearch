@@ -2,7 +2,7 @@
 
 ## 8.0.4 - 28-Feb-2020
 
-- Support for PHP 8.0
+- Support for PHP 8.0 (thanks @okdewit)
   - bumps ES client version to `^7.11`
 
 
