@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.0.4 - 28-Feb-2020
+
+- Support for PHP 8.0
+  - bumps ES client version to `^7.11`
+
+
 ## 8.0.3 - 28-Dec-2020
 
 - Support using a closure for AWS credentials, allowing the config to be cached (#111, thanks @stasadev)
@@ -13,6 +19,7 @@
 - Fix for loading JSON mapping files in `IndexCreateOrUpdateMappingCommand` (#104, thanks @danieljaniga)
 - Set port for the request (#105, thanks @joshuaeon)
 - Better error handling for request statistics (#105, thanks @joshuaeon)
+
 
 ## 8.0.1 - 29-Sep-2020
 
