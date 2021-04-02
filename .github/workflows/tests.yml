@@ -11,9 +11,14 @@ jobs:
    matrix:
     php: [7.3, 7.4, 8.0]
     elastic: [5.6.16, 6.8.15, 7.12.0]
-    stability: [prefer-lowest, prefer-stable]
+    stability: [lowest, stable]
+    exclude:
+      - php: 7.3
+        stability: lowest
+      - php: 7.4
+        stability: lowest
 
-  name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
+  name: PHP ${{ matrix.php }}-${{ matrix.stability }} / ES ${{ matrix.elastic }}
 
   steps:
    - name: Checkout code
@@ -36,7 +41,7 @@ jobs:
       key: dependencies-${{ matrix.php }}-${{ matrix.stability }}-composer-${{ hashFiles('**/composer.lock') }}
       restore-keys: dependencies-${{ matrix.php }}-${{ matrix.stability }}-composer-
    - name: Install dependencies
-     run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+     run: composer update --prefer-${{ matrix.stability }} --prefer-dist --no-interaction
    #      - name: Check coding style
    #        run: php-cs-fixer fix --dry-run --allow-risky=true --format=checkstyle | cs2pr
    - name: Configure sysctl limits
