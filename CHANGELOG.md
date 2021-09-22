@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.5 - 22-Sep-2021
+
+- Fix host assignment issue (#124, thanks @sete391)
+
+
 ## 8.0.4 - 28-Feb-2020
 
 - Support for PHP 8.0 (thanks @okdewit)
