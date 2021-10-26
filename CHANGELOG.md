@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.6 - 25-Oct-2021
+
+- Add comment about `hosts.port` needing to be `null` for typical AWS connections (#126, thanks @sp-clariondoor)
+
+
 ## 8.0.5 - 22-Sep-2021
 
 - Fix host assignment issue (#124, thanks @sete391)
