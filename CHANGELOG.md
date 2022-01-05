@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.7 - 05-Jan-2022
+
+- Fix `composer.json` for PHP 8 compatability (#133, thanks @adriacanal)
+
+
 ## 8.0.6 - 25-Oct-2021
 
 - Add comment about `hosts.port` needing to be `null` for typical AWS connections (#126, thanks @sp-clariondoor)
