@@ -1,5 +1,10 @@
 # Changelog
 
+## 9.0.0 - 23-Feb-2022
+
+- Support for Laravel 7, 8 and 9, and PHP 7.3–8.1 (as appropriate)
+
+
 ## 8.0.7 - 05-Jan-2022
 
 - Fix `composer.json` for PHP 8 compatability (#133, thanks @adriacanal)
