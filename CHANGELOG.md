@@ -1,5 +1,10 @@
 # Changelog
 
+## 9.0.1 - 16-Jul-2022
+
+- Update `guzzlehttp/psr7` package to version `^2.0` (currently 2.4.0) (#138)
+
+
 ## 9.0.0 - 23-Feb-2022
 
 - Support for Laravel 7, 8 and 9, and PHP 7.3–8.1 (as appropriate)
