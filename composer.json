@@ -19,7 +19,7 @@
         "php": "^7.3|^8.0",
         "ext-json": "*",
         "elasticsearch/elasticsearch": "^7.11",
-        "guzzlehttp/psr7": "^1.7",
+        "guzzlehttp/psr7": "^2.0",
         "illuminate/contracts": "^7.0|^8.0|^9.0",
         "illuminate/support": "^7.0|^8.0|^9.0",
         "psr/http-message": "^1.0"
