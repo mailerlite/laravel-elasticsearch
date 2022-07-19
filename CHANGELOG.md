@@ -1,5 +1,10 @@
 # Changelog
 
+## 9.0.2 - 18-Jul-2022
+
+- "Update" `guzzlehttp/psr7` package to version `^1.7|^2.0` (thanks @brunogaspar)
+
+
 ## 9.0.1 - 16-Jul-2022
 
 - Update `guzzlehttp/psr7` package to version `^2.0` (currently 2.4.0) (#138)
