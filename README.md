@@ -5,7 +5,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 > ## ⚠️ This Package Will Be Abandoned
 > Due to several factors, including the fact that I no longer use ES,
 > I will be ceasing development on this package.  If you are interested in
-> taking over this project, please reach out to me here or on Twitter: @cviebrock
+> taking over this project, please reach out to me here on the Issues board.
 
 [![Build Status](https://github.com/cviebrock/laravel-elasticsearch/workflows/tests/badge.svg?branch=master)](https://github.com/cviebrock/laravel-elasticsearch/actions)
 [![Total Downloads](https://poser.pugx.org/cviebrock/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
