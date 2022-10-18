@@ -339,12 +339,6 @@ php artisan laravel-elasticsearch:utils:alias-switch-index <your_NEW_elasticsear
 Thanks to [everyone](https://github.com/cviebrock/laravel-elasticsearch/graphs/contributors)
 who has contributed to this project!
 
-Special thanks to 
-[JetBrains](https://www.jetbrains.com/?from=cviebrock/laravel-elasticsearch) for their 
-Open Source License Program ... and the excellent PHPStorm IDE, of course!
-
-[![JetBrains](./.github/jetbrains.svg)](https://www.jetbrains.com/?from=cviebrock/laravel-elasticsearch)
-
 Please use [Github](https://github.com/cviebrock/laravel-elasticsearch) for reporting bugs, 
 and making comments or suggestions.
  
