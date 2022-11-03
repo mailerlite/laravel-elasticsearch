@@ -176,8 +176,10 @@ class Factory
                 });
             }
         }
+        $ES_api_id=Arr::get($config, 'ES_api_id');
+        $ES_api_key=Arr::get($config, 'ES_api_key');
 
         // Build and return the client
-        return $clientBuilder->build();
+        return $clientBuilder->setApiKey($ES_api_id,$ES_api_key)->build();
     }
 }
