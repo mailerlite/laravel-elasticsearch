@@ -56,6 +56,11 @@ return [
                     'aws_secret'        => env('AWS_SECRET_ACCESS_KEY', ''),
                     'aws_credentials'   => null,
                     'aws_session_token' => env('AWS_SESSION_TOKEN', null),
+
+                    'ES_api_id' => env('ELASTICSEARCH_KEY_ID', ''),
+                    'ES_api_key' => env('ELASTICSEARCH_API_KEY', ''),
+
+
                 ],
             ],
 
