@@ -180,6 +180,12 @@ class Factory
         $ES_api_key=Arr::get($config, 'ES_api_key');
 
         // Build and return the client
-        return $clientBuilder->setApiKey($ES_api_id,$ES_api_key)->build();
+        if($ES_api_id != '')
+            {
+              return $clientBuilder->setApiKey($ES_api_id,$ES_api_key)->build();
+            }
+        else {
+            return $clientBuilder->build();
+                }
     }
 }
