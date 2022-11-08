@@ -64,6 +64,14 @@ ELASTICSEARCH_USER=
 ELASTICSEARCH_PASS=
 ```
 
+If you are logging in via API keys, you will need to fill in these values:
+
+```ini
+ELASTICSEARCH_API_ID=
+ELASTICSEARCH_API_KEY=
+```
+
+
 ##### Connecting to AWS Elasticsearch Service
 
 If you are connecting to ElasticSearch instances on Amazon AWS, then you'll also

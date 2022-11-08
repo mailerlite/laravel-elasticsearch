@@ -1,5 +1,10 @@
 # Changelog
 
+## 9.0.3 - 07-Nov-2022
+
+- Add ability to log in via API keys (#141, thanks @mhdEurFlash123)
+
+
 ## 9.0.2 - 18-Jul-2022
 
 - "Update" `guzzlehttp/psr7` package to version `^1.7|^2.0` (thanks @brunogaspar)

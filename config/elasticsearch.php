@@ -49,6 +49,10 @@ return [
                     'user'              => env('ELASTICSEARCH_USER', null),
                     'pass'              => env('ELASTICSEARCH_PASS', null),
 
+                    // Alternatively, you can log in via API keys
+                    'api_id'            => env('ELASTICSEARCH_API_ID', null),
+                    'api_key'           => env('ELASTICSEARCH_API_KEY', null),
+
                     // If you are connecting to an Elasticsearch instance on AWS, you will need these values as well
                     'aws'               => env('AWS_ELASTICSEARCH_ENABLED', false),
                     'aws_region'        => env('AWS_REGION', ''),
@@ -56,11 +60,6 @@ return [
                     'aws_secret'        => env('AWS_SECRET_ACCESS_KEY', ''),
                     'aws_credentials'   => null,
                     'aws_session_token' => env('AWS_SESSION_TOKEN', null),
-
-                    'ES_api_id' => env('ELASTICSEARCH_KEY_ID', ''),
-                    'ES_api_key' => env('ELASTICSEARCH_API_KEY', ''),
-
-
                 ],
             ],
 

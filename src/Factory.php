@@ -1,4 +1,6 @@
-<?php namespace Cviebrock\LaravelElasticsearch;
+<?php
+
+namespace Cviebrock\LaravelElasticsearch;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
@@ -96,7 +98,7 @@ class Factory
         // Configure handlers for any AWS hosts
         foreach ($config['hosts'] as $host) {
             if (isset($host['aws']) && $host['aws']) {
-                $clientBuilder->setHandler(function(array $request) use ($host) {
+                $clientBuilder->setHandler(function (array $request) use ($host) {
                     $psr7Handler = \Aws\default_http_handler();
                     $signer = new \Aws\Signature\SignatureV4('es', $host['aws_region']);
                     $request['headers']['Host'][0] = parse_url($request['headers']['Host'][0])['host'] ?? $request['headers']['Host'][0];
@@ -145,7 +147,8 @@ class Factory
                     );
 
                     // Get curl stats
-                    $http_stats = new class {
+                    $http_stats = new class
+                    {
                         public $data = [];
                         public function __invoke(...$args)
                         {
@@ -155,9 +158,9 @@ class Factory
 
                     // Send the signed request to Amazon ES
                     $response = $psr7Handler($signedRequest, ['http_stats_receiver' => $http_stats])
-                        ->then(function(ResponseInterface $response) {
+                        ->then(function (ResponseInterface $response) {
                             return $response;
-                        }, function($error) {
+                        }, function ($error) {
                             return $error['response'];
                         })
                         ->wait();
@@ -176,16 +179,12 @@ class Factory
                 });
             }
         }
-        $ES_api_id=Arr::get($config, 'ES_api_id');
-        $ES_api_key=Arr::get($config, 'ES_api_key');
 
         // Build and return the client
-        if($ES_api_id != '')
-            {
-              return $clientBuilder->setApiKey($ES_api_id,$ES_api_key)->build();
-            }
-        else {
-            return $clientBuilder->build();
-                }
+        if ($host['api_id'] !== null && $host['api_key'] !== null) {
+            $clientBuilder->setApiKey($host['api_id'], $host['api_key']);
+        }
+
+        return $clientBuilder->build();
     }
 }

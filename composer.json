@@ -1,5 +1,5 @@
 {
-    "name": "mhd-neuroflash/laravel-elasticsearch-updated",
+    "name": "cviebrock/laravel-elasticsearch",
     "description": "An easy way to use the official PHP ElasticSearch client in your Laravel applications.",
     "keywords": [
         "laravel",
