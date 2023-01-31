@@ -18,16 +18,16 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
-        "elasticsearch/elasticsearch": "^7.11",
+        "elasticsearch/elasticsearch": "^7.11|^8.6",
         "guzzlehttp/psr7": "^1.7|^2.0",
-        "illuminate/contracts": "^7.0|^8.0|^9.0",
-        "illuminate/support": "^7.0|^8.0|^9.0",
+        "illuminate/contracts": "^7.0|^8.0|^9.0|^10.0",
+        "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
         "psr/http-message": "^1.0"
     },
     "require-dev": {
         "limedeck/phpunit-detailed-printer": "^6.0",
         "mockery/mockery": "^1.4.3",
-        "orchestra/testbench": "^6.5|^7.0",
+        "orchestra/testbench": "^6.5|^7.0|^8.0",
         "phpunit/phpunit": "^9.4"
     },
     "suggest": {
