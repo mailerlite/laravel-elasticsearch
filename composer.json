@@ -27,7 +27,7 @@
     "require-dev": {
         "mockery/mockery": "^1.4.3",
         "orchestra/testbench": "^6.5|^7.0|^8.0",
-        "pestphp/pest": "^1.22|2.x-dev"
+        "phpunit/phpunit": "^9.4"
     },
     "suggest": {
         "aws/aws-sdk-php": "Required to connect to an Elasticsearch host on AWS (^3.80)"
@@ -49,7 +49,7 @@
         ],
         "tests": [
             "rm -rf build",
-            "php vendor/bin/pest"
+            "php vendor/bin/phpunit"
         ]
     },
     "extra": {
@@ -65,9 +65,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
+        "sort-packages": true
     }
 }

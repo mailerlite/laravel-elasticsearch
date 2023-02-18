@@ -1,8 +1,8 @@
 # Changelog
 
-## 10.0.0 - 17-Feb-2022
+## 10.0.0 - 17-Feb-2023
 
-- Laravel 10.0 support
+- Support for Laravel 10
 
 
 ## 9.0.4 - 08-Nov-2022
