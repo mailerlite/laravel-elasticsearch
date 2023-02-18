@@ -62,12 +62,9 @@
             }
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": false
-        }
     }
 }

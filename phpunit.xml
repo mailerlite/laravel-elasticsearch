@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<phpunit
          backupGlobals="false"
          backupStaticAttributes="false"
          bootstrap="vendor/autoload.php"
@@ -9,15 +9,15 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="true"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+>
   <coverage>
     <include>
       <directory suffix=".php">src/</directory>
     </include>
     <report>
-      <clover outputFile="build/clover.xml" />
       <html outputDirectory="build/coverage" />
-      <text outputFile="build/coverage.txt" />
     </report>
   </coverage>
   <testsuites>
