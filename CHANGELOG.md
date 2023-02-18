@@ -1,6 +1,11 @@
 # Changelog
 
-## 9.0.3 - 07-Nov-2022
+## 10.0.0 - 17-Feb-2022
+
+- Laravel 10.0 support
+
+
+## 9.0.4 - 08-Nov-2022
 
 - Add ability to log in via API keys (#141, thanks @mhdEurFlash123)
 

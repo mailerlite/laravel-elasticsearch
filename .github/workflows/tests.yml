@@ -12,9 +12,6 @@ jobs:
     php: [7.3, 7.4, 8.0, 8.1]
     elastic: [7.11.0]
     stability: [prefer-lowest, prefer-stable]
-    exclude:
-     - php: 8.1
-       stability: prefer-lowest
   name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
 
   steps:
@@ -54,4 +51,4 @@ jobs:
    - name: Configure matchers for PHPUnit
      uses: mheap/phpunit-matcher-action@v1
    - name: Run PHP tests via PHPUnit
-     run: vendor/bin/phpunit --teamcity
+     run: vendor/bin/pest --teamcity
