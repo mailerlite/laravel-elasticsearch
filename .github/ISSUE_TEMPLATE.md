@@ -1,12 +1,3 @@
-**NOTE:  This Package Will Be Abandoned**
-Due to several factors, including the fact that I no longer use ES, 
-I will be ceasing development on this package.  Bug fixes with PRs will
-eventually be looked at, but requests for new features or general support
-questions may go unanswered.
-
-If you are interested in taking over this project, please reach out to 
-me here on Github, or on Twitter: @cviebrock
-
 ---
 
 Please be sure you include all the relevant information in your issue so we can help you:
@@ -19,7 +10,7 @@ Please be sure you include all the relevant information in your issue so we can 
       official client.  If it doesn't work there, then the issue isn't with my package.
 - [ ] Is there any other code we might need to see in order to help?
 
-Please use a descriptive title for your issue.  "Why doesn't this work?" doesn't provide 
+Please use a descriptive title for your issue.  "Why doesn't this work?" doesn't provide
 other users much information if they are scanning the list of issues.
 
 Also, *please* use [fenced code blocks](https://help.github.com/articles/creating-and-highlighting-code-blocks/)
