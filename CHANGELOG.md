@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.0.1 - 12-Jun-2023
+
+- bug fixes and additional documentation (thanks @PrinsFrank and @shuvroroy)
+  
+  
 ## 10.0.0 - 17-Feb-2023
 
 - Support for Laravel 10
