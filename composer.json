@@ -34,12 +34,12 @@
     },
     "autoload": {
         "psr-4": {
-            "mailerlite\\LaravelElasticsearch\\": "src"
+            "MailerLite\\LaravelElasticsearch\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "mailerlite\\LaravelElasticsearch\\Tests\\": "tests"
+            "MailerLite\\LaravelElasticsearch\\Tests\\": "tests"
         }
     },
     "scripts": {
