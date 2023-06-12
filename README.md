@@ -2,43 +2,39 @@
 
 An easy way to use the [official Elastic Search client](https://github.com/elastic/elasticsearch-php) in your Laravel or Lumen applications.
 
-> ## ⚠️ This Package Will Be Abandoned
-> Due to several factors, including the fact that I no longer use ES,
-> I will be ceasing development on this package.  If you are interested in
-> taking over this project, please reach out to me here on the Issues board.
-
-[![Build Status](https://github.com/cviebrock/laravel-elasticsearch/workflows/tests/badge.svg?branch=master)](https://github.com/cviebrock/laravel-elasticsearch/actions)
-[![Total Downloads](https://poser.pugx.org/cviebrock/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
-[![Latest Stable Version](https://poser.pugx.org/cviebrock/laravel-elasticsearch/v/stable.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
-[![Latest Stable Version](https://poser.pugx.org/cviebrock/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/cviebrock/laravel-elasticsearch)
-[![License](https://img.shields.io/packagist/l/cviebrock/laravel-elasticsearch)](LICENSE.md)
+[![Build Status](https://github.com/mailerlite/laravel-elasticsearch/workflows/tests/badge.svg?branch=master)](https://github.com/mailerlite/laravel-elasticsearch/actions)
+[![Total Downloads](https://poser.pugx.org/mailerlite/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
+[![Latest Stable Version](https://poser.pugx.org/mailerlite/laravel-elasticsearch/v/stable.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
+[![Latest Stable Version](https://poser.pugx.org/mailerlite/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
+[![License](https://img.shields.io/packagist/l/mailerlite/laravel-elasticsearch)](LICENSE.md)
 
 
-- [Installation and Configuration](#installation-and-configuration)
-  - [Laravel](#laravel)
-    - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
-    - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
-  - [Lumen](#lumen)
-- [Usage](#usage)
-- [Advanced Usage](#advanced-usage)
-- [Console Commands](#console-commands)
-- [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
-- [Copyright and License](#copyright-and-license)
+- [Laravel-Elasticsearch](#laravel-elasticsearch)
+  - [Installation and Configuration](#installation-and-configuration)
+    - [Laravel](#laravel)
+        - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
+        - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
+    - [Lumen](#lumen)
+  - [Usage](#usage)
+  - [Advanced Usage](#advanced-usage)
+  - [Console commands](#console-commands)
+  - [Bugs, Suggestions, Contributions and Support](#bugs-suggestions-contributions-and-support)
+  - [Copyright and License](#copyright-and-license)
 
 
 
 ## Installation and Configuration
 
-Install the current version of the `cviebrock/laravel-elasticsearch` package via composer:
+Install the current version of the `mailerlite/laravel-elasticsearch` package via composer:
 
 ```sh
-composer require cviebrock/laravel-elasticsearch
+composer require mailerlite/laravel-elasticsearch
 ```
 
 If you are using ElasticSearch version 5, then install version 2 of this package:
 
 ```sh
-composer require cviebrock/laravel-elasticsearch:^2
+composer require mailerlite/laravel-elasticsearch:^2
 ```
 
 ### Laravel
@@ -48,14 +44,14 @@ The package's service provider will automatically register its service provider.
 Publish the configuration file:
 
 ```sh
-php artisan vendor:publish --provider="Cviebrock\LaravelElasticsearch\ServiceProvider"
+php artisan vendor:publish --provider="mailerlite\LaravelElasticsearch\ServiceProvider"
 ```
 
 ##### Alternative configuration method via .env file
 
 After you publish the configuration file as suggested above, you may configure ElasticSearch
 by adding the following to your application's `.env` file (with appropriate values):
-  
+
 ```ini
 ELASTICSEARCH_HOST=localhost
 ELASTICSEARCH_PORT=9200
@@ -75,7 +71,7 @@ ELASTICSEARCH_API_KEY=
 ##### Connecting to AWS Elasticsearch Service
 
 If you are connecting to ElasticSearch instances on Amazon AWS, then you'll also
-need to `composer require aws/aws-sdk-php:^3.80` and add the following to your 
+need to `composer require aws/aws-sdk-php:^3.80` and add the following to your
 `.env` file:
 
 ```ini
@@ -85,7 +81,7 @@ AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
 ```
 
-If you have to use another authentication method having custom credentials (i.e. `instanceProfile()`), 
+If you have to use another authentication method having custom credentials (i.e. `instanceProfile()`),
 you have to publish the configuration file and use the **aws_credentials**:
 
 ```php
@@ -159,7 +155,7 @@ If you are using `php artisan config:cache`, you cannot have the Closure in your
 If you work with Lumen, please register the service provider and configuration in `bootstrap/app.php`:
 
 ```php
-$app->register(Cviebrock\LaravelElasticsearch\ServiceProvider::class);
+$app->register(mailerlite\LaravelElasticsearch\ServiceProvider::class);
 $app->configure('elasticsearch');
 ```
 
@@ -204,23 +200,23 @@ the configuration file).
 $return = Elasticsearch::connection('connectionName')->index($data);
 ```
 
-Lumen users who wish to use Facades can do so by editing the 
+Lumen users who wish to use Facades can do so by editing the
 `bootstrap/app.php` file to include the following:
 
 ```php
 $app->withFacades(true, [
     ...
-    Cviebrock\LaravelElasticsearch\Facade::class => 'Elasticsearch',
+    mailerlite\LaravelElasticsearch\Facade::class => 'Elasticsearch',
     ...
 ]);
 ```
 
-Lumen users who aren't using facades will need to use dependency injection 
+Lumen users who aren't using facades will need to use dependency injection
 or the application container in order to get the ES service object:
 
 ```php
 // using injection:
-public function handle(\Cviebrock\LaravelElasticsearch\Manager $elasticsearch)
+public function handle(\mailerlite\LaravelElasticsearch\Manager $elasticsearch)
 {
     $elasticsearch->ping();
 }
@@ -229,17 +225,17 @@ public function handle(\Cviebrock\LaravelElasticsearch\Manager $elasticsearch)
 $elasticSearch = $this->app('elasticsearch');
 ```
 
-Of course, dependency injection and the application container work 
+Of course, dependency injection and the application container work
 for Laravel applications as well.
 
 
 
 ## Advanced Usage
 
-Because the package is a wrapper around the official Elastic client, you can 
-do pretty much anything with this package.  Not only can you perform standard 
-CRUD operations, but you can monitor the health of your Elastic cluster programmatically, 
-back it up, or make changes to it.  Some of these operations are done through 
+Because the package is a wrapper around the official Elastic client, you can
+do pretty much anything with this package.  Not only can you perform standard
+CRUD operations, but you can monitor the health of your Elastic cluster programmatically,
+back it up, or make changes to it.  Some of these operations are done through
 "namespaced" commands, which this package happily supports.
 
 To grab statistics for an index:
@@ -263,11 +259,11 @@ To delete whole indices (be careful!):
 $response = Elasticsearch::indices()->delete(['index' => 'my_index']);
 ```
 
-Please remember that this package is a thin wrapper around a large number of very 
-sophisticated and well-documented Elastic features.  Information about those features 
-and the methods and parameters used to call them can be found in the 
+Please remember that this package is a thin wrapper around a large number of very
+sophisticated and well-documented Elastic features.  Information about those features
+and the methods and parameters used to call them can be found in the
 [Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html).
-Help with using them is available via the [Elastic forums](https://discuss.elastic.co/) 
+Help with using them is available via the [Elastic forums](https://discuss.elastic.co/)
 and on sites like [Stack Overflow](https://stackoverflow.com/questions/tagged/elasticsearch).
 
 
@@ -294,7 +290,7 @@ Delete an index:
 php artisan laravel-elasticsearch:utils:index-delete <your_elasticsearch_index_name>
 ```
 
-Create or update index mapping:  
+Create or update index mapping:
 _Note: The index mapping file must contain a valid JSON mapping definition as Elasticsearch expects, for example:_
 
 ```json
@@ -338,26 +334,26 @@ Switch index on alias (useful for zero-downtime release of the new index):
 
 ```sh
 php artisan laravel-elasticsearch:utils:alias-switch-index <your_NEW_elasticsearch_index_name> <your_OLD_elasticsearch_index_name> <your_elasticsearch_alias_name>
-```  
+```
 
 
 
 ## Bugs, Suggestions, Contributions and Support
 
-Thanks to [everyone](https://github.com/cviebrock/laravel-elasticsearch/graphs/contributors)
+Thanks to [everyone](https://github.com/mailerlite/laravel-elasticsearch/graphs/contributors)
 who has contributed to this project!
 
-Please use [Github](https://github.com/cviebrock/laravel-elasticsearch) for reporting bugs, 
+Please use [Github](https://github.com/mailerlite/laravel-elasticsearch) for reporting bugs,
 and making comments or suggestions.
- 
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute changes.
 
 
 
 ## Copyright and License
 
-[laravel-elasticsearch](https://github.com/cviebrock/laravel-elasticsearch)
-was written by [Colin Viebrock](http://viebrock.ca) and is released under the 
-[MIT License](LICENSE.md).
+[laravel-elasticsearch](https://github.com/mailerlite/laravel-elasticsearch)
+was written thanks to [Colin Viebrock](http://viebrock.ca) and is released under the
+[MIT License](LICENSE.md). It is being maintained and developed by [MailerLite](https://www.mailerlite.com
 
-Copyright (c) 2015 Colin Viebrock
+Copyright (c) 2023 MailerLite
