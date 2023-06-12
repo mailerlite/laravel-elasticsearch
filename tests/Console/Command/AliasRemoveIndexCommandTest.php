@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Cviebrock\LaravelElasticsearch\Tests\Console\Command;
+namespace MailerLite\LaravelElasticsearch\Tests\Console\Command;
 
-use Cviebrock\LaravelElasticsearch\Tests\TestCase;
+use MailerLite\LaravelElasticsearch\Tests\TestCase;
 use Elasticsearch\Client;
 use Elasticsearch\Namespaces\IndicesNamespace;
 use Exception;

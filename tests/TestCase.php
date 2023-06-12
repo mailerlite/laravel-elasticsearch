@@ -1,7 +1,7 @@
-<?php namespace Cviebrock\LaravelElasticsearch\Tests;
+<?php namespace MailerLite\LaravelElasticsearch\Tests;
 
-use Cviebrock\LaravelElasticsearch\Facade;
-use Cviebrock\LaravelElasticsearch\ServiceProvider;
+use MailerLite\LaravelElasticsearch\Facade;
+use MailerLite\LaravelElasticsearch\ServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 

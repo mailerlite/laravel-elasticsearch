@@ -1,6 +1,6 @@
 <?php
 
-namespace Cviebrock\LaravelElasticsearch;
+namespace MailerLite\LaravelElasticsearch;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;

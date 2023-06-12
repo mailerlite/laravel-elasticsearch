@@ -1,4 +1,4 @@
-<?php namespace Cviebrock\LaravelElasticsearch;
+<?php namespace MailerLite\LaravelElasticsearch;
 
 use Elasticsearch\Client;
 use Illuminate\Contracts\Container\Container;
@@ -8,7 +8,7 @@ use Illuminate\Support\Arr;
 /**
  * Class Manager
  *
- * @package Cviebrock\LaravelElasticsearch
+ * @package MailerLite\LaravelElasticsearch
  */
 class Manager
 {
@@ -23,7 +23,7 @@ class Manager
     /**
      * The Elasticsearch connection factory instance.
      *
-     * @var \Cviebrock\LaravelElasticsearch\Factory
+     * @var \MailerLite\LaravelElasticsearch\Factory
      */
     protected $factory;
 
@@ -36,7 +36,7 @@ class Manager
 
     /**
      * @param \Illuminate\Contracts\Container\Container $app
-     * @param \Cviebrock\LaravelElasticsearch\Factory $factory
+     * @param \MailerLite\LaravelElasticsearch\Factory $factory
      */
     public function __construct(Container $app, Factory $factory)
     {

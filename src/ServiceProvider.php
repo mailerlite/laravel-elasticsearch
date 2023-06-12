@@ -1,12 +1,12 @@
-<?php namespace Cviebrock\LaravelElasticsearch;
+<?php namespace MailerLite\LaravelElasticsearch;
 
-use Cviebrock\LaravelElasticsearch\Console\Command\AliasCreateCommand;
-use Cviebrock\LaravelElasticsearch\Console\Command\AliasRemoveIndexCommand;
-use Cviebrock\LaravelElasticsearch\Console\Command\AliasSwitchIndexCommand;
-use Cviebrock\LaravelElasticsearch\Console\Command\IndexCreateCommand;
-use Cviebrock\LaravelElasticsearch\Console\Command\IndexCreateOrUpdateMappingCommand;
-use Cviebrock\LaravelElasticsearch\Console\Command\IndexDeleteCommand;
-use Cviebrock\LaravelElasticsearch\Console\Command\IndexExistsCommand;
+use MailerLite\LaravelElasticsearch\Console\Command\AliasCreateCommand;
+use MailerLite\LaravelElasticsearch\Console\Command\AliasRemoveIndexCommand;
+use MailerLite\LaravelElasticsearch\Console\Command\AliasSwitchIndexCommand;
+use MailerLite\LaravelElasticsearch\Console\Command\IndexCreateCommand;
+use MailerLite\LaravelElasticsearch\Console\Command\IndexCreateOrUpdateMappingCommand;
+use MailerLite\LaravelElasticsearch\Console\Command\IndexDeleteCommand;
+use MailerLite\LaravelElasticsearch\Console\Command\IndexExistsCommand;
 use Elasticsearch\Client;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
@@ -17,7 +17,7 @@ use Laravel\Lumen\Application as LumenApplication;
 /**
  * Class ServiceProvider
  *
- * @package Cviebrock\LaravelElasticsearch
+ * @package MailerLite\LaravelElasticsearch
  */
 class ServiceProvider extends BaseServiceProvider
 {

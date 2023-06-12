@@ -1,7 +1,7 @@
-<?php namespace Cviebrock\LaravelElasticsearch\Tests;
+<?php namespace MailerLite\LaravelElasticsearch\Tests;
 
-use Cviebrock\LaravelElasticsearch\Factory;
-use Cviebrock\LaravelElasticsearch\Manager;
+use MailerLite\LaravelElasticsearch\Factory;
+use MailerLite\LaravelElasticsearch\Manager;
 use Elasticsearch;
 use Elasticsearch\Client;
 
