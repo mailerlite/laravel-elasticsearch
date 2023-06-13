@@ -44,7 +44,7 @@ The package's service provider will automatically register its service provider.
 Publish the configuration file:
 
 ```sh
-php artisan vendor:publish --provider="mailerlite\LaravelElasticsearch\ServiceProvider"
+php artisan vendor:publish --provider="Mailerlite\LaravelElasticsearch\ServiceProvider"
 ```
 
 ##### Alternative configuration method via .env file
@@ -155,7 +155,7 @@ If you are using `php artisan config:cache`, you cannot have the Closure in your
 If you work with Lumen, please register the service provider and configuration in `bootstrap/app.php`:
 
 ```php
-$app->register(mailerlite\LaravelElasticsearch\ServiceProvider::class);
+$app->register(Mailerlite\LaravelElasticsearch\ServiceProvider::class);
 $app->configure('elasticsearch');
 ```
 
@@ -206,7 +206,7 @@ Lumen users who wish to use Facades can do so by editing the
 ```php
 $app->withFacades(true, [
     ...
-    mailerlite\LaravelElasticsearch\Facade::class => 'Elasticsearch',
+    Mailerlite\LaravelElasticsearch\Facade::class => 'Elasticsearch',
     ...
 ]);
 ```
@@ -216,7 +216,7 @@ or the application container in order to get the ES service object:
 
 ```php
 // using injection:
-public function handle(\mailerlite\LaravelElasticsearch\Manager $elasticsearch)
+public function handle(\Mailerlite\LaravelElasticsearch\Manager $elasticsearch)
 {
     $elasticsearch->ping();
 }
@@ -354,6 +354,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute changes.
 
 [laravel-elasticsearch](https://github.com/mailerlite/laravel-elasticsearch)
 was written thanks to [Colin Viebrock](http://viebrock.ca) and is released under the
-[MIT License](LICENSE.md). It is being maintained and developed by [MailerLite](https://www.mailerlite.com
+[MIT License](LICENSE.md). It is being maintained and developed by [MailerLite](https://www.mailerlite.com)
 
 Copyright (c) 2023 MailerLite

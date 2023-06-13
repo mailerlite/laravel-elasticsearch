@@ -1,14 +1,14 @@
-<?php namespace Cviebrock\LaravelElasticsearch\Tests;
+<?php 
 
-use Cviebrock\LaravelElasticsearch\Factory;
-use Cviebrock\LaravelElasticsearch\Manager;
+namespace MailerLite\LaravelElasticsearch\Tests;
+
+use MailerLite\LaravelElasticsearch\Factory;
+use MailerLite\LaravelElasticsearch\Manager;
 use Elasticsearch;
 use Elasticsearch\Client;
 
-
 class ServiceProviderTests extends TestCase
 {
-
     public function testAbstractsAreLoaded(): void
     {
         $factory = app('elasticsearch.factory');

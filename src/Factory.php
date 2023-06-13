@@ -1,6 +1,6 @@
 <?php
 
-namespace Cviebrock\LaravelElasticsearch;
+namespace MailerLite\LaravelElasticsearch;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
@@ -17,7 +17,6 @@ use Monolog\Handler\StreamHandler;
 
 class Factory
 {
-
     /**
      * Map configuration array keys with ES ClientBuilder setters
      *
