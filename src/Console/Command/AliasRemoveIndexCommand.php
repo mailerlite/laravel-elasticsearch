@@ -8,10 +8,8 @@ use Elasticsearch\Client;
 use Illuminate\Console\Command;
 use Throwable;
 
-
 final class AliasRemoveIndexCommand extends Command
 {
-
     /**
      * @var string
      */

@@ -1,4 +1,6 @@
-<?php namespace MailerLite\LaravelElasticsearch;
+<?php
+
+namespace MailerLite\LaravelElasticsearch;
 
 use MailerLite\LaravelElasticsearch\Console\Command\AliasCreateCommand;
 use MailerLite\LaravelElasticsearch\Console\Command\AliasRemoveIndexCommand;
@@ -13,7 +15,6 @@ use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
 
-
 /**
  * Class ServiceProvider
  *
@@ -21,7 +22,6 @@ use Laravel\Lumen\Application as LumenApplication;
  */
 class ServiceProvider extends BaseServiceProvider
 {
-
     /**
      * Bootstrap the application services.
      */

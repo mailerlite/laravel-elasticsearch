@@ -1,7 +1,8 @@
-<?php namespace MailerLite\LaravelElasticsearch;
+<?php 
+
+namespace MailerLite\LaravelElasticsearch;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
-
 
 /**
  * Class Facade
@@ -10,7 +11,6 @@ use Illuminate\Support\Facades\Facade as BaseFacade;
  */
 class Facade extends BaseFacade
 {
-
     /**
      * @inheritdoc
      */

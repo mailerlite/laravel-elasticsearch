@@ -7,10 +7,8 @@ namespace MailerLite\LaravelElasticsearch\Console\Command;
 use Elasticsearch\Client;
 use Illuminate\Console\Command;
 
-
 final class IndexExistsCommand extends Command
 {
-
     /**
      * @var string
      */

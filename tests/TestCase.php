@@ -1,9 +1,10 @@
-<?php namespace MailerLite\LaravelElasticsearch\Tests;
+<?php 
+
+namespace MailerLite\LaravelElasticsearch\Tests;
 
 use MailerLite\LaravelElasticsearch\Facade;
 use MailerLite\LaravelElasticsearch\ServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-
 
 /**
  * Class TestCase
@@ -12,7 +13,6 @@ use Orchestra\Testbench\TestCase as Orchestra;
  */
 abstract class TestCase extends Orchestra
 {
-
     /**
      * @inheritdoc
      */

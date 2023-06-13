@@ -1,9 +1,10 @@
-<?php namespace MailerLite\LaravelElasticsearch;
+<?php
+
+namespace MailerLite\LaravelElasticsearch;
 
 use Elasticsearch\Client;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Arr;
-
 
 /**
  * Class Manager
@@ -12,7 +13,6 @@ use Illuminate\Support\Arr;
  */
 class Manager
 {
-
     /**
      * The application instance.
      *

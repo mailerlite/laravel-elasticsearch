@@ -17,7 +17,6 @@ use Monolog\Handler\StreamHandler;
 
 class Factory
 {
-
     /**
      * Map configuration array keys with ES ClientBuilder setters
      *

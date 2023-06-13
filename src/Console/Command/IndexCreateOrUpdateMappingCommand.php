@@ -9,10 +9,8 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Throwable;
 
-
 final class IndexCreateOrUpdateMappingCommand extends Command
 {
-
     /**
      * @var string
      */
