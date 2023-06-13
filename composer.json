@@ -55,10 +55,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Mailerlite\\LaravelElasticsearch\\ServiceProvider"
+                "MailerLite\\LaravelElasticsearch\\ServiceProvider"
             ],
             "aliases": {
-                "Elasticsearch": "Mailerlite\\LaravelElasticsearch\\Facade"
+                "Elasticsearch": "MailerLite\\LaravelElasticsearch\\Facade"
             }
         }
     },

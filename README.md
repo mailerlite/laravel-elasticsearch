@@ -44,7 +44,7 @@ The package's service provider will automatically register its service provider.
 Publish the configuration file:
 
 ```sh
-php artisan vendor:publish --provider="Mailerlite\LaravelElasticsearch\ServiceProvider"
+php artisan vendor:publish --provider="MailerLite\LaravelElasticsearch\ServiceProvider"
 ```
 
 ##### Alternative configuration method via .env file
@@ -155,7 +155,7 @@ If you are using `php artisan config:cache`, you cannot have the Closure in your
 If you work with Lumen, please register the service provider and configuration in `bootstrap/app.php`:
 
 ```php
-$app->register(Mailerlite\LaravelElasticsearch\ServiceProvider::class);
+$app->register(MailerLite\LaravelElasticsearch\ServiceProvider::class);
 $app->configure('elasticsearch');
 ```
 
@@ -206,7 +206,7 @@ Lumen users who wish to use Facades can do so by editing the
 ```php
 $app->withFacades(true, [
     ...
-    Mailerlite\LaravelElasticsearch\Facade::class => 'Elasticsearch',
+    MailerLite\LaravelElasticsearch\Facade::class => 'Elasticsearch',
     ...
 ]);
 ```
