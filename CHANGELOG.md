@@ -1,5 +1,10 @@
 # Changelog
 
+## 11.0.0 - 13-Jun-2023
+
+- update namespace and support php 8.2 in github action (thanks @nklmilojevic and @shuvroroy)
+
+
 ## 10.0.1 - 12-Jun-2023
 
 - bug fixes and additional documentation (thanks @PrinsFrank and @shuvroroy)
