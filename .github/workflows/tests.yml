@@ -21,7 +21,7 @@ jobs:
 
   steps:
    - name: Checkout code
-     uses: actions/checkout@v2
+     uses: actions/checkout@v4
    - name: Setup PHP
      uses: shivammathur/setup-php@v2
      with:
@@ -34,7 +34,7 @@ jobs:
      id: composer-cache
      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
    - name: Cache dependencies
-     uses: actions/cache@v2
+     uses: actions/cache@v4
      with:
       path: ${{ steps.composer-cache.outputs.dir }}
       key: dependencies-${{ matrix.php }}-${{ matrix.stability }}-composer-${{ hashFiles('**/composer.lock') }}
