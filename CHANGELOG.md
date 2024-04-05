@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.1.0 - 13-Jun-2023
+
+- support laravel 11.0 & php 8.3 in github action (thanks @shuvroroy)
+
 ## 11.0.0 - 13-Jun-2023
 
 - update namespace and support php 8.2 in github action (thanks @nklmilojevic and @shuvroroy)
