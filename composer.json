@@ -27,7 +27,7 @@
     "require-dev": {
         "mockery/mockery": "^1.4.3",
         "orchestra/testbench": "^6.5|^7.0|^8.0|^9.0",
-        "phpunit/phpunit": "^9.4|^10.5"
+        "phpunit/phpunit": "^9.4"
     },
     "suggest": {
         "aws/aws-sdk-php": "Required to connect to an Elasticsearch host on AWS (^3.80)"
