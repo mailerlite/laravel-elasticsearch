@@ -150,6 +150,19 @@ If you are using `php artisan config:cache`, you cannot have the Closure in your
 ],
 ```
 
+#### Logging Configuration  
+
+- **Custom Logger Support**: You can now define `logObject` in the configuration using a class reference (e.g., `\App\Logging\ElasticsearchLogger::class`).  
+- **Automatic Resolution**: If `logObject` is a class reference, it will be resolved via `app($logObject)`.  
+- **Alternative Logging**: If no logger is provided, but `logPath` and `logLevel` are set, a default `StreamHandler` logger will be created.  
+- **Example Usage**:  
+
+  ```php
+  'logObject' => \App\Logging\ElasticsearchLogger::class,
+  ```
+
+This allows for greater flexibility in managing Elasticsearch logs.
+
 ### Lumen
 
 If you work with Lumen, please register the service provider and configuration in `bootstrap/app.php`:
