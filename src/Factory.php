@@ -69,6 +69,8 @@ class Factory
             $logLevel = Arr::get($config, 'logLevel');
             if ($logObject && $logObject instanceof LoggerInterface) {
                 $clientBuilder->setLogger($logObject);
+            } elseif ($logObject && app($logObject) instanceof LoggerInterface) {
+                $clientBuilder->setLogger(app($logObject));
             } elseif ($logPath && $logLevel) {
                 $handler = new StreamHandler($logPath, $logLevel);
                 $logObject = new Logger('log');
