@@ -28,7 +28,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 Install the current version of the `mailerlite/laravel-elasticsearch` package via composer:
 
 ```sh
-composer require mailerlite/laravel-elasticsearch
+composer require anashaat/laravel-elasticsearch
 ```
 
 If you are using ElasticSearch version 5, then install version 2 of this package:
