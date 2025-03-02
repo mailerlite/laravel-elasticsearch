@@ -11,12 +11,12 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "MailerLite",
-            "email": "info@mailerlite.com"
+            "name": "ANashaat",
+            "email": "abdelrahmanndev@gmail.com"
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.3|^8.0|^8.1",
         "ext-json": "*",
         "elasticsearch/elasticsearch": "^7.11",
         "guzzlehttp/psr7": "^1.7|^2.0",
@@ -62,7 +62,7 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "sort-packages": true

@@ -3,9 +3,9 @@
 An easy way to use the [official Elastic Search client](https://github.com/elastic/elasticsearch-php) in your Laravel or Lumen applications.
 
 [![Build Status](https://github.com/mailerlite/laravel-elasticsearch/workflows/tests/badge.svg?branch=master)](https://github.com/mailerlite/laravel-elasticsearch/actions)
-[![Total Downloads](https://poser.pugx.org/mailerlite/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
-[![Latest Stable Version](https://poser.pugx.org/mailerlite/laravel-elasticsearch/v/stable.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
-[![Latest Stable Version](https://poser.pugx.org/mailerlite/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
+[![Total Downloads](https://poser.pugx.org/mailerlite/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/anashaat/laravel-elasticsearch)
+[![Latest Stable Version](https://poser.pugx.org/mailerlite/laravel-elasticsearch/v/stable.png)](https://packagist.org/packages/anashaat/laravel-elasticsearch)
+[![Latest Stable Version](https://poser.pugx.org/mailerlite/laravel-elasticsearch/v/unstable.png)](https://packagist.org/packages/anashaat/laravel-elasticsearch)
 [![License](https://img.shields.io/packagist/l/mailerlite/laravel-elasticsearch)](LICENSE.md)
 
 
@@ -25,7 +25,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 
 ## Installation and Configuration
 
-Install the current version of the `mailerlite/laravel-elasticsearch` package via composer:
+Install the current version of the `anashaat/laravel-elasticsearch` package via composer:
 
 ```sh
 composer require anashaat/laravel-elasticsearch
