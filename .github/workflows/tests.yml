@@ -27,7 +27,7 @@ jobs:
    - name: Checkout code
      uses: actions/checkout@v4
    - name: Setup PHP
-     uses: shivammathur/setup-php@v2
+     uses: setup-php/setup-php@46ae35f3338b644fa11efcbbcd5d739c34372ae8
      with:
       php-version: ${{ matrix.php }}
       tools: composer:v2, cs2pr
