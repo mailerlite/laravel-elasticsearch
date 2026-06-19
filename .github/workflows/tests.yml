@@ -25,7 +25,7 @@ jobs:
 
   steps:
    - name: Checkout code
-     uses: actions/checkout@v4
+     uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
    - name: Setup PHP
      uses: setup-php/setup-php@46ae35f3338b644fa11efcbbcd5d739c34372ae8
      with:
@@ -38,7 +38,7 @@ jobs:
      id: composer-cache
      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
    - name: Cache dependencies
-     uses: actions/cache@v4
+     uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
      with:
       path: ${{ steps.composer-cache.outputs.dir }}
       key: dependencies-${{ matrix.php }}-${{ matrix.stability }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -54,10 +54,10 @@ jobs:
       sudo sysctl -w fs.file-max=262144
       sudo sysctl -w vm.max_map_count=262144
    - name: Runs Elasticsearch
-     uses: elastic/elastic-github-actions/elasticsearch@master
+     uses: elastic/elastic-github-actions/elasticsearch@98431b45a60cbb6ace481778827bc8e11f12fd65 # master
      with:
       stack-version: ${{ matrix.elastic }}
    - name: Configure matchers for PHPUnit
-     uses: mheap/phpunit-matcher-action@v1
+     uses: mheap/phpunit-matcher-action@dcbd4ead41890163b65d0b21534387ce72980ee5 # v1
    - name: Run PHP tests via PHPUnit
      run: vendor/bin/phpunit --teamcity
