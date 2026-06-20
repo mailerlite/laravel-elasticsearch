@@ -2,7 +2,7 @@
 
 An easy way to use the [official Elastic Search client](https://github.com/elastic/elasticsearch-php) in your Laravel applications.
 
-[![Build Status](https://github.com/mailerlite/laravel-elasticsearch/workflows/tests/badge.svg?branch=main)](https://github.com/mailerlite/laravel-elasticsearch/actions)
+[![Build Status](https://github.com/mailerlite/laravel-elasticsearch/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/mailerlite/laravel-elasticsearch/actions/workflows/tests.yml)
 [![Total Downloads](https://poser.pugx.org/mailerlite/laravel-elasticsearch/downloads.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
 [![Latest Stable Version](https://poser.pugx.org/mailerlite/laravel-elasticsearch/v/stable.png)](https://packagist.org/packages/mailerlite/laravel-elasticsearch)
 [![License](https://img.shields.io/packagist/l/mailerlite/laravel-elasticsearch)](LICENSE.md)
