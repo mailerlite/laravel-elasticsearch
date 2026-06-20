@@ -9,6 +9,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 
 
 - [Laravel-Elasticsearch](#laravel-elasticsearch)
+  - [Requirements](#requirements)
   - [Installation and Configuration](#installation-and-configuration)
     - [Laravel](#laravel)
         - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
@@ -21,6 +22,11 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
   - [Copyright and License](#copyright-and-license)
 
 
+## Requirements
+
+- PHP `8.2` or higher (Laravel `13` requires PHP `8.3`)
+- Laravel `11`, `12` or `13`
+- An Elasticsearch `8.x` cluster
 
 ## Installation and Configuration
 
@@ -44,16 +50,8 @@ For example, to use Elasticsearch 7:
 composer require mailerlite/laravel-elasticsearch:^11
 ```
 
-> **Upgrading from Elasticsearch 7?** Version 12 moves to the Elasticsearch 8.x
-> client, which introduces breaking changes (new namespace, response objects and
-> removed configuration options). See [UPGRADING.md](UPGRADING.md) for the full
-> migration guide.
-
-#### Requirements
-
-- PHP `8.2` or higher (Laravel `13` requires PHP `8.3`)
-- Laravel `11`, `12` or `13`
-- An Elasticsearch `8.x` cluster
+> [!NOTE]
+> **Upgrading from Elasticsearch 7?** Version 12 moves to the Elasticsearch 8.x client, which introduces breaking changes (new namespace, response objects and removed configuration options). See [UPGRADING.md](UPGRADING.md) for the full migration guide.
 
 ### Laravel
 
