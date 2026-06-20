@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MailerLite\LaravelElasticsearch\Console\Command;
 
-use Elasticsearch\Client;
+use MailerLite\LaravelElasticsearch\Manager;
 use Illuminate\Console\Command;
 
 final class IndexExistsCommand extends Command
@@ -16,14 +16,14 @@ final class IndexExistsCommand extends Command
                             {index-name : The index name}';
 
     /**
-     * @var Client
+     * @var Manager
      */
-    private $client;
+    private $manager;
 
     public function __construct(
-        Client $client
+        Manager $manager
     ) {
-        $this->client = $client;
+        $this->manager = $manager;
 
         parent::__construct();
     }
@@ -43,9 +43,9 @@ final class IndexExistsCommand extends Command
             return self::FAILURE;
         }
 
-        if ($this->client->indices()->exists([
+        if ($this->manager->indices()->exists([
             'index' => $indexName,
-        ])) {
+        ])->asBool()) {
             $this->output->writeln(
                 sprintf(
                     '<info>Index %s exists.</info>',

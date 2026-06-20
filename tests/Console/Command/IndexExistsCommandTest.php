@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace MailerLite\LaravelElasticsearch\Tests\Console\Command;
 
 use MailerLite\LaravelElasticsearch\Tests\TestCase;
-use Elasticsearch\Client;
-use Elasticsearch\Namespaces\IndicesNamespace;
+use MailerLite\LaravelElasticsearch\Manager;
+use Elastic\Elasticsearch\Endpoints\Indices;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Mockery\MockInterface;
 
 final class IndexExistsCommandTest extends TestCase
 {
     public function testIndexExists(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->once()
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(true);
+                            ->andReturn($this->elasticsearchResponse(true));
                     })
                 );
         });
@@ -35,14 +36,14 @@ final class IndexExistsCommandTest extends TestCase
 
     public function testIndexDoesntExists(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->once()
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(false);
+                            ->andReturn($this->elasticsearchResponse(false));
                     })
                 );
         });
@@ -54,9 +55,7 @@ final class IndexExistsCommandTest extends TestCase
             ->expectsOutput('Index test_index_name_doesnt_exists doesn\'t exists.');
     }
 
-    /**
-     * @dataProvider invalidIndexNameDataProvider
-     */
+    #[DataProvider('invalidIndexNameDataProvider')]
     public function testArgumentIndexNameIsInValid($invalidIndexName): void
     {
         $this->artisan('laravel-elasticsearch:utils:index-exists',
@@ -65,7 +64,7 @@ final class IndexExistsCommandTest extends TestCase
             ->expectsOutput('Argument index-name must be a non empty string.');
     }
 
-    public function invalidIndexNameDataProvider(): Generator
+    public static function invalidIndexNameDataProvider(): Generator
     {
         yield [
             null
