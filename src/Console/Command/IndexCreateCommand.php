@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MailerLite\LaravelElasticsearch\Console\Command;
 
-use Elasticsearch\Client;
+use MailerLite\LaravelElasticsearch\Manager;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -17,14 +17,14 @@ final class IndexCreateCommand extends Command
                             {index-name : The index name}';
 
     /**
-     * @var Client
+     * @var Manager
      */
-    private $client;
+    private $manager;
 
     public function __construct(
-        Client $client
+        Manager $manager
     ) {
-        $this->client = $client;
+        $this->manager = $manager;
 
         parent::__construct();
     }
@@ -37,9 +37,9 @@ final class IndexCreateCommand extends Command
             return self::FAILURE;
         }
 
-        if ($this->client->indices()->exists([
+        if ($this->manager->indices()->exists([
             'index' => $indexName,
-        ])) {
+        ])->asBool()) {
             $this->output->writeln(
                 sprintf(
                     '<error>Index %s already exists and cannot be created.</error>',
@@ -51,7 +51,7 @@ final class IndexCreateCommand extends Command
         }
 
         try {
-            $this->client->indices()->create([
+            $this->manager->indices()->create([
                 'index' => $indexName,
             ]);
         } catch (Throwable $exception) {
