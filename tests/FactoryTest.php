@@ -6,8 +6,11 @@ namespace MailerLite\LaravelElasticsearch\Tests;
 
 use Aws\Credentials\Credentials;
 use Elastic\Elasticsearch\Client;
+use Elastic\Elasticsearch\ClientBuilder;
 use GuzzleHttp\Psr7\Request;
 use MailerLite\LaravelElasticsearch\Factory;
+use Mockery;
+use Monolog\Logger;
 use Psr\Log\NullLogger;
 use ReflectionMethod;
 
@@ -79,6 +82,36 @@ final class FactoryTest extends TestCase
         ]]);
 
         $this->assertSame(['http://localhost'], $hosts);
+    }
+
+    public function testBuildHostsFromMultipleHosts(): void
+    {
+        $hosts = $this->callProtected(new Factory(), 'buildHosts', [[
+            ['host' => 'node-1', 'port' => 9200],
+            ['host' => 'node-2', 'port' => 9201, 'scheme' => 'https'],
+        ]]);
+
+        $this->assertSame(['http://node-1:9200', 'https://node-2:9201'], $hosts);
+    }
+
+    public function testMakeWithInlineStringHost(): void
+    {
+        $client = $this->make([
+            'hosts' => ['http://localhost:9200'],
+        ]);
+
+        $this->assertInstanceOf(Client::class, $client);
+    }
+
+    public function testApiKeyTakesPrecedenceOverBasicAuth(): void
+    {
+        $builder = Mockery::mock(ClientBuilder::class);
+        $builder->shouldReceive('setApiKey')->once()->with('key', 'id');
+        $builder->shouldNotReceive('setBasicAuthentication');
+
+        $this->callProtected(new Factory(), 'configureAuthentication', [$builder, [
+            ['user' => 'elastic', 'pass' => 'secret', 'api_id' => 'id', 'api_key' => 'key'],
+        ]]);
     }
 
     public function testBuildHostsAcceptsInlineStrings(): void
@@ -220,5 +253,58 @@ final class FactoryTest extends TestCase
         ]]);
 
         $this->assertSame($expected, $credentials);
+    }
+
+    public function testResolveAwsCredentialsFromArrayCallable(): void
+    {
+        $credentials = $this->callProtected(new Factory(), 'resolveAwsCredentials', [[
+            'aws_key'         => 'ignored',
+            'aws_secret'      => 'ignored',
+            'aws_credentials' => [AwsCredentialsProviderStub::class, 'provider'],
+        ]]);
+
+        $this->assertInstanceOf(Credentials::class, $credentials);
+        $this->assertSame('array-key', $credentials->getAccessKeyId());
+        $this->assertSame('array-secret', $credentials->getSecretKey());
+    }
+
+    public function testMakeWithCaBundle(): void
+    {
+        $client = $this->make([
+            'hosts'           => [['host' => 'localhost', 'port' => 9200]],
+            // any existing path is fine; the client only reads it when making a request
+            'sslVerification' => __FILE__,
+        ]);
+
+        $this->assertInstanceOf(Client::class, $client);
+    }
+
+    public function testMakeWithFileLogging(): void
+    {
+        $client = $this->make([
+            'hosts'    => [['host' => 'localhost', 'port' => 9200]],
+            'logging'  => true,
+            // logObject is intentionally omitted to exercise the logPath/logLevel branch
+            'logPath'  => sys_get_temp_dir() . '/laravel-elasticsearch-test.log',
+            'logLevel' => Logger::INFO,
+        ]);
+
+        $this->assertInstanceOf(Client::class, $client);
+    }
+}
+
+/**
+ * Stub used to exercise the "array callable" AWS credentials provider branch,
+ * mirroring config such as [\Aws\Credentials\CredentialProvider::class, 'defaultProvider'].
+ */
+final class AwsCredentialsProviderStub
+{
+    public static function provider(): \Closure
+    {
+        return function () {
+            return \GuzzleHttp\Promise\Create::promiseFor(
+                new Credentials('array-key', 'array-secret')
+            );
+        };
     }
 }

@@ -59,4 +59,24 @@ final class ManagerTest extends TestCase
 
         $this->assertArrayHasKey('default', $manager->getConnections());
     }
+
+    public function testBuildsAndCachesNamedConnectionsIndependently(): void
+    {
+        $this->app['config']->set('elasticsearch.connections.secondary', [
+            'hosts' => [['host' => 'localhost', 'port' => 9201]],
+        ]);
+
+        $manager = $this->manager();
+
+        $default = $manager->connection();
+        $secondary = $manager->connection('secondary');
+
+        $this->assertInstanceOf(Client::class, $secondary);
+        $this->assertNotSame($default, $secondary);
+        $this->assertSame($secondary, $manager->connection('secondary'));
+
+        $connections = $manager->getConnections();
+        $this->assertArrayHasKey('default', $connections);
+        $this->assertArrayHasKey('secondary', $connections);
+    }
 }
