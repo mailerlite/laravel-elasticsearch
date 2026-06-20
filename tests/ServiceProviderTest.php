@@ -5,9 +5,9 @@ namespace MailerLite\LaravelElasticsearch\Tests;
 use MailerLite\LaravelElasticsearch\Factory;
 use MailerLite\LaravelElasticsearch\Manager;
 use Elasticsearch;
-use Elasticsearch\Client;
+use Elastic\Elasticsearch\Client;
 
-class ServiceProviderTests extends TestCase
+class ServiceProviderTest extends TestCase
 {
     public function testAbstractsAreLoaded(): void
     {
@@ -27,7 +27,7 @@ class ServiceProviderTests extends TestCase
      */
     public function testFacadeWorks(): void
     {
-        $ping = Elasticsearch::ping();
+        $ping = Elasticsearch::ping()->asBool();
 
         $this->assertTrue($ping);
     }
@@ -37,7 +37,7 @@ class ServiceProviderTests extends TestCase
      */
     public function testInfoWorks(): void
     {
-        $info = Elasticsearch::info();
+        $info = Elasticsearch::info()->asArray();
 
         $this->assertIsArray($info);
         $this->assertArrayHasKey('cluster_name', $info);
