@@ -21,10 +21,14 @@
         "elasticsearch/elasticsearch": "^8.0",
         "guzzlehttp/guzzle": "^7.0",
         "guzzlehttp/psr7": "^2.0",
+        "illuminate/contracts": "^11.0|^12.0|^13.0",
+        "illuminate/support": "^11.0|^12.0|^13.0",
         "psr/http-message": "^1.1|^2.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.4.3",
+        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^10.5|^11.0|^12.0"
     },
     "suggest": {
         "aws/aws-sdk-php": "Required to connect to an Elasticsearch host on AWS (^3.80)"
