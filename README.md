@@ -10,11 +10,11 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 
 - [Laravel-Elasticsearch](#laravel-elasticsearch)
   - [Requirements](#requirements)
-  - [Installation and Configuration](#installation-and-configuration)
-    - [Laravel](#laravel)
-        - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
-        - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
-        - [Security and TLS (Elasticsearch 8.x)](#security-and-tls-elasticsearch-8x)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+    - [Alternative configuration method via .env file](#alternative-configuration-method-via-env-file)
+    - [Connecting to AWS Elasticsearch Service](#connecting-to-aws-elasticsearch-service)
+    - [Security and TLS (Elasticsearch 8.x)](#security-and-tls-elasticsearch-8x)
   - [Usage](#usage)
   - [Advanced Usage](#advanced-usage)
   - [Console commands](#console-commands)
@@ -28,7 +28,7 @@ An easy way to use the [official Elastic Search client](https://github.com/elast
 - Laravel `11`, `12` or `13`
 - An Elasticsearch `8.x` cluster
 
-## Installation and Configuration
+## Installation
 
 Install the current version of the `mailerlite/laravel-elasticsearch` package via composer:
 
@@ -54,9 +54,9 @@ composer require mailerlite/laravel-elasticsearch:^11
 > [!NOTE]
 > **Upgrading from Elasticsearch 7?** Version 12 moves to the Elasticsearch 8.x client, which introduces breaking changes (new namespace, response objects and removed configuration options). See [UPGRADING.md](UPGRADING.md) for the full migration guide.
 
-### Laravel
+## Configuration
 
-The package's service provider will automatically register its service provider.
+The package's service provider is registered automatically.
 
 Publish the configuration file:
 
@@ -64,7 +64,7 @@ Publish the configuration file:
 php artisan vendor:publish --provider="MailerLite\LaravelElasticsearch\ServiceProvider"
 ```
 
-##### Alternative configuration method via .env file
+### Alternative configuration method via .env file
 
 After you publish the configuration file as suggested above, you may configure ElasticSearch
 by adding the following to your application's `.env` file (with appropriate values):
@@ -85,7 +85,7 @@ ELASTICSEARCH_API_KEY=
 ```
 
 
-##### Connecting to AWS Elasticsearch Service
+### Connecting to AWS Elasticsearch Service
 
 If you are connecting to ElasticSearch instances on Amazon AWS, then you'll also
 need to `composer require aws/aws-sdk-php:^3.80` and add the following to your
@@ -167,7 +167,7 @@ If you are using `php artisan config:cache`, you cannot have the Closure in your
 ],
 ```
 
-##### Security and TLS (Elasticsearch 8.x)
+### Security and TLS (Elasticsearch 8.x)
 
 Elasticsearch 8 enables TLS and authentication **by default**. When connecting to
 a secured cluster you typically need to:
@@ -229,24 +229,18 @@ the configuration file).
 $return = Elasticsearch::connection('connectionName')->index($data);
 ```
 
-> **Note (Elasticsearch 8.x):** The official 8.x client no longer returns plain
-> arrays. Every call returns an `Elastic\Elasticsearch\Response\Elasticsearch`
-> object. It implements `ArrayAccess`, so you can keep accessing keys directly
-> (`$return['_id']`), or convert it explicitly:
->
-> ```php
-> $response = Elasticsearch::info();
->
-> $response->asArray();   // body as associative array
-> $response->asObject();  // body as stdClass
-> $response->asString();  // raw JSON string
-> $response->asBool();    // true for a 2xx status code
-> ```
->
-> By default the client throws an `Elastic\Elasticsearch\Exception\ClientResponseException`
-> on `4xx` responses and a `ServerResponseException` on `5xx` responses. For
-> `HEAD` style endpoints such as `indices()->exists()` and `ping()`, resolve the
-> result with `->asBool()`.
+The official Elasticsearch 8.x client no longer returns plain arrays. Every call returns an `Elastic\Elasticsearch\Response\Elasticsearch` object that implements `ArrayAccess`, so you can keep accessing keys directly (`$return['_id']`) or convert it explicitly. By default the client also throws an `Elastic\Elasticsearch\Exception\ClientResponseException` on `4xx` responses and a `ServerResponseException` on `5xx` responses. For `HEAD`-style endpoints such as `indices()->exists()` and `ping()`, resolve the result with `->asBool()`.
+
+Convert a response explicitly with one of:
+
+```php
+$response = Elasticsearch::info();
+
+$response->asArray();   // body as associative array
+$response->asObject();  // body as stdClass
+$response->asString();  // raw JSON string
+$response->asBool();    // true for a 2xx status code
+```
 
 For example, running a search and reading the hits:
 
@@ -279,15 +273,9 @@ public function handle(\MailerLite\LaravelElasticsearch\Manager $elasticsearch)
 $elasticsearch = app('elasticsearch');
 ```
 
-
-
 ## Advanced Usage
 
-Because the package is a wrapper around the official Elastic client, you can
-do pretty much anything with this package.  Not only can you perform standard
-CRUD operations, but you can monitor the health of your Elastic cluster programmatically,
-back it up, or make changes to it.  Some of these operations are done through
-"namespaced" commands, which this package happily supports.
+Because the package is a wrapper around the official Elastic client, you can do pretty much anything with this package.  Not only can you perform standard CRUD operations, but you can monitor the health of your Elastic cluster programmatically, back it up, or make changes to it.  Some of these operations are done through "namespaced" commands, which this package happily supports.
 
 To grab statistics for an index:
 
@@ -310,14 +298,7 @@ To delete whole indices (be careful!):
 $response = Elasticsearch::indices()->delete(['index' => 'my_index']);
 ```
 
-Please remember that this package is a thin wrapper around a large number of very
-sophisticated and well-documented Elastic features.  Information about those features
-and the methods and parameters used to call them can be found in the
-[Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html).
-Help with using them is available via the [Elastic forums](https://discuss.elastic.co/)
-and on sites like [Stack Overflow](https://stackoverflow.com/questions/tagged/elasticsearch).
-
-
+Please remember that this package is a thin wrapper around a large number of very sophisticated and well-documented Elastic features.  Information about those features and the methods and parameters used to call them can be found in the [Elastic documentation](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html). Help with using them is available via the [Elastic forums](https://discuss.elastic.co/) and on sites like [Stack Overflow](https://stackoverflow.com/questions/tagged/elasticsearch).
 
 ## Console commands
 
@@ -387,24 +368,17 @@ Switch index on alias (useful for zero-downtime release of the new index):
 php artisan laravel-elasticsearch:utils:alias-switch-index <your_NEW_elasticsearch_index_name> <your_OLD_elasticsearch_index_name> <your_elasticsearch_alias_name>
 ```
 
-
-
 ## Bugs, Suggestions, Contributions and Support
 
-Thanks to [everyone](https://github.com/mailerlite/laravel-elasticsearch/graphs/contributors)
-who has contributed to this project!
+Thanks to [everyone](https://github.com/mailerlite/laravel-elasticsearch/graphs/contributors) who has contributed to this project!
 
-Please use [Github](https://github.com/mailerlite/laravel-elasticsearch) for reporting bugs,
-and making comments or suggestions.
+Please use [Github](https://github.com/mailerlite/laravel-elasticsearch) for reporting bugs, and making comments or suggestions.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for how to contribute changes.
-
-
 
 ## Copyright and License
 
 [laravel-elasticsearch](https://github.com/mailerlite/laravel-elasticsearch)
-was written thanks to [Colin Viebrock](http://viebrock.ca) and is released under the
-[MIT License](LICENSE.md). It is being maintained and developed by [MailerLite](https://www.mailerlite.com)
+was written thanks to [Colin Viebrock](http://viebrock.ca) and is released under the [MIT License](LICENSE.md). It is being maintained and developed by [MailerLite](https://www.mailerlite.com)
 
 Copyright (c) 2026 MailerLite
