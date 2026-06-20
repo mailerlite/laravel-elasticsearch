@@ -17,20 +17,7 @@ final class AliasCreateCommand extends Command
                             {index-name : The index name}
                             {alias-name : The alias name}';
 
-    /**
-     * @var Manager
-     */
-    private $manager;
-
-    public function __construct(
-        Manager $manager
-    ) {
-        $this->manager = $manager;
-
-        parent::__construct();
-    }
-
-    public function handle(): int
+    public function handle(Manager $manager): int
     {
         $indexName = $this->argument('index-name');
         $aliasName = $this->argument('alias-name');
@@ -42,7 +29,7 @@ final class AliasCreateCommand extends Command
             return self::FAILURE;
         }
 
-        if (!$this->manager->indices()->exists([
+        if (!$manager->indices()->exists([
             'index' => $indexName,
         ])->asBool()) {
             $this->output->writeln(
@@ -56,7 +43,7 @@ final class AliasCreateCommand extends Command
         }
 
         try {
-            $this->manager->indices()->putAlias([
+            $manager->indices()->putAlias([
                 'index' => $indexName,
                 'name'  => $aliasName,
             ]);

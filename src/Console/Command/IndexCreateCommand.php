@@ -16,20 +16,7 @@ final class IndexCreateCommand extends Command
     protected $signature = 'laravel-elasticsearch:utils:index-create
                             {index-name : The index name}';
 
-    /**
-     * @var Manager
-     */
-    private $manager;
-
-    public function __construct(
-        Manager $manager
-    ) {
-        $this->manager = $manager;
-
-        parent::__construct();
-    }
-
-    public function handle(): int
+    public function handle(Manager $manager): int
     {
         $indexName = $this->argument('index-name');
 
@@ -37,7 +24,7 @@ final class IndexCreateCommand extends Command
             return self::FAILURE;
         }
 
-        if ($this->manager->indices()->exists([
+        if ($manager->indices()->exists([
             'index' => $indexName,
         ])->asBool()) {
             $this->output->writeln(
@@ -51,7 +38,7 @@ final class IndexCreateCommand extends Command
         }
 
         try {
-            $this->manager->indices()->create([
+            $manager->indices()->create([
                 'index' => $indexName,
             ]);
         } catch (Throwable $exception) {

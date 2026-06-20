@@ -18,46 +18,27 @@ final class IndexCreateOrUpdateMappingCommand extends Command
                             {index-name : The index name}
                             {mapping-file-path : The absolute path where mapping file is located}';
 
-    /**
-     * @var Manager
-     */
-    private $manager;
-
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    public function __construct(
-        Manager $manager,
-        Filesystem $filesystem
-    ) {
-        $this->manager = $manager;
-        $this->filesystem = $filesystem;
-
-        parent::__construct();
-    }
-
-    public function handle(): int
+    public function handle(Manager $manager, Filesystem $filesystem): int
     {
         $indexName = $this->argument('index-name');
         $mappingFilePath = $this->argument('mapping-file-path');
 
         if (!$this->argumentsAreValid(
             $indexName,
-            $mappingFilePath
+            $mappingFilePath,
+            $filesystem
         )) {
             return self::FAILURE;
         }
 
-        if (!$this->manager->indices()->exists([
+        if (!$manager->indices()->exists([
             'index' => $indexName,
         ])->asBool()) {
             try {
-                $this->manager->indices()->create([
+                $manager->indices()->create([
                     'index' => $indexName,
                     'body'  => json_decode(
-                        $this->filesystem->get($mappingFilePath),
+                        $filesystem->get($mappingFilePath),
                         true
                     ),
                 ]);
@@ -86,10 +67,10 @@ final class IndexCreateOrUpdateMappingCommand extends Command
         }
 
         try {
-            $this->manager->indices()->putMapping([
+            $manager->indices()->putMapping([
                 'index' => $indexName,
                 'body'  => json_decode(
-                    $this->filesystem->get($mappingFilePath),
+                    $filesystem->get($mappingFilePath),
                     true
                 ),
             ]);
@@ -117,7 +98,7 @@ final class IndexCreateOrUpdateMappingCommand extends Command
         return self::SUCCESS;
     }
 
-    private function argumentsAreValid($indexName, $mappingFilePath): bool
+    private function argumentsAreValid($indexName, $mappingFilePath, Filesystem $filesystem): bool
     {
         if ($indexName === null ||
             !is_string($indexName) ||
@@ -133,7 +114,7 @@ final class IndexCreateOrUpdateMappingCommand extends Command
         if ($mappingFilePath === null ||
             !is_string($mappingFilePath) ||
             mb_strlen($mappingFilePath) === 0 ||
-            !$this->filesystem->exists($mappingFilePath)
+            !$filesystem->exists($mappingFilePath)
         ) {
             $this->output->writeln(
                 '<error>Argument mapping-file-path must exists on filesystem and must be a non empty string.</error>'

@@ -18,20 +18,7 @@ final class AliasSwitchIndexCommand extends Command
                             {old-index-name : The old index name}
                             {alias-name : The alias name}';
 
-    /**
-     * @var Manager
-     */
-    private $manager;
-
-    public function __construct(
-        Manager $manager
-    ) {
-        $this->manager = $manager;
-
-        parent::__construct();
-    }
-
-    public function handle(): int
+    public function handle(Manager $manager): int
     {
         $newIndexName = $this->argument('new-index-name');
         $oldIndexName = $this->argument('old-index-name');
@@ -45,7 +32,7 @@ final class AliasSwitchIndexCommand extends Command
             return self::FAILURE;
         }
 
-        if (!$this->manager->indices()->exists([
+        if (!$manager->indices()->exists([
             'index' => $newIndexName,
         ])->asBool()) {
             $this->output->writeln(
@@ -59,12 +46,12 @@ final class AliasSwitchIndexCommand extends Command
         }
 
         try {
-            $this->manager->indices()->putAlias([
+            $manager->indices()->putAlias([
                 'index' => $newIndexName,
                 'name'  => $aliasName,
             ]);
 
-            $this->manager->indices()->deleteAlias([
+            $manager->indices()->deleteAlias([
                 'index' => $oldIndexName,
                 'name'  => $aliasName,
             ]);
