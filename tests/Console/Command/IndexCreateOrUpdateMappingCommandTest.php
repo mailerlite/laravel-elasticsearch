@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace MailerLite\LaravelElasticsearch\Tests\Console\Command;
 
 use MailerLite\LaravelElasticsearch\Tests\TestCase;
-use Elasticsearch\Client;
-use Elasticsearch\Namespaces\IndicesNamespace;
+use MailerLite\LaravelElasticsearch\Manager;
+use Elastic\Elasticsearch\Endpoints\Indices;
 use Exception;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Mockery\MockInterface;
 
@@ -26,14 +27,14 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
                 ->andReturn('{}');
         });
 
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->times(2)
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(true);
+                            ->andReturn($this->elasticsearchResponse(true));
 
                         $mock->shouldReceive('putMapping')
                             ->once()
@@ -60,7 +61,7 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
                 ->andReturn(false);
         });
 
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldNotReceive('indices');
         });
 
@@ -86,18 +87,18 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
                 ->andReturn('{}');
         });
 
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->times(2)
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(false);
+                            ->andReturn($this->elasticsearchResponse(false));
 
                         $mock->shouldReceive('create')
                             ->once()
-                            ->andReturn(true);
+                            ->andReturn($this->elasticsearchResponse(true));
                     })
                 );
         });
@@ -124,14 +125,14 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
                 ->andReturn('{}');
         });
 
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->times(2)
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(true);
+                            ->andReturn($this->elasticsearchResponse(true));
 
                         $mock->shouldReceive('putMapping')
                             ->once()
@@ -154,9 +155,7 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
             );
     }
 
-    /**
-     * @dataProvider invalidIndexNameDataProvider
-     */
+    #[DataProvider('invalidIndexNameDataProvider')]
     public function testArgumentIndexNameAndAliasAreInValid(
         $invalidIndexName,
         $invalidAliasName,
@@ -171,7 +170,7 @@ final class IndexCreateOrUpdateMappingCommandTest extends TestCase
             ->expectsOutput($expectedOutputMessage);
     }
 
-    public function invalidIndexNameDataProvider(): Generator
+    public static function invalidIndexNameDataProvider(): Generator
     {
         yield [
             null,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MailerLite\LaravelElasticsearch\Console\Command;
 
-use Elasticsearch\Client;
+use MailerLite\LaravelElasticsearch\Manager;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Throwable;
@@ -19,9 +19,9 @@ final class IndexCreateOrUpdateMappingCommand extends Command
                             {mapping-file-path : The absolute path where mapping file is located}';
 
     /**
-     * @var Client
+     * @var Manager
      */
-    private $client;
+    private $manager;
 
     /**
      * @var Filesystem
@@ -29,10 +29,10 @@ final class IndexCreateOrUpdateMappingCommand extends Command
     private $filesystem;
 
     public function __construct(
-        Client $client,
+        Manager $manager,
         Filesystem $filesystem
     ) {
-        $this->client = $client;
+        $this->manager = $manager;
         $this->filesystem = $filesystem;
 
         parent::__construct();
@@ -50,11 +50,11 @@ final class IndexCreateOrUpdateMappingCommand extends Command
             return self::FAILURE;
         }
 
-        if (!$this->client->indices()->exists([
+        if (!$this->manager->indices()->exists([
             'index' => $indexName,
-        ])) {
+        ])->asBool()) {
             try {
-                $this->client->indices()->create([
+                $this->manager->indices()->create([
                     'index' => $indexName,
                     'body'  => json_decode(
                         $this->filesystem->get($mappingFilePath),
@@ -86,7 +86,7 @@ final class IndexCreateOrUpdateMappingCommand extends Command
         }
 
         try {
-            $this->client->indices()->putMapping([
+            $this->manager->indices()->putMapping([
                 'index' => $indexName,
                 'body'  => json_decode(
                     $this->filesystem->get($mappingFilePath),
