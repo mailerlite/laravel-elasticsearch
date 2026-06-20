@@ -1,5 +1,24 @@
 # Changelog
 
+## 11.3.0 - 16-Apr-2026
+
+- Support Laravel 13 (#169, thanks @shuvroroy)
+- Switch CI to `shivammathur/setup-php` (#168, thanks @ziltoidbot)
+- Add `CODEOWNERS` file
+
+## 11.2.1 - 07-Mar-2026
+
+- Fix PHP 8.4 deprecation (#165, thanks @tivvie)
+
+## 11.2.0 - 24-Feb-2025
+
+- Support Laravel 12
+
+## 11.1.1 - 15-Nov-2024
+
+- Include PHP 8.4 in the CI matrix
+- Bump `orchestra/testbench` version
+
 ## 11.1.0 - 13-Jun-2023
 
 - support laravel 11.0 & php 8.3 in github action (thanks @shuvroroy)
