@@ -5,24 +5,25 @@ declare(strict_types=1);
 namespace MailerLite\LaravelElasticsearch\Tests\Console\Command;
 
 use MailerLite\LaravelElasticsearch\Tests\TestCase;
-use Elasticsearch\Client;
-use Elasticsearch\Namespaces\IndicesNamespace;
+use MailerLite\LaravelElasticsearch\Manager;
+use Elastic\Elasticsearch\Endpoints\Indices;
 use Exception;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Mockery\MockInterface;
 
 final class AliasCreateCommandTest extends TestCase
 {
     public function testAliasCreateMustSucceed(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->times(2)
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(true);
+                            ->andReturn($this->elasticsearchResponse(true));
 
                         $mock->shouldReceive('putAlias')
                             ->once()
@@ -43,14 +44,14 @@ final class AliasCreateCommandTest extends TestCase
 
     public function testAliasCreateMustFail(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->times(2)
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(true);
+                            ->andReturn($this->elasticsearchResponse(true));
 
                         $mock->shouldReceive('putAlias')
                             ->once()
@@ -73,14 +74,14 @@ final class AliasCreateCommandTest extends TestCase
 
     public function testAliasCreateMustFailBecauseIndexDoesntExists(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->once()
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
                             ->once()
-                            ->andReturn(false);
+                            ->andReturn($this->elasticsearchResponse(false));
 
                         $mock->shouldNotReceive('putAlias');
                     })
@@ -97,9 +98,7 @@ final class AliasCreateCommandTest extends TestCase
             ->expectsOutput('Index valid_index_name doesn\'t exists and alias cannot be created.');
     }
 
-    /**
-     * @dataProvider invalidIndexNameDataProvider
-     */
+    #[DataProvider('invalidIndexNameDataProvider')]
     public function testArgumentIndexNameAndAliasAreInValid(
         $invalidIndexName,
         $invalidAliasName,
@@ -114,7 +113,7 @@ final class AliasCreateCommandTest extends TestCase
             ->expectsOutput($expectedOutputMessage);
     }
 
-    public function invalidIndexNameDataProvider(): Generator
+    public static function invalidIndexNameDataProvider(): Generator
     {
         yield [
             null,
