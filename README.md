@@ -44,7 +44,8 @@ older version of Elasticsearch, install the matching major version of this packa
 | 8.x           | `^12`           |
 | 7.x           | `^11`           |
 
-For example, to use Elasticsearch 7:
+For example, to use Elasticsearch 7, install version `^11`. Its documentation
+lives on the [`11.x` branch](https://github.com/mailerlite/laravel-elasticsearch/tree/11.x):
 
 ```sh
 composer require mailerlite/laravel-elasticsearch:^11
