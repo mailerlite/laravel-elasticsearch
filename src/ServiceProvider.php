@@ -9,7 +9,7 @@ use MailerLite\LaravelElasticsearch\Console\Command\IndexCreateCommand;
 use MailerLite\LaravelElasticsearch\Console\Command\IndexCreateOrUpdateMappingCommand;
 use MailerLite\LaravelElasticsearch\Console\Command\IndexDeleteCommand;
 use MailerLite\LaravelElasticsearch\Console\Command\IndexExistsCommand;
-use Elasticsearch\Client;
+use Elastic\Elasticsearch\Client;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
