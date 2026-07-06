@@ -1,5 +1,20 @@
 # Changelog
 
+## 12.0.0 - XX-Jun-2026
+
+- Support Elasticsearch 8.x via the official `elasticsearch/elasticsearch` 8 client (thanks @shuvroroy)
+- **Breaking:** the client namespace moved from `Elasticsearch\` to `Elastic\Elasticsearch\`
+- **Breaking:** responses are now `Elastic\Elasticsearch\Response\Elasticsearch` objects; use `->asArray()`/`->asBool()` etc.
+- **Breaking:** minimum PHP is now 8.2 (dropped PHP 7.x and 8.0/8.1)
+- **Breaking:** supports Laravel 11, 12 & 13 only (dropped Laravel 10 and earlier)
+- **Breaking:** removed Lumen support (the package now requires Laravel 11+)
+- Removed config options no longer supported by the 8.x client (`sniffOnStart`, `httpHandler`, `connectionPool`, `connectionSelector`, `serializer`, `connectionFactory`, `endpoint`, `namespaces`, `tracer`)
+- AWS request signing reworked to use the 8.x PSR-18 HTTP client via a Guzzle middleware
+- Added `guzzlehttp/guzzle` (`^7`) as a direct dependency
+- Upgraded the test suite to PHPUnit 10/11/12 and `orchestra/testbench` 9/10/11
+- CI now runs against an Elasticsearch 8.x cluster
+- See [UPGRADING.md](UPGRADING.md) for migration details
+
 ## 11.3.0 - 16-Apr-2026
 
 - Support Laravel 13 (#169, thanks @shuvroroy)

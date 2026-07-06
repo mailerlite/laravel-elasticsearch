@@ -2,7 +2,7 @@
 
 namespace MailerLite\LaravelElasticsearch;
 
-use Elasticsearch\Client;
+use Elastic\Elasticsearch\Client;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Arr;
 
@@ -49,7 +49,7 @@ class Manager
      *
      * @param string|null $name
      *
-     * @return \Elasticsearch\Client
+     * @return \Elastic\Elasticsearch\Client
      */
     public function connection(?string $name = null): Client
     {
@@ -89,7 +89,7 @@ class Manager
      *
      * @param string $name
      *
-     * @return \Elasticsearch\Client
+     * @return \Elastic\Elasticsearch\Client
      */
     protected function makeConnection(string $name): Client
     {

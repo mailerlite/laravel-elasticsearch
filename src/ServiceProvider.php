@@ -9,11 +9,10 @@ use MailerLite\LaravelElasticsearch\Console\Command\IndexCreateCommand;
 use MailerLite\LaravelElasticsearch\Console\Command\IndexCreateOrUpdateMappingCommand;
 use MailerLite\LaravelElasticsearch\Console\Command\IndexDeleteCommand;
 use MailerLite\LaravelElasticsearch\Console\Command\IndexExistsCommand;
-use Elasticsearch\Client;
+use Elastic\Elasticsearch\Client;
 use Illuminate\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Laravel\Lumen\Application as LumenApplication;
 
 /**
  * Class ServiceProvider
@@ -61,8 +60,6 @@ class ServiceProvider extends BaseServiceProvider
 
         if ($this->app instanceof LaravelApplication) {
             $this->publishes([$source => config_path('elasticsearch.php')], 'config');
-        } elseif ($this->app instanceof LumenApplication) {
-            $this->app->configure('elasticsearch');
         }
 
         $this->mergeConfigFrom($source, 'elasticsearch');

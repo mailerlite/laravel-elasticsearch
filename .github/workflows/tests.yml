@@ -9,18 +9,9 @@ jobs:
   strategy:
    fail-fast: true
    matrix:
-    php: [7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
-    elastic: [7.11.0]
+    php: [8.2, 8.3, 8.4, 8.5]
+    elastic: [8.13.4]
     stability: [prefer-lowest, prefer-stable]
-    exclude:
-     - php: 8.1
-       stability: prefer-lowest
-     - php: 8.2
-       stability: prefer-lowest
-     - php: 8.3
-       stability: prefer-lowest
-     - php: 8.4
-       stability: prefer-lowest
   name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
 
   steps:
@@ -57,6 +48,7 @@ jobs:
      uses: elastic/elastic-github-actions/elasticsearch@98431b45a60cbb6ace481778827bc8e11f12fd65 # master
      with:
       stack-version: ${{ matrix.elastic }}
+      security-enabled: false
    - name: Configure matchers for PHPUnit
      uses: mheap/phpunit-matcher-action@dcbd4ead41890163b65d0b21534387ce72980ee5 # v1
    - name: Run PHP tests via PHPUnit

@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace MailerLite\LaravelElasticsearch\Tests\Console\Command;
 
 use MailerLite\LaravelElasticsearch\Tests\TestCase;
-use Elasticsearch\Client;
-use Elasticsearch\Namespaces\IndicesNamespace;
+use MailerLite\LaravelElasticsearch\Manager;
+use Elastic\Elasticsearch\Endpoints\Indices;
 use Exception;
 use Generator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Mockery\MockInterface;
 
 final class IndexCreateCommandTest extends TestCase
 {
     public function testCreateIndexMustSucceed(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->times(2)
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
-                            ->andReturn(false);
+                            ->andReturn($this->elasticsearchResponse(false));
 
                         $mock->shouldReceive('create')
                             ->once()
@@ -38,13 +39,13 @@ final class IndexCreateCommandTest extends TestCase
 
     public function testCreateIndexMustFail(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->times(2)
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
-                            ->andReturn(false);
+                            ->andReturn($this->elasticsearchResponse(false));
 
                         $mock->shouldReceive('create')
                             ->once()
@@ -63,13 +64,13 @@ final class IndexCreateCommandTest extends TestCase
 
     public function testCreateIndexMustFailBecauseIndexAlreadyExists(): void
     {
-        $this->mock(Client::class, function (MockInterface $mock) {
+        $this->mock(Manager::class, function (MockInterface $mock) {
             $mock->shouldReceive('indices')
                 ->once()
                 ->andReturn(
-                    $this->mock(IndicesNamespace::class, function (MockInterface $mock) {
+                    $this->mock(Indices::class, function (MockInterface $mock) {
                         $mock->shouldReceive('exists')
-                            ->andReturn(true);
+                            ->andReturn($this->elasticsearchResponse(true));
 
                         $mock->shouldNotReceive('create');
                     })
@@ -82,9 +83,7 @@ final class IndexCreateCommandTest extends TestCase
             ->expectsOutput('Index valid_index_name already exists and cannot be created.');
     }
 
-    /**
-     * @dataProvider invalidIndexNameDataProvider
-     */
+    #[DataProvider('invalidIndexNameDataProvider')]
     public function testArgumentIndexNameIsInValid($invalidIndexName): void
     {
         $this->artisan('laravel-elasticsearch:utils:index-create',
@@ -93,7 +92,7 @@ final class IndexCreateCommandTest extends TestCase
             ->expectsOutput('Argument index-name must be a non empty string.');
     }
 
-    public function invalidIndexNameDataProvider(): Generator
+    public static function invalidIndexNameDataProvider(): Generator
     {
         yield [
             null

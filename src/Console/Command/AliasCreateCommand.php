@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MailerLite\LaravelElasticsearch\Console\Command;
 
-use Elasticsearch\Client;
+use MailerLite\LaravelElasticsearch\Manager;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -17,20 +17,7 @@ final class AliasCreateCommand extends Command
                             {index-name : The index name}
                             {alias-name : The alias name}';
 
-    /**
-     * @var Client
-     */
-    private $client;
-
-    public function __construct(
-        Client $client
-    ) {
-        $this->client = $client;
-
-        parent::__construct();
-    }
-
-    public function handle(): int
+    public function handle(Manager $manager): int
     {
         $indexName = $this->argument('index-name');
         $aliasName = $this->argument('alias-name');
@@ -42,9 +29,9 @@ final class AliasCreateCommand extends Command
             return self::FAILURE;
         }
 
-        if (!$this->client->indices()->exists([
+        if (!$manager->indices()->exists([
             'index' => $indexName,
-        ])) {
+        ])->asBool()) {
             $this->output->writeln(
                 sprintf(
                     '<error>Index %s doesn\'t exists and alias cannot be created.</error>',
@@ -56,7 +43,7 @@ final class AliasCreateCommand extends Command
         }
 
         try {
-            $this->client->indices()->putAlias([
+            $manager->indices()->putAlias([
                 'index' => $indexName,
                 'name'  => $aliasName,
             ]);

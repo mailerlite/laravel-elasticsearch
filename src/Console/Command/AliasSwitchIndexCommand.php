@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MailerLite\LaravelElasticsearch\Console\Command;
 
-use Elasticsearch\Client;
+use MailerLite\LaravelElasticsearch\Manager;
 use Illuminate\Console\Command;
 use Throwable;
 
@@ -18,20 +18,7 @@ final class AliasSwitchIndexCommand extends Command
                             {old-index-name : The old index name}
                             {alias-name : The alias name}';
 
-    /**
-     * @var Client
-     */
-    private $client;
-
-    public function __construct(
-        Client $client
-    ) {
-        $this->client = $client;
-
-        parent::__construct();
-    }
-
-    public function handle(): int
+    public function handle(Manager $manager): int
     {
         $newIndexName = $this->argument('new-index-name');
         $oldIndexName = $this->argument('old-index-name');
@@ -45,9 +32,9 @@ final class AliasSwitchIndexCommand extends Command
             return self::FAILURE;
         }
 
-        if (!$this->client->indices()->exists([
+        if (!$manager->indices()->exists([
             'index' => $newIndexName,
-        ])) {
+        ])->asBool()) {
             $this->output->writeln(
                 sprintf(
                     '<error>Index %s cannot be linked to alias because doesn\'t exists.</error>',
@@ -59,12 +46,12 @@ final class AliasSwitchIndexCommand extends Command
         }
 
         try {
-            $this->client->indices()->putAlias([
+            $manager->indices()->putAlias([
                 'index' => $newIndexName,
                 'name'  => $aliasName,
             ]);
 
-            $this->client->indices()->deleteAlias([
+            $manager->indices()->deleteAlias([
                 'index' => $oldIndexName,
                 'name'  => $aliasName,
             ]);
