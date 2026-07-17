@@ -28,7 +28,7 @@
     "require-dev": {
         "aws/aws-sdk-php": "^3.80",
         "mockery/mockery": "^1.4.3",
-        "orchestra/testbench": "^9.0|^10.0|^11.0",
+        "orchestra/testbench": "^9.5|^10.0|^11.0",
         "phpunit/phpunit": "^10.5|^11.0|^12.0"
     },
     "suggest": {
