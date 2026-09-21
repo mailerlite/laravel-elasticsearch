@@ -1,0 +1,6 @@
+---
+remotes:
+  - git_url: git@github.com:mailerlite/git-hooks.git
+    ref: main
+    configs:
+      - gitleaks.yml
