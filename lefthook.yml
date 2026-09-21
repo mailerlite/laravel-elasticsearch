@@ -1,0 +1,7 @@
+---
+pre-commit:
+  parallel: true
+  commands:
+    gitleaks:
+      run: gitleaks git --pre-commit --redact --staged --verbose --no-banner
+      fail_text: Staged changes contain a secret. Remove it; never commit and revert.
